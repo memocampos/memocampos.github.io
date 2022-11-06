@@ -365,7 +365,7 @@ function IsGameDay()
     let hour = d.getUTCHours();
     console.log("UTC date:"+ dateUTC +" CST date:" + d + "Day:" + day + "hour:" + hour);
 
-    if ((day == 0 && hour > 16 ) || (day == 2 && hour >= 0) || (day == 2 && hour <= 4)  || (day == 4 && hour < 22) || (day == 5 && hour < 3 ) )  { console.log("GAME DAY"); return 'true';} 
+    if ((day == 0 && hour > 17 ) || (day == 2 && hour >= 1) || (day == 2 && hour <= 4)  || (day == 4 && hour < 23) || (day == 5 && hour < 4 ) )  { console.log("GAME DAY"); return 'true';} 
     else
         return 'false';
 
