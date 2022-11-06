@@ -232,7 +232,7 @@ async function getStandings()
                     mode:'no-cors'
                     //'Content-Type': 'application/json'
                     //'Accept': 'application/json',
-                    //'Access-Control-Allow-Origin': 'https://api.sportradar.com',
+                    'Access-Control-Allow-Origin': 'https://api.sportradar.com',
                     //'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers , X-Requested-With, Content-Type, Authorization',
                 }
                 //mode:'no-cors', 
