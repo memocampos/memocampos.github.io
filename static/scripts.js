@@ -222,14 +222,14 @@ return html;
 async function getStandings() 
 {
         var requestOptions = {
-            //'Access-Control-Allow-Origin':'https://api.sportradar.com', 
+            'Access-Control-Allow-Origin':'https://api.sportradar.com', 
             'Referrer-Policy': 'Origin',
             method: 'GET', 
             redirect: 'follow',
             //credentials: 'same-origin', 
             headers:
                 {
-                    //mode:'no-cors'
+                    mode:'no-cors'
                     //'Content-Type': 'application/json'
                     //'Accept': 'application/json',
                     //'Access-Control-Allow-Origin': 'https://api.sportradar.com',
