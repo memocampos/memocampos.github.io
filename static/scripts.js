@@ -220,8 +220,7 @@ return html;
 
 
 async function getStandings() 
-{
-
+{        
         var requestOptions = { method: 'GET',  redirect: 'follow'};
         let response = await fetch("https://cors-anywhere.herokuapp.com/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         let data = await response.json();
@@ -231,7 +230,6 @@ async function getStandings()
 
 async function Standings()
 {
-
     const d = new Date();
     console.log(d);
     Year = d.getFullYear();
