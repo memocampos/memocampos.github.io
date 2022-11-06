@@ -222,25 +222,25 @@ return html;
 async function getStandings() 
 {
         var requestOptions = {
-             mode:'cors',
+             //mode:'cors',
             'Access-Control-Allow-Origin':'*', 
-            'Referrer-Policy': 'Origin',
+            //'Referrer-Policy': 'Origin',
             method: 'GET', 
             redirect: 'follow',
             //credentials: 'same-origin', 
             headers:
                 {
-                    mode:'no-cors'
+                    //mode:'no-cors',
                     //'Content-Type': 'application/json'
                     //'Accept': 'application/json',
-                    'Access-Control-Allow-Origin': 'https://api.sportradar.com',
+                    'Access-Control-Allow-Origin': '*',
                     //'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers , X-Requested-With, Content-Type, Authorization',
                 }
                  
                 //'origin-list':'*',
             };
         //var requestOptions = { method: 'GET', redirect: 'follow', headers: new Headers({'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'}), 'Access-Control-Allow-Origin':  'https://api.sportradar.com', mode: 'no-cors'};
-        let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
+        let response = await fetch("https://thingproxy.freeboard.io/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         let data = await response.json();
         return data; 
 }
