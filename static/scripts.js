@@ -222,7 +222,8 @@ return html;
 async function getStandings() 
 {
         var requestOptions = {
-            'Access-Control-Allow-Origin':'https://api.sportradar.com', 
+             mode:'cors',
+            'Access-Control-Allow-Origin':'*', 
             'Referrer-Policy': 'Origin',
             method: 'GET', 
             redirect: 'follow',
@@ -235,7 +236,7 @@ async function getStandings()
                     'Access-Control-Allow-Origin': 'https://api.sportradar.com',
                     //'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers , X-Requested-With, Content-Type, Authorization',
                 }
-                //mode:'no-cors', 
+                 
                 //'origin-list':'*',
             };
         //var requestOptions = { method: 'GET', redirect: 'follow', headers: new Headers({'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'}), 'Access-Control-Allow-Origin':  'https://api.sportradar.com', mode: 'no-cors'};
