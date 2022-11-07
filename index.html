@@ -41,6 +41,21 @@
               </select>
           </div>
 
+
+          <h3>Refresh Rate</h3> 
+          <div id="rcorners1" >
+              <select name="RefreshRate" id="RefreshRate">
+                <option value="300">Every 5 minutes</option>
+                <option value="120">Every 2 minutes</option>
+                <option value="60">Every Minute</option>
+                <option value="30">Every 30 seconds (recommended)</option>
+                <option value="15">Every 15 seconds</option>
+              </select>
+          </div>
+
+
+
+
           <h3>Themes</h3> 
           <div id="rcorners1" >
               <table>
@@ -146,8 +161,9 @@
   
         <script>
             
-            
+            console.log(getRefreshRate());
             //Probabilities();
+            
             console.log("Is game day:" + IsGameDay());
             if (IsGameDay() == 'true')
               Scores();

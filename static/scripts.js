@@ -59,6 +59,7 @@ function set_values()
 
     document.getElementById(localStorage.getItem("theme")).checked = true;
     document.getElementById("scrollingSpeed").value = localStorage.getItem("scrollingSpeed");
+    document.getElementById("RefreshRate").value = localStorage.getItem("RefreshRate");
     document.getElementById("webhook_ARI").value = localStorage.getItem("webhook_ARI");
     document.getElementById("webhook_ATL").value = localStorage.getItem("webhook_ATL");
     document.getElementById("webhook_BAL").value = localStorage.getItem("webhook_BAL");
@@ -107,6 +108,7 @@ function SettingsForm(API_KEY, background_color, theme, scrollingSpeed) {
     localStorage.setItem("background_color", checked(background_color));
     localStorage.setItem("theme", checked(theme));
     localStorage.setItem("scrollingSpeed", selected(scrollingSpeed));
+    localStorage.setItem("RefreshRate", selected(RefreshRate));
     localStorage.setItem("webhook_ARI", document.getElementById("webhook_ARI").value);
     localStorage.setItem("webhook_ATL", document.getElementById("webhook_ATL").value);
     localStorage.setItem("webhook_BAL", document.getElementById("webhook_BAL").value);
@@ -148,6 +150,16 @@ function selected(scrollingSpeed) {
     return value;
 }
 
+
+
+function getRefreshRate() {
+
+    if (localStorage.getItem("RefreshRate") == null)
+        return parseInt('30');
+    else
+        return parseInt(localStorage.getItem("RefreshRate"));
+
+}
 
 function checked(radios)
 {
@@ -222,7 +234,7 @@ return html;
 async function getStandings() 
 {        
         var requestOptions = { method: 'GET',  redirect: 'follow'};
-        let response = await fetch("https://cors-anywhere.herokuapp.com/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
+        let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         let data = await response.json();
         return data; 
 }
@@ -303,7 +315,7 @@ async function getProbabilities()
 {
     //var requestOptions = {method: 'GET', redirect: 'follow', 'Access-Control-Allow-Origin': 'https://api.sportradar.com', referrerPolicy: 'origin-when-cross-origin', mode: 'no-cors'};
     var requestOptions = { method: 'GET',  redirect: 'follow'};
-    let response = await fetch("https://cors-anywhere.herokuapp.com/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
+    let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
         let data = await response.json();
         return data; 
 }
@@ -341,7 +353,7 @@ async function Probabilities()
         //console.log(text);
 
     })
-    .catch(error => console.log('error', error));
+    .catch(error => console.log('error: ', error));
 
 }
 
@@ -349,9 +361,8 @@ async function Probabilities()
 
 async function getScores()
 {
-    //var requestOptions = {method: 'GET', redirect: 'follow', 'Access-Control-Allow-Origin': 'https://api.sportradar.com', referrerPolicy: 'origin-when-cross-origin', mode: 'no-cors'};
     var requestOptions = { method: 'GET',  redirect: 'follow'};
-    let response = await fetch("https://cors-anywhere.herokuapp.com/https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions)
+    let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions);
     let data = await response.json();
     return data;
 }
@@ -365,7 +376,7 @@ function IsGameDay()
     let hour = d.getUTCHours();
     console.log("UTC date:"+ dateUTC +" CST date:" + d + "Day:" + day + "hour:" + hour);
 
-    if ((day == 0 && hour > 17 ) || (day == 2 && hour >= 1) || (day == 2 && hour <= 4)  || (day == 4 && hour < 23) || (day == 5 && hour < 4 ) )  { console.log("GAME DAY"); return 'true';} 
+    if ((day == 0 && hour > 17 ) || (day == 1 && hour <= 5)|| (day == 2 && hour >= 1) || (day == 2 && hour <= 4)  || (day == 4 && hour < 23) || (day == 5 && hour < 4 ) )  { console.log("GAME DAY"); return 'true';} 
     else
         return 'false';
 
@@ -394,25 +405,28 @@ async function Scores()
             timestamp = result.generated_at;
             for (let i=0;i<result.summaries.length; i++)
             {
-                matchid = result.summaries[i].sport_event.id
-                teamhome = result.summaries[i].sport_event.competitors[0].name;
-                teamhomeabbreviation = result.summaries[i].sport_event.competitors[0].abbreviation;
-                teamhomescore = result.summaries[i].sport_event_status.home_score;
-                teamaway = result.summaries[i].sport_event.competitors[1].name;
-                teamawayabbreviation = result.summaries[i].sport_event.competitors[1].abbreviation;
-                teamawayscore = result.summaries[i].sport_event_status.away_score;
-                matchstatus = result.summaries[i].sport_event_sta
-                textHTML += generateHTML(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation) ; 
-                console.log("id: " + i + " Match ID: " + matchid + " " + teamhomeabbreviation + " " + teamhomescore + "-" + teamawayscore + " " + teamawayabbreviation);
-                validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore);
-
+     
+                if (result.summaries[i].sport_event.sport_event_context.competition.name == 'NFL' )
+                {
+                    matchid = result.summaries[i].sport_event.id
+                    teamhome = result.summaries[i].sport_event.competitors[0].name;
+                    teamhomeabbreviation = result.summaries[i].sport_event.competitors[0].abbreviation;
+                    teamhomescore = result.summaries[i].sport_event_status.home_score;
+                    teamaway = result.summaries[i].sport_event.competitors[1].name;
+                    teamawayabbreviation = result.summaries[i].sport_event.competitors[1].abbreviation;
+                    teamawayscore = result.summaries[i].sport_event_status.away_score;
+                    matchstatus = result.summaries[i].sport_event_sta
+                    textHTML += generateHTML(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation) ; 
+                    console.log("id: " + i + " Match ID: " + matchid + " " + teamhomeabbreviation + " " + teamhomescore + "-" + teamawayscore + " " + teamawayabbreviation);
+                    validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore);
+                }
             }
             //console.log(textHTML);
             const h2 = document.getElementById("myH2");
             let html = textHTML;
             h2.insertAdjacentHTML("afterend", html);
         } )
-      .catch(error => console.log('Error'));
+      .catch(error => console.log('error: ', error));
 
 }
 
@@ -463,9 +477,27 @@ function isTouchdown(matchid,team,score,playingAt)
     if ((parseInt(score) - parseInt(localStorage.getItem(matchid+"-"+playingAt+"-score-"+team)) ) >=6 )
     {
         console.log("TOUCHDOWN: " + team);
+        displayTouchdown(team);
         if (localStorage.getItem("webhook_" + team) != null) 
             fetch(localStorage.getItem("webhook_" + team));
     }   
+}
+
+
+function  displayTouchdown(team) 
+{
+
+    let html = "";
+
+    html =  '<div class=\"game\">';
+    html += '<div class=\"score\">';
+    html += '<img id=\"' + team + '\" src=\"' + createSRC(team) + '\" class=\"responsive\" alt=\"away\" /> ';
+    html += '</div>';
+    html += '<div class=\"score\"> TOUCHDOWN 🏈</div>';
+    html += '</div>';
+    const h2 = document.getElementById("myH2");
+    h2.insertAdjacentHTML("afterend", html);
+
 }
 
 
