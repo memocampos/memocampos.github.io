@@ -236,7 +236,7 @@ async function getStandings()
         var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
         
 
-    let response = await fetch("https://r1nl2mzyac.execute-api.us-west-2.amazonaws.com/default/test", requestOptions);
+    let response = await fetch("https://sozmwkhko9.execute-api.us-west-2.amazonaws.com/default/test", requestOptions);
       //
         //let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
       //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
@@ -371,7 +371,8 @@ async function getScores()
 {
     var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
     //http://localhost:3000/fetch/
-    let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions);
+    let response = await fetch("https://sozmwkhko9.execute-api.us-west-2.amazonaws.com/default/test"  , requestOptions);
+    // let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions);
     
     //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions);
     let data = await response.json();
