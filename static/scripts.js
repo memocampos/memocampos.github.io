@@ -262,6 +262,7 @@ async function Standings()
         var textHTML = "";
         getStandings()
         .then(result => {
+            console.log(result);
             standingsDate = result.generated_at;    
             standingsDate = standingsDate.substring(0,8)+parseInt(standingsDate.substring(9,10));
             standingsDate = new Date();
@@ -337,7 +338,7 @@ async function Probabilities()
     .then(result => {
 
         timestamp = result.generated_at;
-        //console.log(result);
+        console.log(result);
         
         console.log(result.sport_event_probabilities.length);
         
@@ -415,6 +416,7 @@ async function Scores()
     getScores()
       .then (result => 
         {
+            console.log(result);
             timestamp = result.generated_at;
             for (let i=0;i<result.summaries.length; i++)
             {
