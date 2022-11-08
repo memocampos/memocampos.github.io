@@ -165,8 +165,11 @@
             //Probabilities();
             
             console.log("Is game day:" + IsGameDay());
-            if (IsGameDay() == 'true')
+            if (IsGameDay() == 'true') {
               Scores();
+              Standings();
+              Probabilities();
+            }
             else 
               Standings();
             
