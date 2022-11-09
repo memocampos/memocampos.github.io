@@ -237,7 +237,6 @@ async function getStandings()
         
 
     let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/test?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-    console.log(response);  
     //
         //let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
       //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
@@ -263,7 +262,6 @@ async function Standings()
         var textHTML = "";
         getStandings()
         .then(result => {
-            console.log(result);
             standingsDate = result.generated_at;    
             standingsDate = standingsDate.substring(0,8)+parseInt(standingsDate.substring(9,10));
             standingsDate = new Date();
@@ -339,7 +337,6 @@ async function Probabilities()
     .then(result => {
 
         timestamp = result.generated_at;
-        console.log(result);
         
         console.log(result.sport_event_probabilities.length);
         
@@ -378,7 +375,6 @@ async function getScores()
     // let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions);
     
     //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions);
-   console.log(response);
     let data = await response.json();
     return data;
 }
@@ -392,10 +388,9 @@ function IsGameDay()
     let hour = d.getUTCHours();
     console.log("UTC date:"+ dateUTC +" CST date:" + d + "Day:" + day + "hour:" + hour);
 
-    // if ((day == 0 && hour > 17 ) || (day == 1 && hour <= 5)|| (day == 2 && hour >= 1) || (day == 2 && hour <= 4)  || (day == 4 && hour < 23) || (day == 5 && hour < 4 ) )  { console.log("GAME DAY"); return 'true';} 
-    // else
-    //     return 'false';
-    return Math.round(Math.random());
+    if ((day == 0 && hour > 17 ) || (day == 1 && hour <= 5)|| (day == 2 && hour >= 1) || (day == 2 && hour <= 4)  || (day == 4 && hour < 23) || (day == 5 && hour < 4 ) )  { console.log("GAME DAY"); return 'true';} 
+    else
+        return 'false';
 }
 
 
@@ -418,7 +413,6 @@ async function Scores()
     getScores()
       .then (result => 
         {
-            console.log(result);
             timestamp = result.generated_at;
             for (let i=0;i<result.summaries.length; i++)
             {
