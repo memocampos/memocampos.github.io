@@ -21,21 +21,22 @@
           <h3> API Key</h3>
           <div id="rcorners1" class="center" >
                 <form id="settingsForm"  onsubmit='SettingsForm(document.getElementById("API_KEY").value, document.getElementsByName("background_color"), document.getElementsByName("theme"), document.getElementById("scrollingSpeed"))'>           
-                <input type="text" id="API_KEY" name="API_KEY" value="">
+                
 
                 <h3>In order to obtain live game scores you need to get a free API key from sportradar.com, just follow below instructions:</h3>
 
                 <ol>
-                  <li>Go to <a href="http://developer.sportradar.com/member/register">developer.sportradar.com</a>&nbsp;and register an account</li>
-                  <li>You will receive a confirmation email to activate your account, confirm it and sign in</li>
-                  <li>Under &ldquo;My&nbsp;API&nbsp;Keys&rdquo; click on Applications and click on [Create New App]</li>
+                  <li>Register an account at <a href="http://developer.sportradar.com/member/register" target="_blank">developer.sportradar.com</a></li>
+
+                  <li>Under <strong>My&nbsp;API&nbsp;Keys</strong> click on <strong>Applications</strong> and then click on <strong>[Create New App]</strong></li>
+                  
                   <li>Fill in all required information</li>
-                  <li>Search for &ldquo;Issue a new&nbsp;key&nbsp;for Global American Football Trial&rdquo; and select by clicking on the check box.</li>
-                  <li>Click on the Agree terms of the service check box</li>
-                  <li>Click on [Register Application]</li>
-                  <li>You should see a message indicating that &ldquo;Your Application was registered!&rdquo;</li>
-                  <li>Click on My Account and look for the&nbsp;Key ID, copy and paste it above.</li>
+                  <li>Search for <strong>&ldquo;Issue a new&nbsp;key&nbsp;for Global American Football Trial</strong>&rdquo; and select by clicking on the check box.</li>
+             
+                  <li>Click on My Account and look for the&nbsp;Key ID, copy and paste it below:</li><br>
+                  <input type="text" id="API_KEY" name="API_KEY" value="">
                 </ol>
+                
                 
 
           </div>
@@ -130,42 +131,41 @@
 
               <p>&nbsp;</p>
 
+                
 
-
-              <table>
-                        <tr><td><img src="images/logo/ARI.png" width='40px' height='40px' /></td><td>Arizona Cardinals</td><td><input type="text" id="webhook_ARI" name="webhook_ARI" value=""></td></tr>
-                        <tr><td><img src="images/logo/ATL.png" width='40px' height='40px' /></td><td>Atlanta Falcons</td><td><input type="text" id="webhook_ATL" name="webhook_ATL" value=""></td></tr>
-                        <tr><td><img src="images/logo/BAL.png" width='40px' height='40px' /></td><td>Baltimore Ravens</td><td><input type="text" id="webhook_BAL" name="webhook_BAL" value=""></td></tr>
-                        <tr><td><img src="images/logo/BUF.png" width='40px' height='40px' /></td><td>Buffalo Bills</td><td><input type="text" id="webhook_BUF" name="webhook_BUF" value=""></td></tr>
-                        <tr><td><img src="images/logo/CAR.png" width='40px' height='40px' /></td><td>Carolina Panthers</td><td><input type="text" id="webhook_CAR" name="webhook_CAR" value=""></td></tr>
-                        <tr><td><img src="images/logo/CHI.png" width='40px' height='40px' /></td><td>Chicago Bears</td><td><input type="text" id="webhook_CHI" name="webhook_CHI" value=""></td></tr>
-                        <tr><td><img src="images/logo/CIN.png" width='40px' height='40px' /></td><td>Cincinnati Bengals</td><td><input type="text" id="webhook_CIN" name="webhook_CIN" value=""></td></tr>
-                        <tr><td><img src="images/logo/CLE.png" width='40px' height='40px' /></td><td>Cleveland Browns</td><td><input type="text" id="webhook_CLE" name="webhook_CLE" value=""></td></tr>
-                        <tr><td><img src="images/logo/DAL.png" width='40px' height='40px' /></td><td>Dallas Cowboys</td><td><input type="text" id="webhook_DAL" name="webhook_DAL" value=""></td></tr>
-                        <tr><td><img src="images/logo/DEN.png" width='40px' height='40px' /></td><td>Denver Broncos</td><td><input type="text" id="webhook_DEN" name="webhook_DEN" value=""></td></tr>
-                        <tr><td><img src="images/logo/DET.png" width='40px' height='40px' /></td><td>Detroit Lions</td><td><input type="text" id="webhook_DET" name="webhook_DET" value=""></td></tr>
-                        <tr><td><img src="images/logo/GB.png" width='40px' height='40px' /></td><td>Green Bay Packers</td><td><input type="text" id="webhook_GB" name="webhook_GB" value=""></td></tr>
-                        <tr><td><img src="images/logo/HOU.png" width='40px' height='40px' /></td><td>Houston Texans</td><td><input type="text" id="webhook_HOU" name="webhook_HOU" value=""></td></tr>
-                        <tr><td><img src="images/logo/IND.png" width='40px' height='40px' /></td><td>Indianapolis Colts</td><td><input type="text" id="webhook_IND" name="webhook_IND" value=""></td></tr>
-                        <tr><td><img src="images/logo/JAX.png" width='40px' height='40px' /></td><td>Jacksonville Jaguars</td><td><input type="text" id="webhook_JAX" name="webhook_JAX" value=""></td></tr>
-                        <tr><td><img src="images/logo/KC.png" width='40px' height='40px' /></td><td>Kansas City Chiefs</td><td><input type="text" id="webhook_KC" name="webhook_KC" value=""></td></tr>
-                        <tr><td><img src="images/logo/LV.png" width='40px' height='40px' /></td><td>Las Vegas Raiders</td><td><input type="text" id="webhook_LV" name="webhook_LV" value=""></td></tr>
-                        <tr><td><img src="images/logo/LAC.png" width='40px' height='40px' /></td><td>Los Angeles Chargers</td><td><input type="text" id="webhook_LAC" name="webhook_LAC" value=""></td></tr>
-                        <tr><td><img src="images/logo/LA.png" width='40px' height='40px' /></td><td>Los Angeles Rams</td><td><input type="text" id="webhook_LA" name="webhook_LA" value=""></td></tr>
-                        <tr><td><img src="images/logo/MIA.png" width='40px' height='40px' /></td><td>Miami Dolphins</td><td><input type="text" id="webhook_MIA" name="webhook_MIA" value=""></td></tr>
-                        <tr><td><img src="images/logo/MIN.png" width='40px' height='40px' /></td><td>Minnesota Vikings</td><td><input type="text" id="webhook_MIN" name="webhook_MIN" value=""></td></tr>
-                        <tr><td><img src="images/logo/NE.png" width='40px' height='40px' /></td><td>New England Patriots</td><td><input type="text" id="webhook_NE" name="webhook_NE" value=""></td></tr>
-                        <tr><td><img src="images/logo/NO.png" width='40px' height='40px' /></td><td>New Orleans Saints</td><td><input type="text" id="webhook_NO" name="webhook_NO" value=""></td></tr>
-                        <tr><td><img src="images/logo/NYG.png" width='40px' height='40px' /></td><td>New York Giants</td><td><input type="text" id="webhook_NYG" name="webhook_NYG" value=""></td></tr>
-                        <tr><td><img src="images/logo/NYJ.png" width='40px' height='40px' /></td><td>New York Jets</td><td><input type="text" id="webhook_NYJ" name="webhook_NYJ" value=""></td></tr>
-                        <tr><td><img src="images/logo/PHI.png" width='40px' height='40px' /></td><td>Philadelphia Eagles</td><td><input type="text" id="webhook_PHI" name="webhook_PHI" value=""></td></tr>
-                        <tr><td><img src="images/logo/PIT.png" width='40px' height='40px' /></td><td>Pittsburgh Steelers</td><td><input type="text" id="webhook_PIT" name="webhook_PIT" value=""></td></tr>
-                        <tr><td><img src="images/logo/SF.png" width='40px' height='40px' /></td><td>San Francisco 49ers</td><td><input type="text" id="webhook_SF" name="webhook_SF" value=""></td></tr>
-                        <tr><td><img src="images/logo/SEA.png" width='40px' height='40px' /></td><td>Seattle Seahawks</td><td><input type="text" id="webhook_SEA" name="webhook_SEA" value=""></td></tr>
-                        <tr><td><img src="images/logo/TB.png" width='40px' height='40px' /></td><td>Tampa Bay Buccaneers</td><td><input type="text" id="webhook_TB" name="webhook_TB" value=""></td></tr>
-                        <tr><td><img src="images/logo/TEN.png" width='40px' height='40px' /></td><td>Tennessee Titans</td><td><input type="text" id="webhook_TEN" name="webhook_TEN" value=""></td></tr>
-                        <tr><td><img src="images/logo/WAS.png" width='40px' height='40px' /></td><td>Washington Commanders</td><td><input type="text" id="webhook_WAS" name="webhook_WAS" value=""></td></tr>
-              </table>
+              <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                <tr><td class="textright">Arizona Cardinals</td><td><img src="images/logo/ARI.png" width='40px' height='40px' /></td><td style="width:80%"><input type="text" id="webhook_ARI" name="webhook_ARI" value=""></td></tr>
+                <tr><td class="textright">Atlanta Falcons</td><td><img src="images/logo/ATL.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_ATL" name="webhook_ATL" value=""></td></tr>
+                <tr><td class="textright">Baltimore Ravens</td><td><img src="images/logo/BAL.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_BAL" name="webhook_BAL" value=""></td></tr>
+                <tr><td class="textright">Buffalo Bills</td><td><img src="images/logo/BUF.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_BUF" name="webhook_BUF" value=""></td></tr>
+                <tr><td class="textright">Carolina Panthers</td><td><img src="images/logo/CAR.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_CAR" name="webhook_CAR" value=""></td></tr>
+                <tr><td class="textright">Chicago Bears</td><td><img src="images/logo/CHI.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_CHI" name="webhook_CHI" value=""></td></tr>
+                <tr><td class="textright">Cincinnati Bengals</td><td><img src="images/logo/CIN.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_CIN" name="webhook_CIN" value=""></td></tr>
+                <tr><td class="textright">Cleveland Browns</td><td><img src="images/logo/CLE.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_CLE" name="webhook_CLE" value=""></td></tr>
+                <tr><td class="textright">Dallas Cowboys</td><td><img src="images/logo/DAL.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_DAL" name="webhook_DAL" value=""></td></tr>
+                <tr><td class="textright">Denver Broncos</td><td><img src="images/logo/DEN.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_DEN" name="webhook_DEN" value=""></td></tr>
+                <tr><td class="textright">Detroit Lions</td><td><img src="images/logo/DET.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_DET" name="webhook_DET" value=""></td></tr>
+                <tr><td class="textright">Green Bay Packers</td><td><img src="images/logo/GB.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_GB" name="webhook_GB" value=""></td></tr>
+                <tr><td class="textright">Houston Texans</td><td><img src="images/logo/HOU.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_HOU" name="webhook_HOU" value=""></td></tr>
+                <tr><td class="textright">Indianapolis Colts</td><td><img src="images/logo/IND.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_IND" name="webhook_IND" value=""></td></tr>
+                <tr><td class="textright">Jacksonville Jaguars</td><td><img src="images/logo/JAX.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_JAX" name="webhook_JAX" value=""></td></tr>
+                <tr><td class="textright">Kansas City Chiefs</td><td><img src="images/logo/KC.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_KC" name="webhook_KC" value=""></td></tr>
+                <tr><td class="textright">Las Vegas Raiders</td><td><img src="images/logo/LV.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_LV" name="webhook_LV" value=""></td></tr>
+                <tr><td class="textright">Los Angeles Chargers</td><td><img src="images/logo/LAC.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_LAC" name="webhook_LAC" value=""></td></tr>
+                <tr><td class="textright">Los Angeles Rams</td><td><img src="images/logo/LA.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_LA" name="webhook_LA" value=""></td></tr>
+                <tr><td class="textright">Miami Dolphins</td><td><img src="images/logo/MIA.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_MIA" name="webhook_MIA" value=""></td></tr>
+                <tr><td class="textright">Minnesota Vikings</td><td><img src="images/logo/MIN.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_MIN" name="webhook_MIN" value=""></td></tr>
+                <tr><td class="textright">New England Patriots</td><td><img src="images/logo/NE.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_NE" name="webhook_NE" value=""></td></tr>
+                <tr><td class="textright">New Orleans Saints</td><td><img src="images/logo/NO.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_NO" name="webhook_NO" value=""></td></tr>
+                <tr><td class="textright">New York Giants</td><td><img src="images/logo/NYG.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_NYG" name="webhook_NYG" value=""></td></tr>
+                <tr><td class="textright">New York Jets</td><td><img src="images/logo/NYJ.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_NYJ" name="webhook_NYJ" value=""></td></tr>
+                <tr><td class="textright">Philadelphia Eagles</td><td><img src="images/logo/PHI.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_PHI" name="webhook_PHI" value=""></td></tr>
+                <tr><td class="textright">Pittsburgh Steelers</td><td><img src="images/logo/PIT.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_PIT" name="webhook_PIT" value=""></td></tr>
+                <tr><td class="textright">San Francisco 49ers</td><td><img src="images/logo/SF.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_SF" name="webhook_SF" value=""></td></tr>
+                <tr><td class="textright">Seattle Seahawks</td><td><img src="images/logo/SEA.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_SEA" name="webhook_SEA" value=""></td></tr>
+                <tr><td class="textright">Tampa Bay Buccaneers</td><td><img src="images/logo/TB.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_TB" name="webhook_TB" value=""></td></tr>
+                <tr><td class="textright">Tennessee Titans</td><td><img src="images/logo/TEN.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_TEN" name="webhook_TEN" value=""></td></tr>
+                <tr><td class="textright">Washington Commanders</td><td><img src="images/logo/WAS.png" width='40px' height='40px' /></td><td><input type="text" id="webhook_WAS" name="webhook_WAS" value=""></td></tr>              </table>
             </div>
           <br>
           <input type="submit" value="Save" class="submit">
