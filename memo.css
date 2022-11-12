@@ -1,5 +1,5 @@
 :root {
-  --blue: blue;
+  --blue: #013369;
   --white: #ffffff;
   --black: #000000;
   --grey: grey;
@@ -270,7 +270,7 @@ input[type=text]
 }
 
 .blue {
-  background-color: blue;
+  background-color: #013369;
 }
 
 
