@@ -322,10 +322,10 @@ async function getProbabilities()
     var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
     
     // let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
-    let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/probabilities?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY"), requestOptions);
+    //let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/probabilities?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY"), requestOptions);
 
     
-    //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
+    let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
         let data = await response.json();
         return data; 
 }
@@ -347,10 +347,10 @@ async function Probabilities()
             away = result.sport_event_probabilities[i].sport_event.competitors[1].abbreviation;
             home_probability = result.sport_event_probabilities[i].markets[0].outcomes[0].probability;
             away_probability = result.sport_event_probabilities[i].markets[0].outcomes[1].probability;
-            text[i] = generateArray(i,event_id,home,home_probability,away,away_probability);
+            //text[i] = generateArray(i,event_id,home,home_probability,away,away_probability);
 
             //Show Probabilities on Console
-            //console.log(event_id + " " + home + " " + home_probability + " " + away + " " + away_probability   )
+            console.log(event_id + " " + home + " " + home_probability + " " + away + " " + away_probability   )
             //IF Event found do something        
             //if ('sr:sport_event:33623327' == result.sport_event_probabilities[i].sport_event.id)
             //    console.log(result.sport_event_probabilities[i].sport_event.id);

@@ -22,7 +22,22 @@
           <div id="rcorners1" >
                 <form id="settingsForm"  onsubmit='SettingsForm(document.getElementById("API_KEY").value, document.getElementsByName("background_color"), document.getElementsByName("theme"), document.getElementById("scrollingSpeed"))'>           
                 <input type="text" id="API_KEY" name="API_KEY" value="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>  
+
+                <h3>In order to obtain live game scores you need to get a free API key from sportradar.com, just follow below instructions:</h3>
+
+                <ol>
+                  <li>Go to <a href="http://developer.sportradar.com/member/register">developer.sportradar.com</a>&nbsp;and register an account</li>
+                  <li>You will receive a confirmation email to activate your account, confirm it and sign in</li>
+                  <li>Under &ldquo;My&nbsp;API&nbsp;Keys&rdquo; click on Applications and click on [Create New App]</li>
+                  <li>Fill in all required information</li>
+                  <li>Search for &ldquo;Issue a new&nbsp;key&nbsp;for Global American Football Trial&rdquo; and select by clicking on the check box.</li>
+                  <li>Click on the Agree terms of the service check box</li>
+                  <li>Click on [Register Application]</li>
+                  <li>You should see a message indicating that &ldquo;Your Application was registered!&rdquo;</li>
+                  <li>Click on My Account and look for the&nbsp;Key ID, copy and paste it above.</li>
+                </ol>
+                
+
           </div>
 
           <h3>Scrolling Speed</h3> 
@@ -108,7 +123,15 @@
 
               <h3>Trigger Actions on Touchdowns</h3> 
               <div id="rcorners1" >
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>  
+
+              <h3>Do you want to create an automated event every time a team scores a touchdown?&nbsp;</h3>
+
+              <p>Register at <a href="https://ifttt.com/"><strong>IFTTT</strong></a>&nbsp;and create <strong><a href="https://ifttt.com/maker_webhooks">webhook</a></strong> and paste it below:</p>
+
+              <p>&nbsp;</p>
+
+
+
               <table>
                         <tr><td><img src="images/logo/ARI.png" width='40px' height='40px' /></td><td>Arizona Cardinals</td><td><input type="text" id="webhook_ARI" name="webhook_ARI" value=""></td></tr>
                         <tr><td><img src="images/logo/ATL.png" width='40px' height='40px' /></td><td>Atlanta Falcons</td><td><input type="text" id="webhook_ATL" name="webhook_ATL" value=""></td></tr>
@@ -162,7 +185,7 @@
         <script>
             
             console.log(getRefreshRate());
-            Probabilities();
+            //Probabilities();
             
             console.log("Is game day:" + IsGameDay());
             if (IsGameDay() == 'true') {
