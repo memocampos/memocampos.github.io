@@ -512,4 +512,7 @@ function  displayTouchdown(team, teamname)
 
 }
 
-
+function clickimage(webhook)
+{
+    fetch(localStorage.getItem(webhook));
+}
