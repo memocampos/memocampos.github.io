@@ -153,6 +153,14 @@ body {
 
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+
+}
+
 .Standings {
 
   font-family: sans-serif;
@@ -245,11 +253,12 @@ body {
 
 
 #rcorners1 {
-  border-radius: 15px;
+  border-radius: 5px;
   background: white;
-  padding: 20px;
-  width: 300px;
-  height: 100%;
+  padding: 10px;
+
+  width: 95%;
+  height: 95%;
 }
 
 
