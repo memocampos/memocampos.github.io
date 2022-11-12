@@ -121,6 +121,17 @@ body {
 }
 
 
+.teamTouchdown {
+  font-family: NFL-Font;
+  display: flex;
+  color: #DDD;
+  font-size: 45vh;
+  font-weight: 1;
+  align-items: center;
+  margin-left: 0px;
+}
+
+
 .teamName {
   font-family: NFL-Font;
   display: flex;

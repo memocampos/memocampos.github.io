@@ -361,8 +361,8 @@ async function Probabilities()
 
 async function getScores()
 {
-    var requestOptions = { method: 'GET',  redirect: 'follow'};
-    let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions);
+    var requestOptions = { method: 'GET',  redirect: 'follow',};
+    let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions);
     let data = await response.json();
     return data;
 }
@@ -418,7 +418,7 @@ async function Scores()
                     matchstatus = result.summaries[i].sport_event_sta
                     textHTML += generateHTML(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation) ; 
                     console.log("id: " + i + " Match ID: " + matchid + " " + teamhomeabbreviation + " " + teamhomescore + "-" + teamawayscore + " " + teamawayabbreviation);
-                    validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore);
+                    validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore,teamaway,teamhome);
                 }
             }
             //console.log(textHTML);
@@ -431,7 +431,7 @@ async function Scores()
 }
 
 
-function validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore)
+function validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore,teamaway,teamhome)
 {
     
     if (localStorage.getItem(matchid+"-away-score-"+teamawayabbreviation) == null)
@@ -445,7 +445,7 @@ function validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbrevi
                 console.log("No score change " + teamawayabbreviation + " playing away with score:" + teamawayscore);
             else
                 {
-                    isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away' );
+                    isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away' ,teamaway);
                     console.log("Score Change on away team " + teamawayabbreviation);
                     localStorage.setItem(matchid+"-away-score-"+teamawayabbreviation, teamawayscore);
                 }
@@ -464,7 +464,7 @@ function validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbrevi
             else
                 {
                     console.log("Score Change on home team " + teamhomeabbreviation);
-                    isTouchdown(matchid, teamhomeabbreviation, teamhomescore, 'home' );
+                    isTouchdown(matchid, teamhomeabbreviation, teamhomescore, 'home' , teamhome);
                     localStorage.setItem(matchid+"-home-score-"+teamhomeabbreviation, teamhomescore);
                 }
         }
@@ -472,19 +472,19 @@ function validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbrevi
 }
 
 
-function isTouchdown(matchid,team,score,playingAt)
+function isTouchdown(matchid,team,score,playingAt,teamname)
 {
     if ((parseInt(score) - parseInt(localStorage.getItem(matchid+"-"+playingAt+"-score-"+team)) ) >=6 )
     {
         console.log("TOUCHDOWN: " + team);
-        displayTouchdown(team);
+        displayTouchdown(team,teamname);
         if (localStorage.getItem("webhook_" + team) != null) 
             fetch(localStorage.getItem("webhook_" + team));
     }   
 }
 
 
-function  displayTouchdown(team) 
+function  displayTouchdown(team, teamname) 
 {
 
     let html = "";
@@ -493,7 +493,11 @@ function  displayTouchdown(team)
     html += '<div class=\"score\">';
     html += '<img id=\"' + team + '\" src=\"' + createSRC(team) + '\" class=\"responsive\" alt=\"away\" /> ';
     html += '</div>';
-    html += '<div class=\"score\"> TOUCHDOWN 🏈</div>';
+    html += '<div class=\"score\" > Touchdown 🏈 ' + teamname + ' </div>';
+    html += '<div class=\"score\">';
+    html += '<img id=\"' + team + '\" src=\"' + createSRC(team) + '\" class=\"responsive\" alt=\"away\" /> ';
+    html += '</div>';
+
     html += '</div>';
     const h2 = document.getElementById("myH2");
     h2.insertAdjacentHTML("afterend", html);
