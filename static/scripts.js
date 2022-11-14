@@ -92,6 +92,7 @@ function set_values()
     document.getElementById("webhook_TB").value = localStorage.getItem("webhook_TB");
     document.getElementById("webhook_TEN").value = localStorage.getItem("webhook_TEN");
     document.getElementById("webhook_WAS").value = localStorage.getItem("webhook_WAS");
+    document.getElementById("webhook_OFF").value = localStorage.getItem("webhook_OFF");
 
     
 
@@ -141,6 +142,7 @@ function SettingsForm(API_KEY, background_color, theme, scrollingSpeed) {
     localStorage.setItem("webhook_TB", document.getElementById("webhook_TB").value);
     localStorage.setItem("webhook_TEN", document.getElementById("webhook_TEN").value);
     localStorage.setItem("webhook_WAS", document.getElementById("webhook_WAS").value);
+    localStorage.setItem("webhook_OFF", document.getElementById("webhook_OFF").value);
 }
 
 
@@ -322,10 +324,10 @@ async function getProbabilities()
     var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
     
     // let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
-    //let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/probabilities?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY"), requestOptions);
+    let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/probabilities?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY"), requestOptions);
 
     
-    let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
+    //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
         let data = await response.json();
         return data; 
 }
@@ -371,7 +373,7 @@ async function Probabilities()
 async function getScores()
 {
     var requestOptions = { method: 'GET',  redirect: 'follow'};
-    let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ) , requestOptions);
+    let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/scores?url=https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json?api_key=" + localStorage.getItem("API_KEY" ), requestOptions);
     let data = await response.json();
     return data;
 }
