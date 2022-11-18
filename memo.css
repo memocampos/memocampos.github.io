@@ -128,6 +128,9 @@ input[type=text]
   background-image: url("images/staticbackground/field0.jpeg");
 
   background-size: 100% auto;
+  overflow: hidden;
+  align-items: center;
+ 
 
 
 }
