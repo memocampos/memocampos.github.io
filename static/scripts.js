@@ -46,6 +46,7 @@ function isHome() {
 
 function set_values()
 {
+    window.scrollBy(0, 50);
     myFunction_set()
     document.getElementById("API_KEY").value = localStorage.getItem("API_KEY");
 
