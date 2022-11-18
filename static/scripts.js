@@ -52,6 +52,10 @@ function set_values()
     if (localStorage.getItem("background_color") == null)
         localStorage.setItem("background_color", 'black');
 
+
+    if (localStorage.getItem("background_color") == 'image')
+        document.getElementById("path").className = "path2";
+
     document.getElementById(localStorage.getItem("background_color")).checked = true;
   
     if (localStorage.getItem("theme") == null)
