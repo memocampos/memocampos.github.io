@@ -47,6 +47,19 @@ body {
 
 }
 
+.responsivelogo 
+{
+    width: 40vh;
+    height: 40vh;
+    max-width: 600px;
+    min-width: 1em;
+    max-height: 600px;
+    min-height: 1em;
+    margin-left: 40px;
+
+}
+
+
 
 .responsiveStandings 
 {
@@ -174,22 +187,33 @@ input[type=text]
   font-family: NFL-Font;
   display: flex;
   color: #DDD;
-  font-size: 3.5vw;
+  font-size: 10vh;
   font-weight: 100;
   align-items: center;
   margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .teamRank {
   font-family: sans-serif;
   display: flex;
   color: #DDD;
-  font-size: 2vw;
+  font-size: 5vh;
   font-weight: 100;
-  align-items: center;
-  margin-left: 70px;
+  align-items: left;
+}
+
+.teamtext {
+  font-family: sans-serif;
+  display: flex;
+  color: #DDD;
+  font-size: 3vh;
+  align-items: left;
 
 }
+
 
 .center {
   display: block;
@@ -218,8 +242,10 @@ input[type=text]
 
 .StandingsFrame 
 {
-  width: 60vw;
-  height: 75vh;
+  width: 900px;
+  height: 150px;
+
+  
 }
 
 

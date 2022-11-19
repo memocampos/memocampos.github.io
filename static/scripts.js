@@ -200,42 +200,104 @@ function generateHTML(away,awayscore,homescore,home)
 }
 
 
+
 function generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw, goals_for, goals_against, goals_diff)
 {
-
-html  = '<div class=\"game\">';
-html +=  '  <div class=\"StandingsFrame\">';
-html +=  '    <img class=\"imageBackground\" width="100%" height="100%" src=\"images/backgrounds/' + teamAbbreviation + '.webp\" />';
-html +=  '    <table style=\"width:100%;height: 100%;\" >';
-html +=  '      <tr style=\"height:60vh;\"> ';
-html +=  '        <td style=\"width:30vh;\">';
-
-html +=  '<img id=\"' + teamAbbreviation + '\" src=\"' + createSRC(teamAbbreviation) + '\" class=\"responsive\" alt=\"away\" /> ';
-
-html +=  '        </td>';
-html +=  '        <td>';
-html +=  '          <div class=\"Standings\">';
-html +=  '            <table>';
-html +=  '              <tbody>';
-html +=  '              <tr><td>Games Played: </td><td>' + played + '</td></tr>';
-html +=  '              <tr><td>Win: </td><td>' + win + '</td></tr>';
-html +=  '              <tr><td>Loss: </td><td>' + loss + '</td></tr>';
-html +=  '              <tr><td>Draw: </td><td>' + draw + '</td></tr>';
-html +=  '              <tr><td>Goals For: </td><td>' + goals_for + '</td></tr>';
-html +=  '              <tr><td>Goals Against: </td><td>' + goals_against + '</td></tr>';
-html +=  '              <tr><td>Goals Diffrence: </td><td>' + goals_diff + '</td></tr>';
-html +=  '              </tbody>';
-html +=  '              </table>';
-html +=  '          </div>';
-html +=  '        </td>';
-html +=  '      </tr>';
-html +=  '      <tr><td class=\"teamName\">' + teamName + '</td><td class=\"teamRank\">Rank # ' + rank + '</td></tr>';
-html +=  '    </table>';
-html +=  '  </div>';
-html +=  '</div>';
-return html;
+    html = '          <div class=\"game\" style=\"background-image: url(\' images/backgrounds/' + teamAbbreviation + '.webp\');border-radius: 10px;\">';
+    html +=  '            <div class=\"standingsframe\">';
+    html +=  '                <div>';
+    html +=  '                <table>';
+    html +=  '                <tbody>';
+    html +=  '                  <tr>';
+    html +=  '                    <td>';
+    html +=  '                          <table style=\"width: 100%;\" >';
+    html +=  '                            <tbody>';
+    html +=  '                            <tr>';
+    html +=  '                            <td><img id=\"' + teamAbbreviation + '\" src=\"' + createSRC(teamAbbreviation) + '\" class=\"responsivelogo\" alt=\"away\" /></td>';
+    html +=  '                            <td><p class=\"teamRank\">Rank #' + rank + '</p>';
+    html +=  '            				<table class=\"teamtext\">';
+    html +=  '              			<tbody>';
+    html +=  '              			<tr><td>Games Played: </td><td>' + played + '</td></tr>';
+    html +=  '              			<tr><td>Win: </td><td>' + win + '</td></tr>';
+    html +=  '              			<tr><td>Loss: </td><td>' + loss + '</td></tr>';
+    html +=  '              			<tr><td>Draw: </td><td>' + draw + '</td></tr>';
+    html +=  '              			<tr><td>Goals For: </td><td>' + goals_for + '</td></tr>';
+    html +=  '              			<tr><td>Goals Against: </td><td>' + goals_against + '</td></tr>';
+    html +=  '              			<tr><td>Goals Diffrence: </td><td>' + goals_diff + '</td></tr>';
+    html +=  '              			</tbody>';
+    html +=  '              			</table>';
+    html +=  '                            </td>';
+    html +=  '                            </tr>';
+    html +=  '                            </tbody>';
+    html +=  '                            </table>';
+    html +=  '                    </td>';
+    html +=  '                  </tr>';
+    html +=  '                  <tr>';
+    html +=  '                    <td><quote class=\"teamName\">' + teamName + '</quote></td>';
+    html +=  '                  </tr>';
+    html +=  '                </tbody>';
+    html +=  '                </table></div>';
+    html +=  '            </div>';
+    html +=  '          </div>';
+    return html;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 async function getStandings() 
@@ -243,10 +305,9 @@ async function getStandings()
         var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
         
 
-    let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/standings?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-    //
+    //let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/standings?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         //let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-      //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
+      let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         let data = await response.json();
         return data; 
 }
@@ -260,6 +321,8 @@ async function Standings()
     Month = d.getMonth() + 1;
     Day = d.getDate();  
     currentDate = Year+"-"+Month+"-"+Day;
+    
+//REMEMBER TO CHANHE != currentDate
 
     //Validation to only get standings once per day
     if (localStorage.getItem('Standings-date') == null || localStorage.getItem('Standings-date') == currentDate)
@@ -280,6 +343,7 @@ async function Standings()
             localStorage.setItem("Standings-date",YYYY+"-"+MM+"-"+DD);
             standings = result.standings[0].groups[0].standings;
 
+            console.log("si llego");
             
             //console.log(result.standings[0].groups[0].standings);
             for (var i = 0; i < standings.length; i++)
