@@ -200,7 +200,7 @@ input[type=text]
   font-family: sans-serif;
   display: flex;
   color: #DDD;
-  font-size: 5vh;
+  font-size: 10vh;
   font-weight: 100;
   align-items: left;
 }
@@ -209,7 +209,7 @@ input[type=text]
   font-family: sans-serif;
   display: flex;
   color: #DDD;
-  font-size: 3vh;
+  font-size: 8vh;
   align-items: left;
 
 }
