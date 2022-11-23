@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Live Game Scores 🏈</title>
     <link rel="icon" type="image/x-icon" href="images/NFL.ico">
-    <link rel="stylesheet" href="memo.css" />
+    <link rel="stylesheet" href="static/memo.css" />
+    <link rel="stylesheet" href="static/animate.min.css"/>
     
     <meta http-equiv="refresh" content="30">   <!-- TIMER DEBE de ser 30 -->
   </head>
@@ -233,7 +234,11 @@
             
             console.log(getRefreshRate());
             //Probabilities();
-            
+            //isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away' ,teamaway);
+            //isTouchdown('sr:sport_event:33623449','PIT',27,'home','Pittsburgh Steelers');
+            document.documentElement.style.setProperty('--animate-duration', '5s');
+            document.documentElement.style.setProperty('--animate-delay', '0.1s');
+
         
             console.log("Is game day:" + IsGameDay());
             if (IsGameDay() == 'true') {
@@ -247,6 +252,8 @@
         <!-- -->
         <p id="demo">
           <div class="game">
+            
+
             <div class="score"><img src="images/NFL.png" class="responsive" /></div>
             <div class="score">Live Game Scores 🏈</div>
           </div>

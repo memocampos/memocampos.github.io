@@ -321,11 +321,11 @@ async function Standings()
     Month = d.getMonth() + 1;
     Day = d.getDate();  
     currentDate = Year+"-"+Month+"-"+Day;
-    
+    console.log("O here");
 //REMEMBER TO CHANHE != currentDate
 
     //Validation to only get standings once per day
-    if (localStorage.getItem('Standings-date') == null || localStorage.getItem('Standings-date') == currentDate)
+    if (localStorage.getItem('Standings-date') == null || localStorage.getItem('Standings-date') != currentDate)
     {
 
         let text="";
@@ -553,6 +553,7 @@ function validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbrevi
 
 function isTouchdown(matchid,team,score,playingAt,teamname)
 {
+
     if ((parseInt(score) - parseInt(localStorage.getItem(matchid+"-"+playingAt+"-score-"+team)) ) >=6 )
     {
         console.log("TOUCHDOWN: " + team);
@@ -569,11 +570,11 @@ function  displayTouchdown(team, teamname)
     let html = "";
 
     html =  '<div class=\"game\">';
-    html += '<div class=\"score\">';
+    html += '<div class=\"score animate__animated animate__heartBeat animate__fast animate__infinite\">';
     html += '<img id=\"' + team + '\" src=\"' + createSRC(team) + '\" class=\"responsive\" alt=\"away\" /> ';
     html += '</div>';
-    html += '<div class=\"score\" > Touchdown 🏈 ' + teamname + ' </div>';
-    html += '<div class=\"score\">';
+    html += '<div class=\"score animate__animated animate__heartBeat animate__faster animate__infinite\" > Touchdown🏈' + teamname + ' </div>';
+    html += '<div class=\"score score animate__animated animate__heartBeat animate__faster animate__infinite\">';
     html += '<img id=\"' + team + '\" src=\"' + createSRC(team) + '\" class=\"responsive\" alt=\"away\" /> ';
     html += '</div>';
 
