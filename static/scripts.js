@@ -47,6 +47,23 @@ function isHome() {
 function set_values()
 {
     window.scrollBy(0, 50);
+    if (localStorage.getItem("RefreshRate") == null)
+    {
+        setTimeout(function(){
+            window.location.reload(1);
+         }, 30000);    
+    }
+    else
+    {
+        setTimeout(function(){
+            window.location.reload(1);
+         }, parseInt(localStorage.getItem("RefreshRate")));
+
+
+    }
+
+
+
     myFunction_set()
     document.getElementById("API_KEY").value = localStorage.getItem("API_KEY");
 

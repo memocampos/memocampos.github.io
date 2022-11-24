@@ -8,8 +8,8 @@
     <link rel="icon" type="image/x-icon" href="images/NFL.ico">
     <link rel="stylesheet" href="static/memo.css" />
     <link rel="stylesheet" href="static/animate.min.css"/>
-    
-    <meta http-equiv="refresh" content="30">   <!-- TIMER DEBE de ser 30 -->
+    <!--
+    <meta http-equiv="refresh" content="30">    TIMER DEBE de ser 30 -->
   </head>
 
   <body onload="set_values()">
@@ -62,11 +62,12 @@
           <h3>Refresh Rate</h3> 
           <div id="rcorners1" class="center"  >
               <select name="RefreshRate" id="RefreshRate">
-                <option value="300">Every 5 minutes</option>
-                <option value="120">Every 2 minutes</option>
-                <option value="60">Every Minute</option>
-                <option value="30">Every 30 seconds (recommended)</option>
-                <option value="15">Every 15 seconds</option>
+                <option value="300000">Every 5 minutes</option>
+                <option value="120000">Every 2 minutes</option>
+                <option value="60000">Every Minute</option>
+                <option value="45000">Every 45 seconds</option>
+                <option value="30000">Every 30 seconds (recommended)</option>
+                <option value="15000">Every 15 seconds</option>
               </select>
           </div>
 
