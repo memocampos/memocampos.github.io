@@ -587,10 +587,10 @@ function  displayTouchdown(team, teamname)
     let html = "";
 
     html =  '<div class=\"game\">';
-    html += '<div class=\"score animate__animated animate__heartBeat animate__fast animate__infinite\">';
+    html += '<div class=\"score animate__animated animate__heartBeat animate__faster animate__infinite\">';
     html += '<img id=\"' + team + '\" src=\"' + createSRC(team) + '\" class=\"responsive\" alt=\"away\" /> ';
     html += '</div>';
-    html += '<div class=\"score animate__animated animate__heartBeat animate__faster animate__infinite\" > Touchdown🏈' + teamname + ' </div>';
+    html += '<div class=\"score animate__animated animate__shakeY animate__faster animate__infinite\" > Touchdown🏈' + teamname + ' </div>';
     html += '<div class=\"score score animate__animated animate__heartBeat animate__faster animate__infinite\">';
     html += '<img id=\"' + team + '\" src=\"' + createSRC(team) + '\" class=\"responsive\" alt=\"away\" /> ';
     html += '</div>';
