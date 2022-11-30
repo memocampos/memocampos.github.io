@@ -1,5 +1,3 @@
-var txt = "";
-
 // Get the root element
 var r = document.querySelector(':root');
 var theme;
@@ -10,8 +8,6 @@ function myFunction_get() {
   var rs = getComputedStyle(r);
   // Alert the value of the --blue variable
   alert("The value of --black is: " + rs.getPropertyValue('--black'));
- 
- 
 }
 
 // Create a function for setting a variable value
@@ -19,8 +15,7 @@ function myFunction_set() {
   // Set the value of variable --blue to another value (in this case "lightblue")
   r.style.setProperty('--black', getlocal('background_color'));
   r.style.setProperty('--1', getlocal('scrollingSpeed'));
-  theme = getlocal('theme');
-  
+  theme = getlocal('theme'); 
 }
 
 
@@ -35,12 +30,11 @@ function createSRC(team) {
 }
 
 function isHome() {
+    //flip horizontally helmets if team is home 
     if (getlocal('theme') == 'helmet')
         return " flip";
     else
-        return "";
-
-        
+        return "";       
 }
 
 
@@ -58,11 +52,7 @@ function set_values()
         setTimeout(function(){
             window.location.reload(1);
          }, parseInt(localStorage.getItem("RefreshRate")));
-
-
     }
-
-
 
     myFunction_set()
     document.getElementById("API_KEY").value = localStorage.getItem("API_KEY");
@@ -115,12 +105,6 @@ function set_values()
     document.getElementById("webhook_TEN").value = localStorage.getItem("webhook_TEN");
     document.getElementById("webhook_WAS").value = localStorage.getItem("webhook_WAS");
     document.getElementById("webhook_OFF").value = localStorage.getItem("webhook_OFF");
-
-    
-
-
-
-
 }
 
 
@@ -260,63 +244,6 @@ function generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 async function getStandings() 
 {        
         var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
@@ -329,7 +256,6 @@ async function getStandings()
         return data; 
 }
 
-
 async function Standings()
 {
     const d = new Date();
@@ -338,8 +264,6 @@ async function Standings()
     Month = d.getMonth() + 1;
     Day = d.getDate();  
     currentDate = Year+"-"+Month+"-"+Day;
-    console.log("O here");
-//REMEMBER TO CHANHE != currentDate
 
     //Validation to only get standings once per day
     if (localStorage.getItem('Standings-date') == null || localStorage.getItem('Standings-date') != currentDate)
@@ -360,7 +284,7 @@ async function Standings()
             localStorage.setItem("Standings-date",YYYY+"-"+MM+"-"+DD);
             standings = result.standings[0].groups[0].standings;
 
-            console.log("si llego");
+            //console.log("si llego");
             
             //console.log(result.standings[0].groups[0].standings);
             for (var i = 0; i < standings.length; i++)
@@ -410,10 +334,9 @@ async function getProbabilities()
     var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
     
     // let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
-    let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/probabilities?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY"), requestOptions);
+    //let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/probabilities?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY"), requestOptions);
 
-    
-    //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
+    let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
         let data = await response.json();
         return data; 
 }
@@ -421,37 +344,40 @@ async function getProbabilities()
 
 async function Probabilities()
 {
-    let text="";
-    getProbabilities()
-    .then(result => {
-
-        timestamp = result.generated_at;
-        
-        console.log(result.sport_event_probabilities.length);
-        
-        for (var i = 0; i < result.sport_event_probabilities.length; i++){
-            event_id =  result.sport_event_probabilities[i].sport_event.id;
-            home = result.sport_event_probabilities[i].sport_event.competitors[0].abbreviation;
-            away = result.sport_event_probabilities[i].sport_event.competitors[1].abbreviation;
-            home_probability = result.sport_event_probabilities[i].markets[0].outcomes[0].probability;
-            away_probability = result.sport_event_probabilities[i].markets[0].outcomes[1].probability;
-            //text[i] = generateArray(i,event_id,home,home_probability,away,away_probability);
-
-            //Show Probabilities on Console
-            console.log(event_id + " " + home + " " + home_probability + " " + away + " " + away_probability   )
-            //IF Event found do something        
-            //if ('sr:sport_event:33623327' == result.sport_event_probabilities[i].sport_event.id)
-            //    console.log(result.sport_event_probabilities[i].sport_event.id);
-
-
-
-        }
-        //print_probabilities(text);
-        //console.log(text);
-
-    })
-    .catch(error => console.log('error: ', error));
-
+    const d = new Date();
+    console.log(d);
+    Year = d.getFullYear();
+    Month = d.getMonth() + 1;
+    Day = d.getDate();  
+    currentDate = Year+"-"+Month+"-"+Day;
+    console.log(localStorage.getItem('Probabilities-date'));
+    console.log(currentDate);
+    //Validation to only get Probabilities once per day
+    if (localStorage.getItem('Probabilities-date') == null || localStorage.getItem('Probabilities-date') != currentDate)
+    {
+                console.log("Getting Probabilities...");
+                let text="";
+                getProbabilities()
+                .then(result => {
+                    //store current date
+                    localStorage.setItem('Probabilities-date',currentDate);
+                    for (var i = 0; i < result.sport_event_probabilities.length; i++)
+                    {
+                        event_id =  result.sport_event_probabilities[i].sport_event.id;
+                        home = result.sport_event_probabilities[i].sport_event.competitors[0].abbreviation;
+                        away = result.sport_event_probabilities[i].sport_event.competitors[1].abbreviation;
+                        home_probability = result.sport_event_probabilities[i].markets[0].outcomes[0].probability;
+                        away_probability = result.sport_event_probabilities[i].markets[0].outcomes[1].probability;
+                        //Show Probabilities on Console
+                        console.log(event_id + " " + home + " " + home_probability + " " + away + " " + away_probability);
+                        //store today probabilities
+                        localStorage.setItem(event_id + "-" + home,home_probability);
+                        localStorage.setItem(event_id + "-" + away,away_probability);
+                    }
+                })
+                .catch(error => console.log('error: ', error));
+    }
+    else { console.log("Probabilites already generated.")}
 }
 
 
@@ -478,9 +404,6 @@ function IsGameDay()
         return 'false';
 }
 
-
-
-
 async function Scores()
 {
     var textHTML = "";
@@ -492,9 +415,6 @@ async function Scores()
     var status;
     var matchstatus;
 
-
-
-    
     getScores()
       .then (result => 
         {

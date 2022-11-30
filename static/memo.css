@@ -1,10 +1,10 @@
-:root {
+:root 
+{
   --blue: #013369;
   --white: #ffffff;
   --black: #000000;
   --grey: grey;
   --red: red;
-
 
   --1 : 30s;
   --2 : 25s;
@@ -13,25 +13,22 @@
   --5 : 10s;
   --6 : 8s;
   --7 : 5s;
-  --8 : 3s;
-  
-   
+  --8 : 3s;   
 }
 
-::-webkit-scrollbar {
+::-webkit-scrollbar 
+{
   display: none;
 }
 
 
-body {
-  margin: 0;
-
-
-
- 
+body 
+{
+  margin: 0; 
 }
 
-@font-face {
+@font-face 
+{
   font-family: NFL-Font;
   src: url('fonts/NFL-Font/Freshman.ttf');
 }
@@ -59,15 +56,10 @@ body {
 
 }
 
-
-
 .responsiveStandings 
 {
     width: 800px;
     height: 80vh;
-
-
-
 }
 
 input[type=text]
@@ -84,17 +76,18 @@ input[type=text]
   padding-bottom: 3px;
   padding-left: 2px;
   border-color: #013369;
-  
-  
 }
 
 
-.parent {
+.parent 
+{
   position: relative;
   top: 0;
   left: 0;
 }
-.imageTeam {
+
+.imageTeam 
+{
   position: relative;
   align-items:flex-end;
   margin-top: 20px;
@@ -104,23 +97,21 @@ input[type=text]
   height: 100%;
   min-width: 1em;
   min-height: 1em;
-
 }
-.imageBackground {
+
+.imageBackground 
+{
   border-radius: 15px;
   position:absolute;
   width: 60vw;
   height: 75vh;
-
-  
   z-index: -1;
-
-  
 }
 
 
 
-.path {
+.path 
+{
   display: flex;
   width: 100%;
   height: 100vh;
@@ -131,24 +122,19 @@ input[type=text]
 }
 
 
-
-.path2 {
-
+.path2 
+{
   display: flex;
   width: 100%;
   height: 100vh;
-
   background-image: url("../images/staticbackground/field0.jpeg");
-
   background-size: 100% auto;
   overflow: hidden;
   align-items: center;
- 
-
-
 }
 
-.scores {
+.scores 
+{
   color: #EEE;
   display: flex;
   white-space: nowrap;
@@ -156,14 +142,16 @@ input[type=text]
   padding-left: 100%;
 }
 
-.game {
+.game 
+{
   display: flex;
   margin-left: 50px;
   margin-right: 50px;
   align-items: center;
 }
 
-.score {
+.score 
+{
   font-family: sans-serif;
   display: flex;
   color: #DDD;
@@ -172,7 +160,8 @@ input[type=text]
 }
 
 
-.teamTouchdown {
+.teamTouchdown 
+{
   font-family: NFL-Font;
   display: flex;
   color: #DDD;
@@ -182,8 +171,8 @@ input[type=text]
   margin-left: 0px;
 }
 
-
-.teamName {
+.teamName 
+{
   font-family: NFL-Font;
   display: flex;
   color: #DDD;
@@ -196,7 +185,8 @@ input[type=text]
   margin-bottom: 20px;
 }
 
-.teamRank {
+.teamRank 
+{
   font-family: sans-serif;
   display: flex;
   color: #DDD;
@@ -205,7 +195,8 @@ input[type=text]
   align-items: left;
 }
 
-.teamtext {
+.teamtext 
+{
   font-family: sans-serif;
   display: flex;
   color: #DDD;
@@ -215,7 +206,8 @@ input[type=text]
 }
 
 
-.center {
+.center 
+{
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -223,14 +215,13 @@ input[type=text]
 
 }
 
-.textright {
+.textright 
+{
   text-align: right;
-
-
 }
 
-.Standings {
-
+.Standings 
+{
   font-family: sans-serif;
   margin-left: auto;
   color: #DDD;
@@ -243,19 +234,19 @@ input[type=text]
 .StandingsFrame 
 {
   width: 900px;
-  height: 150px;
-
-  
+  height: 150px; 
 }
 
 
-.flip {
+.flip 
+{
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
 
 
-@keyframes move {
+@keyframes move 
+{
   0% {
     transform: translate(0, 0);
   }
@@ -265,7 +256,8 @@ input[type=text]
 }
 
 
-.collapsible {
+.collapsible 
+{
   background-color: var(--black);
   color: var(--black);
   cursor: pointer;
@@ -279,9 +271,9 @@ input[type=text]
 }
 
 
-.content {
-   
-    border: none;
+.content 
+{  
+  border: none;
   padding: 0 18px;
   display: none;
   overflow: hidden;
@@ -289,27 +281,31 @@ input[type=text]
 }
 
 
-.box {
+.box 
+{
   height: 20px;
   width: 20px;
 
   border: 1px solid black;
 }
 
-.white {
+.white 
+{
   background-color: white;
 }
 
-.black {
+.black 
+{
   background-color: black;
 }
 
-.grey {
+.grey 
+{
   background-color: grey;
 }
 
-
-.red {
+.red 
+{
   background-color: red;
 }
 
@@ -322,7 +318,8 @@ input[type=text]
 }
 
 
-#rcorners1 {
+#rcorners1 
+{
   border-radius: 5px;
   background: white;
   padding: 15px;
@@ -332,32 +329,35 @@ input[type=text]
 }
 
 
-.table {
+.table 
+{
   border-collapse:separate;
   border-radius:6px;
 }
 
 
 
-th {
+th 
+{
   background-color: #013369;
   font-weight: bold;
   color: white
  
 }
 
-td:first-child, th:first-child {
+td:first-child, th:first-child 
+{
    border-left: none;
 }
 
 
-.submit {
+.submit 
+{
   float: right;
   display: inline;
   position: fixed;
   top: 4px;
   right: 7px;
-
   color: #ffffff;
   background-color: #013369;
   font-size: 19px;
@@ -367,7 +367,8 @@ td:first-child, th:first-child {
   cursor: pointer
 }
 
-.submit:hover {
+.submit:hover 
+{
   color: #d50a0a;
   background-color: #ffffff;
 }

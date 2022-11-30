@@ -8,13 +8,11 @@
     <link rel="icon" type="image/x-icon" href="images/NFL.ico">
     <link rel="stylesheet" href="static/memo.css" />
     <link rel="stylesheet" href="static/animate.min.css"/>
-    <!--
-    <meta http-equiv="refresh" content="30">    TIMER DEBE de ser 30 -->
   </head>
 
   <body onload="set_values()">
 
-    <!-- SETTINGS -->
+  <!-- SETTINGS -->
     <button type="button" class="collapsible" style="border-style: dashed;" ><img src="images/settings.png" width="30px" style="padding-right: 4px;"></button>
       <div class="content">
         <h1>Settings</h1>
@@ -22,24 +20,15 @@
           <h3> API Key</h3>
           <div id="rcorners1" class="center" >
                 <form id="settingsForm"  onsubmit='SettingsForm(document.getElementById("API_KEY").value, document.getElementsByName("background_color"), document.getElementsByName("theme"), document.getElementById("scrollingSpeed"))'>           
-                
-
                 <h3>In order to obtain live game scores you need to get a free API key from sportradar.com, just follow below instructions:</h3>
-
                 <ol>
-                  <li>Register an account at <a href="http://developer.sportradar.com/member/register" target="_blank">developer.sportradar.com</a></li>
-
+                  <li>Register an account at <a href="https://developer.sportradar.com/member/register" target="_blank">developer.sportradar.com</a></li>
                   <li>Under <strong>My&nbsp;API&nbsp;Keys</strong> click on <strong>Applications</strong> and then click on <strong>[Create New App]</strong></li>
-                  
                   <li>Fill in all required information</li>
                   <li>Search for <strong>&ldquo;Issue a new&nbsp;key&nbsp;for Global American Football Trial</strong>&rdquo; and select by clicking on the check box.</li>
-             
                   <li>Click on My Account and look for the&nbsp;Key ID, copy and paste it below:</li><br>
                   <input type="text" id="API_KEY" name="API_KEY" value="">
                 </ol>
-                
-                
-
           </div>
 
           <h3>Scrolling Speed</h3> 
@@ -95,8 +84,6 @@
 
                 </td>
 
-
-
                 <td>
                   <input type="radio" id="logo_name" name="theme" value="logo_name">
                   <label for="logo_name"><br><img src="images/logo_name/GB.png" width="100px" height="100px"/><br>Logo with<br>team name</label>
@@ -150,18 +137,11 @@
                 </tbody>
                 </table>
             </div>
-
               <h3>Trigger Actions on Touchdowns</h3> 
               <div id="rcorners1" class="center" >
-
               <h3>Do you want to create an automated event every time a team scores a touchdown?&nbsp;</h3>
-
               <p>Register at <a href="https://ifttt.com/"><strong>IFTTT</strong></a>&nbsp;and create <strong><a href="https://ifttt.com/maker_webhooks">webhook</a></strong> and paste it below:</p>
-
               <p>&nbsp;</p>
-
-                
-
               <table cellpadding="0" cellspacing="0" width="100%" border="0">
                 <tr><td class="textright">Arizona Cardinals</td><td><img src="images/logo/ARI.png" width='40px' height='40px' onclick="clickimage('webhook_ARI')" /></td><td style="width:80%"><input type="text" id="webhook_ARI" name="webhook_ARI" value=""></td></tr>
                 <tr><td class="textright">Atlanta Falcons</td><td><img src="images/logo/ATL.png" width='40px' height='40px'  onclick="clickimage('webhook_ATL')" /></td><td><input type="text" id="webhook_ATL" name="webhook_ATL" value=""></td></tr>
@@ -211,30 +191,10 @@
     <div class="path" id="path">
       <div class="scores" >
         <h2 id="myH2"></h2>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
         <script>
             
-            console.log(getRefreshRate());
-            //Probabilities();
+            Probabilities();
             //isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away' ,teamaway);
             //isTouchdown('sr:sport_event:33623449','PIT',27,'home','Pittsburgh Steelers');
             document.documentElement.style.setProperty('--animate-duration', '5s');
@@ -260,12 +220,6 @@
           </div>
         </p>
 
-
-        
-
-
-
-      
       </div>
     </div>
   </body>
