@@ -249,7 +249,7 @@ async function getStandings()
         var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
         
 
-    let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl-api?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
+    let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json&round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         //let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
       //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         let data = await response.json();
@@ -335,7 +335,7 @@ async function getProbabilities()
     
     // let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
     //let response = await fetch("https://i57hmdn6xa.execute-api.us-west-2.amazonaws.com/default/probabilities?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-    let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl-api?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
+    let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
 
     //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json?api_key=" + localStorage.getItem("API_KEY") , requestOptions);
         let data = await response.json();
@@ -386,7 +386,7 @@ async function Probabilities()
 async function getScores()
 {
     var requestOptions = { method: 'GET',  redirect: 'follow'};
-    let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl-api?url=https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json&api_key=" + localStorage.getItem("API_KEY" ), requestOptions);
+    let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json&api_key=" + localStorage.getItem("API_KEY" ), requestOptions);
     let data = await response.json();
     return data;
 }
