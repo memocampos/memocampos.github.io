@@ -372,3 +372,16 @@ td:first-child, th:first-child
   color: #d50a0a;
   background-color: #ffffff;
 }
+
+#DivImage 
+{
+  float: left;
+}
+
+#DivProbabilities
+{
+  float: center;
+  clear: center;
+  text-align: center;
+  font-size:3vw;
+}
