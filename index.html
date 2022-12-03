@@ -13,13 +13,13 @@
   <body onload="set_values()">
 
   <!-- SETTINGS -->
-    <button type="button" class="collapsible" style="border-style: dashed;" ><img src="images/settings.png" width="30px" style="padding-right: 4px;"></button>
+    <button type="button" class="collapsible" style="border-style: none;background-color: #013369" ><img src="images/settings7.png" width="30px" style="padding-right: 6px;"></button>
       <div class="content">
         <h1>Settings</h1>
 
           <h3> API Key</h3>
           <div id="rcorners1" class="center" >
-                <form id="settingsForm"  onsubmit='SettingsForm(document.getElementById("API_KEY").value, document.getElementsByName("background_color"), document.getElementsByName("theme"), document.getElementById("scrollingSpeed"))'>           
+                <form id="settingsForm"  onsubmit='SettingsForm(document.getElementById("API_KEY").value, document.getElementsByName("background_color"), document.getElementsByName("theme"), document.getElementById("scrollingSpeed"),document.getElementById("WinLossCheckbox"),document.getElementById("ProbCheckbox-checkbox"))'>           
                 <h3>In order to obtain live game scores you need to get a free API key from sportradar.com, just follow below instructions:</h3>
                 <ol>
                   <li>Register an account at <a href="https://developer.sportradar.com/member/register" target="_blank">developer.sportradar.com</a></li>
@@ -60,6 +60,16 @@
               </select>
           </div>
 
+
+
+        <h3>Win‑Loss Record and Probabilities</h3> 
+        <div id="rcorners1" class="center"  >
+          <input type="checkbox" id="WinLossCheckbox" name="WinLossCheckbox" value="WinLossCheckbox">
+          <label for="WinLossCheckbox"> Display win-loss record</label><br>
+          <input type="checkbox" id="ProbCheckbox" name="ProbCheckbox" value="ProbCheckbox">
+          <label for="ProbCheckbox"> Display team probabilities </label><br>
+
+        </div>
 
 
 

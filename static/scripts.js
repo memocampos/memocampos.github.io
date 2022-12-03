@@ -45,7 +45,8 @@ function set_values()
     {
         setTimeout(function(){
             window.location.reload(1);
-         }, 30000);    
+         }, 30000); 
+         localStorage.setItem("RefreshRate",'30000');   
     }
     else
     {
@@ -65,6 +66,25 @@ function set_values()
         document.getElementById("path").className = "path2";
 
     document.getElementById(localStorage.getItem("background_color")).checked = true;
+
+
+    if (localStorage.getItem("WinLossCheckbox") == null)
+        localStorage.setItem("WinLossCheckbox", 'FALSE');
+
+    if (localStorage.getItem("WinLossCheckbox") == "TRUE")
+        document.getElementById("WinLossCheckbox").checked = true;
+    else
+        document.getElementById("WinLossCheckbox").checked = false;
+
+    
+    if (localStorage.getItem("ProbCheckbox") == null)
+        localStorage.setItem("ProbCheckbox", 'FALSE');
+
+    if (localStorage.getItem("ProbCheckbox") == "TRUE")
+        document.getElementById("ProbCheckbox").checked = true;
+    else
+        document.getElementById("ProbCheckbox").checked = false;
+
   
     if (localStorage.getItem("theme") == null)
         localStorage.setItem("theme", 'logo');
@@ -110,7 +130,21 @@ function set_values()
 
 
 
-function SettingsForm(API_KEY, background_color, theme, scrollingSpeed) {
+function SettingsForm(API_KEY, background_color, theme, scrollingSpeed,WinLossCheckbox,ProbCheckbox) {
+    if (document.getElementById('WinLossCheckbox').checked)
+        localStorage.setItem("WinLossCheckbox", "TRUE");
+    else
+        localStorage.setItem("WinLossCheckbox", "FALSE");
+        
+
+    if (document.getElementById('ProbCheckbox').checked)
+        localStorage.setItem("ProbCheckbox", "TRUE");
+    else
+        localStorage.setItem("ProbCheckbox", "FALSE");
+
+
+
+
     localStorage.setItem("API_KEY", API_KEY);
     localStorage.setItem("background_color", checked(background_color));
     localStorage.setItem("theme", checked(theme));
@@ -199,6 +233,54 @@ function generateHTML(away,awayscore,homescore,home)
     html += '</div>';
     return html;
 }
+
+
+
+function generateHTMLwData(away,awayscore,homescore,home, matchid)
+{
+
+
+    html = '<div class=\"game\">';
+    html += '<table><tbody><tr><td>';
+    html += '<div class=\"score responsive\" id=\"DivImage\" >';
+    html += '<img id=\"' + away + '\" src=\"' + createSRC(away) + '\"  alt=\"away\" /> ';
+    html += '</div>';
+    html += '</td></tr><tr><td>';
+    html +=  '<div id=\"DivProbabilities\">' + away;
+        if (localStorage.getItem("WinLossCheckbox") == "TRUE")
+            html += ' ' + localStorage.getItem(away + "-games");
+
+        if (localStorage.getItem("ProbCheckbox") == "TRUE")
+            html += ' ' + arrow(parseInt(localStorage.getItem(away + "-games"))) + localStorage.getItem(matchid + "-" + away) + '%' ;
+    html +=  '</div>';
+    html += '</td></tr></tbody></table>';
+
+    html += '<div class=\"score centerScore\">' + awayscore + ' - ' +  homescore + '</div>';
+
+    html += '<table><tbody><tr><td>';
+    html += '<div class=\"score responsive\" id=\"DivImage\" >';
+    html += '<img id=\"' + home + '\" src=\"' + createSRC(home) + '\" class=\"' + isHome() + '\" alt=\"home\" />';
+    html += '</div>';
+    html += '</td></tr><tr><td>';
+    html +=  '<div id=\"DivProbabilities\">' + home;
+        if (localStorage.getItem("WinLossCheckbox") == "TRUE")
+            html += ' ' + localStorage.getItem(home + "-games");
+
+        if (localStorage.getItem("ProbCheckbox") == "TRUE")
+            html += ' ' + arrow(parseInt(localStorage.getItem(home + "-games"))) + localStorage.getItem(matchid + "-" + home) + '%' ;
+    html +=  '</div>';
+    html += '</td></tr></tbody></table></div>';
+    return html;
+}
+
+function arrow(value)
+{
+    if (value>50)
+        return '⬆';
+    else
+        return '⬇';
+}
+
 
 
 
@@ -415,7 +497,7 @@ async function Scores()
     var teamawayscore;
     var status;
     var matchstatus;
-
+    
     getScores()
       .then (result => 
         {
@@ -432,8 +514,14 @@ async function Scores()
                     teamaway = result.summaries[i].sport_event.competitors[1].name;
                     teamawayabbreviation = result.summaries[i].sport_event.competitors[1].abbreviation;
                     teamawayscore = result.summaries[i].sport_event_status.away_score;
-                    matchstatus = result.summaries[i].sport_event_sta
-                    textHTML += generateHTML(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation) ; 
+                    matchstatus = result.summaries[i].sport_event_status;
+
+                    alert(localStorage.getItem("WinLossCheckbox"));
+                    if (localStorage.getItem("WinLossCheckbox") == "TRUE" || localStorage.getItem("ProbCheckbox") == "TRUE" )
+                        textHTML += generateHTMLwData(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation,matchid);
+                    else
+                        textHTML += generateHTML(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation) ; 
+
                     console.log("id: " + i + " Match ID: " + matchid + " " + teamhomeabbreviation + " " + teamhomescore + "-" + teamawayscore + " " + teamawayabbreviation);
                     validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore,teamaway,teamhome);
                 }

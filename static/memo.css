@@ -150,6 +150,14 @@ input[type=text]
   align-items: center;
 }
 
+
+.centerScore
+{
+  display: flex;
+  align-items: center;
+}
+
+
 .score 
 {
   font-family: sans-serif;
@@ -317,6 +325,13 @@ input[type=text]
   background-color: #013369;
 }
 
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 
 #rcorners1 
 {
@@ -383,5 +398,6 @@ td:first-child, th:first-child
   float: center;
   clear: center;
   text-align: center;
-  font-size:3vw;
+  font-family: NFL-Font, sans-serif;
+  font-size:7.5vh;
 }

@@ -191,24 +191,85 @@
     <div class="path" id="path">
       <div class="scores" >
 
+
+
         <div class="game">
-            <table>
-                <tbody>
-                <tr>
-                <td>	
-                    <div class="score responsive" id="DivImage" ><img id="LAC" src="images/logo/PIT.png" class=" " alt="away" /> </div>
-                </td>
-                </tr>
-                <tr>
-                <td>             
-                    <div id="DivProbabilities">(10-1) 14% </div>
-                </td>
-                </tr>
-                </tbody>
-                </table>
-            
+            <table><tbody><tr><td>	
+                <div class="score responsive" id="DivImage" ><img id="PIT" src="images/logo/BUF.png"  alt="away" /> </div>
+            </td></tr><tr><td>             
+                <div id="DivProbabilities">BUF (10-1) ⬆76%</div> 
+            </td></tr></tbody></table>
+        <div class="score centerScore">10 - 23</div>
+            <table><tbody><tr><td>	
+                <div class="score responsive" id="DivImage" ><img id="PIT" src="images/logo/MIN.png"  alt="away" /> </div>
+            </td></tr><tr><td>             
+                <div id="DivProbabilities">MIN (10-1) ⬇14%</div>  
+            </td></tr></tbody></table>
         </div>
-        
+
+
+        <div class="game">
+            <table><tbody><tr><td>	
+                <div class="score responsive" id="DivImage" ><img id="PIT" src="images/logo/DAL.png" class="" alt="away" /> </div>
+            </td></tr><tr><td>             
+                <div id="DivProbabilities">DAL (10-1) ⬆98%</div>
+            </td></tr></tbody></table>
+            <div class="score centerScore">50 - 23</div>
+            <table><tbody><tr><td>	
+                <div class="score responsive" id="DivImage" ><img id="PIT" src="images/logo/HOU.png" class="" alt="home" /> </div>
+            </td></tr><tr><td>             
+                <div id="DivProbabilities">HOU (10-1) ⬇2%</div>
+            </td></tr></tbody></table>
+            </div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="game">
+            <table><tbody><tr><td>	
+                <div class="score responsive" id="DivImage" ><img id="PIT" src="images/logo/KC.png" class="" alt="away" /> </div>
+            </td></tr><tr><td>             
+                <div id="DivProbabilities">KC (10-1) ⬆64%</div>
+            </td></tr></tbody></table>
+            <div class="score centerScore">10 - 23</div>
+            <table><tbody><tr><td>	
+                <div class="score responsive" id="DivImage" ><img id="PIT" src="images/logo/MIA.png" class="" alt="away" /> </div>
+            </td></tr><tr><td>             
+                <div id="DivProbabilities">MIA (10-1) ⬇24%</div>
+            </td></tr></tbody></table>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -224,9 +285,9 @@
             document.documentElement.style.setProperty('--animate-duration', '5s');
             document.documentElement.style.setProperty('--animate-delay', '0.1s');
       
-            textHTML += generateHTML('PIT',27,5,'ATL') ;
-            textHTML += generateHTML('SEA',12,31,'MIN') ;
-            textHTML += generateHTML('BUF',29,3,'CHI') ;
+            //textHTML += generateHTML('PIT',27,5,'ATL') ;
+            //textHTML += generateHTML('SEA',12,31,'MIN') ;
+            //textHTML += generateHTML('BUF',29,3,'CHI') ;
             const h2 = document.getElementById("myH2");
             html = textHTML;
             h2.insertAdjacentHTML("afterend", html);
