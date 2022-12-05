@@ -7,7 +7,7 @@ function myFunction_get() {
   // Get the styles (properties and values) for the root
   var rs = getComputedStyle(r);
   // Alert the value of the --blue variable
-  alert("The value of --black is: " + rs.getPropertyValue('--black'));
+  //alert("The value of --black is: " + rs.getPropertyValue('--black'));
 }
 
 // Create a function for setting a variable value
@@ -250,6 +250,7 @@ function generateHTMLwData(away,awayscore,homescore,home, matchid)
         if (localStorage.getItem("WinLossCheckbox") == "TRUE")
             html += ' ' + localStorage.getItem(away + "-games");
 
+            console.log("FLECHA: " + arrow(parseInt(localStorage.getItem(away + "-games"))));
         if (localStorage.getItem("ProbCheckbox") == "TRUE")
             html += ' ' + arrow(parseInt(localStorage.getItem(away + "-games"))) + localStorage.getItem(matchid + "-" + away) + '%' ;
     html +=  '</div>';
@@ -516,7 +517,7 @@ async function Scores()
                     teamawayscore = result.summaries[i].sport_event_status.away_score;
                     matchstatus = result.summaries[i].sport_event_status;
 
-                    alert(localStorage.getItem("WinLossCheckbox"));
+                    //alert(localStorage.getItem("WinLossCheckbox"));
                     if (localStorage.getItem("WinLossCheckbox") == "TRUE" || localStorage.getItem("ProbCheckbox") == "TRUE" )
                         textHTML += generateHTMLwData(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation,matchid);
                     else
