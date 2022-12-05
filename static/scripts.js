@@ -250,9 +250,8 @@ function generateHTMLwData(away,awayscore,homescore,home, matchid)
         if (localStorage.getItem("WinLossCheckbox") == "TRUE")
             html += ' ' + localStorage.getItem(away + "-games");
 
-            console.log("FLECHA: " + arrow(parseInt(localStorage.getItem(away + "-games"))));
         if (localStorage.getItem("ProbCheckbox") == "TRUE")
-            html += ' ' + arrow(parseInt(localStorage.getItem(away + "-games"))) + localStorage.getItem(matchid + "-" + away) + '%' ;
+            html += ' ' + arrow(parseInt(localStorage.getItem(matchid + "-" + away))) + localStorage.getItem(matchid + "-" + away) + '%' ;
     html +=  '</div>';
     html += '</td></tr></tbody></table>';
 
@@ -268,7 +267,7 @@ function generateHTMLwData(away,awayscore,homescore,home, matchid)
             html += ' ' + localStorage.getItem(home + "-games");
 
         if (localStorage.getItem("ProbCheckbox") == "TRUE")
-            html += ' ' + arrow(parseInt(localStorage.getItem(home + "-games"))) + localStorage.getItem(matchid + "-" + home) + '%' ;
+            html += ' ' + arrow(parseInt(localStorage.getItem(matchid + "-" + home))) + localStorage.getItem(matchid + "-" + home) + '%' ;
     html +=  '</div>';
     html += '</td></tr></tbody></table></div>';
     return html;
@@ -437,7 +436,7 @@ async function Probabilities()
     console.log(localStorage.getItem('Probabilities-date'));
     console.log(currentDate);
     //Validation to only get Probabilities once per day
-    if (localStorage.getItem('Probabilities-date') == null || localStorage.getItem('Probabilities-date') == currentDate)
+    if (localStorage.getItem('Probabilities-date') == null || localStorage.getItem('Probabilities-date') != currentDate)
     {
                 console.log("Getting Probabilities...");
                 let text="";
@@ -498,6 +497,7 @@ async function Scores()
     var teamawayscore;
     var status;
     var matchstatus;
+
     
     getScores()
       .then (result => 
