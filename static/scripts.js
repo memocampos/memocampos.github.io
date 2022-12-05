@@ -436,7 +436,7 @@ async function Probabilities()
     console.log(localStorage.getItem('Probabilities-date'));
     console.log(currentDate);
     //Validation to only get Probabilities once per day
-    if (localStorage.getItem('Probabilities-date') == null || localStorage.getItem('Probabilities-date') != currentDate)
+    if (localStorage.getItem('Probabilities-date') == null || localStorage.getItem('Probabilities-date') == currentDate)
     {
                 console.log("Getting Probabilities...");
                 let text="";
