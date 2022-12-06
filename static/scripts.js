@@ -442,8 +442,7 @@ async function Probabilities()
                 let text="";
                 getProbabilities()
                 .then(result => {
-                    //store current date
-                    localStorage.setItem('Probabilities-date',currentDate);
+                
                     for (var i = 0; i < result.sport_event_probabilities.length; i++)
                     {
                         event_id =  result.sport_event_probabilities[i].sport_event.id;
@@ -456,6 +455,8 @@ async function Probabilities()
                         //store today probabilities
                         localStorage.setItem(event_id + "-" + home,home_probability);
                         localStorage.setItem(event_id + "-" + away,away_probability);
+                            //store current date
+                        localStorage.setItem('Probabilities-date',currentDate);
                     }
                 })
                 .catch(error => console.log('error: ', error));
