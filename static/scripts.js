@@ -276,9 +276,9 @@ function generateHTMLwData(away,awayscore,homescore,home, matchid)
 function arrow(value)
 {
     if (value>50)
-        return '⬆';
+        return '🠉';
     else
-        return '⬇';
+        return '🠋';
 }
 
 
