@@ -199,11 +199,21 @@
 
     <!-- scrolling -->
     <div class="path" id="path" >
-      <div class="scores" >
+      <div class="scores" id="scores">
         <h2 id="myH2"></h2>
   
         <script>
-            
+          const path = document.getElementById('scores');
+          path.addEventListener('click', (e)=> 
+          {  
+          const running = path.style.animationPlayState === 'running';
+          path.style.animationPlayState = running ? 'paused' : 'running';
+          })
+
+          path.addEventListener('scroll', (e)=> {alert("Scroll")}) 
+
+
+
             Probabilities();
             //isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away' ,teamaway);
             //isTouchdown('sr:sport_event:33623449','PIT',27,'home','Pittsburgh Steelers');

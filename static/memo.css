@@ -24,7 +24,8 @@
 
 body 
 {
-  margin: 0; 
+  margin: 0;
+  accent-color: #013369; 
 }
 
 @font-face 
