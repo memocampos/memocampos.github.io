@@ -278,7 +278,7 @@ function arrow(value)
     if (value>50)
         return '⬆';
     else
-        return '↓';
+        return '⬇';
 }
 
 
