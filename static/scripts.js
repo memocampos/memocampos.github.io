@@ -335,6 +335,7 @@ async function getStandings()
         //let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
       //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         let data = await response.json();
+
         return data; 
 }
 
@@ -351,12 +352,13 @@ async function Standings()
     if (localStorage.getItem('Standings-date') == null || localStorage.getItem('Standings-date') != currentDate)
     {
 
-        let text="";
-        var textHTML = "";
+
         getStandings()
         .then(result => {
-            standingsDate = result.generated_at;    
-            standingsDate = standingsDate.substring(0,8)+parseInt(standingsDate.substring(9,10));
+            const myJSON = JSON.stringify(result);
+            localStorage.setItem("StandingsJSON",myJSON);
+            //standingsDate = result.generated_at;    
+            //standingsDate = standingsDate.substring(0,8)+parseInt(standingsDate.substring(9,10));
             standingsDate = new Date();
             YYYY = standingsDate.getFullYear();
             MM = standingsDate.getMonth() + 1;
@@ -364,48 +366,66 @@ async function Standings()
         
             console.log("Standings-date",YYYY+"-"+MM+"-"+DD);
             localStorage.setItem("Standings-date",YYYY+"-"+MM+"-"+DD);
-            standings = result.standings[0].groups[0].standings;
-
-            //console.log("si llego");
-            
-            //console.log(result.standings[0].groups[0].standings);
-            for (var i = 0; i < standings.length; i++)
-            { 
-
-               teamAbbreviation = standings[i].competitor.abbreviation;
-               teamName = standings[i].competitor.name;
-               teamID = standings[i].competitor.id;
-               rank = standings[i].rank;
-
-               played = standings[i].played;
-               win = standings[i].win;
-               loss = standings[i].loss;
-               draw = standings[i].draw;
-               goals_for = standings[i].goals_for;
-               goals_against = standings[i].goals_against;
-               goals_diff = standings[i].goals_diff;
-
-
-                if (standings[i].draw>0)
-                    games = "(" + standings[i].win+","+standings[i].loss+","+standings[i].draw+")";
-                else
-                    games = "(" + standings[i].win+","+standings[i].loss+")";
-
-                console.log(teamAbbreviation + " " + games);
-                localStorage.setItem(teamAbbreviation + "-games",games);
-                textHTML += generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw,goals_for, goals_against, goals_diff);    
-
-            }
-
-            const h2 = document.getElementById("myH2");
-            let html = textHTML;
-            h2.insertAdjacentHTML("afterend", html);
-
+            console.log("Standings generated");
+            //new Audio('/static/nfl.mp3').play();
 
         })
         .catch(error => console.log('error: ', error));
+    }
+    displayStandings()
+}
+
+function displayStandings()
+{
+
+
+    var textHTML = "";
+    let text = localStorage.getItem("StandingsJSON");
+    let result = JSON.parse(text);
+
+
+
+    standings = result.standings[0].groups[0].standings;
+
+    //console.log("si llego");
+    
+    //console.log(result.standings[0].groups[0].standings);
+    for (var i = 0; i < standings.length; i++)
+    { 
+
+       teamAbbreviation = standings[i].competitor.abbreviation;
+       teamName = standings[i].competitor.name;
+       teamID = standings[i].competitor.id;
+       rank = standings[i].rank;
+
+       played = standings[i].played;
+       win = standings[i].win;
+       loss = standings[i].loss;
+       draw = standings[i].draw;
+       goals_for = standings[i].goals_for;
+       goals_against = standings[i].goals_against;
+       goals_diff = standings[i].goals_diff;
+
+
+        if (standings[i].draw>0)
+            games = "(" + standings[i].win+","+standings[i].loss+","+standings[i].draw+")";
+        else
+            games = "(" + standings[i].win+","+standings[i].loss+")";
+
+        console.log(teamAbbreviation + " " + games);
+        localStorage.setItem(teamAbbreviation + "-games",games);
+        textHTML += generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw,goals_for, goals_against, goals_diff);    
 
     }
+
+    const h2 = document.getElementById("myH2");
+    let html = textHTML;
+    h2.insertAdjacentHTML("afterend", html);
+
+
+
+
+
 }
 
 
