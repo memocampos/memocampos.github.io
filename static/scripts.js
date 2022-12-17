@@ -286,8 +286,8 @@ function arrow(value)
 
 function generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw, goals_for, goals_against, goals_diff)
 {
-    html = '          <div class=\"game\" style=\"background-image: url(\' images/backgrounds/' + teamAbbreviation + '.webp\');border-radius: 10px;\">';
-    html +=  '            <div class=\"standingsframe\">';
+    html = '          <div class=\"game standingsframe\" style=\"background-image: url(\' images/backgrounds/' + teamAbbreviation + '.webp\');border-radius: 10px;\">';
+    html +=  '            <div class=\" \">';
     html +=  '                <div>';
     html +=  '                <table>';
     html +=  '                <tbody>';
@@ -503,7 +503,7 @@ function IsGameDay()
     let hour = d.getUTCHours();
     console.log("UTC date:"+ dateUTC +" CST date:" + d + "Day:" + day + "hour:" + hour);
 
-    if ((day == 0 && hour > 17 ) || (day == 1 && hour <= 5)|| (day == 2 && hour >= 1) || (day == 2 && hour <= 4)  || (day == 4 && hour < 23) || (day == 5 && hour < 4 ) )  { console.log("GAME DAY"); return 'true';} 
+    if ((day == 0 && hour > 17 ) || (day == 1 && hour <= 5)|| (day == 2 && hour >= 1) || (day == 2 && hour <= 4)  || (day == 4 && hour < 23) || (day == 6 && hour <= 17)|| (day == 5 && hour < 4 ) )  { console.log("GAME DAY"); return 'true';} 
     else
         return 'false';
 }

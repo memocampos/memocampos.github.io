@@ -240,10 +240,11 @@ input[type=text]
   text-align: end;
 }
 
-.StandingsFrame 
+.standingsframe 
 {
-  width: 900px;
-  height: 150px; 
+
+  -webkit-box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72); 
+box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72);
 }
 
 
