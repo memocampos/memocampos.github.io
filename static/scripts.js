@@ -335,7 +335,8 @@ async function getStandings()
         //let response = await fetch("http://localhost:3000/fetch/https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
       //let response = await fetch("https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json?round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         let data = await response.json();
-
+        var myJSON = JSON.stringify(data);
+        localStorage.setItem("StandingsJSON",myJSON);
         return data; 
 }
 
@@ -355,24 +356,32 @@ async function Standings()
 
         getStandings()
         .then(result => {
-            const myJSON = JSON.stringify(result);
-            localStorage.setItem("StandingsJSON",myJSON);
             //standingsDate = result.generated_at;    
             //standingsDate = standingsDate.substring(0,8)+parseInt(standingsDate.substring(9,10));
             standingsDate = new Date();
             YYYY = standingsDate.getFullYear();
             MM = standingsDate.getMonth() + 1;
             DD = standingsDate.getDate();
-        
+
+            if (localStorage.getItem("StandingsJSON").search("The NFL overall table") > 0)
+             {
             console.log("Standings-date",YYYY+"-"+MM+"-"+DD);
             localStorage.setItem("Standings-date",YYYY+"-"+MM+"-"+DD);
-            console.log("Standings generated");
+            console.log("Standings generated at: ",YYYY+"-"+MM+"-"+DD);
+
+
+
             //new Audio('/static/nfl.mp3').play();
+            }
 
         })
         .catch(error => console.log('error: ', error));
     }
-    displayStandings()
+    if (IsGameDay() == 'true')
+    {
+        console.log("Standongs ALREADY OBTAINED, Game day today scores will be displayed and not standings" );}
+    else {displayStandings();}
+    
 }
 
 function displayStandings()
@@ -448,13 +457,13 @@ async function getProbabilities()
 async function Probabilities()
 {
     const d = new Date();
-    console.log(d);
+    
     Year = d.getFullYear();
     Month = d.getMonth() + 1;
     Day = d.getDate();  
     currentDate = Year+"-"+Month+"-"+Day;
-    console.log(localStorage.getItem('Probabilities-date'));
-    console.log(currentDate);
+    console.log("Probabilites consulted on: ", localStorage.getItem('Probabilities-date'));
+    var ProbabilitiesLength = 0;
     //Validation to only get Probabilities once per day
     if (localStorage.getItem('Probabilities-date') == null || localStorage.getItem('Probabilities-date') != currentDate)
     {
@@ -462,8 +471,13 @@ async function Probabilities()
                 let text="";
                 getProbabilities()
                 .then(result => {
+
+                    if (result.sport_event_probabilities.length>0) 
+                        ProbabilitiesLength = result.sport_event_probabilities.length;
+                    else
+                        ProbabilitiesLength = 0;
                 
-                    for (var i = 0; i < result.sport_event_probabilities.length; i++)
+                    for (var i = 0; i < ProbabilitiesLength; i++)
                     {
                         event_id =  result.sport_event_probabilities[i].sport_event.id;
                         home = result.sport_event_probabilities[i].sport_event.competitors[0].abbreviation;
@@ -518,6 +532,7 @@ async function Scores()
     var teamawayscore;
     var status;
     var matchstatus;
+    
 
     
     getScores()
@@ -538,7 +553,6 @@ async function Scores()
                     teamawayscore = result.summaries[i].sport_event_status.away_score;
                     matchstatus = result.summaries[i].sport_event_status;
 
-                    //alert(localStorage.getItem("WinLossCheckbox"));
                     if (localStorage.getItem("WinLossCheckbox") == "TRUE" || localStorage.getItem("ProbCheckbox") == "TRUE" )
                         textHTML += generateHTMLwData(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation,matchid);
                     else

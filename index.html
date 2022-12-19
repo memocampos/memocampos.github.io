@@ -142,6 +142,17 @@
                 </tbody>
                 </table>
             </div>
+
+            <h3>NFL Song</h3> 
+            <div id="rcorners1" class="center" >
+              <audio id="myAudio" controls autoplay>
+                <source src="static/nfl.ogg" type="audio/ogg">
+                <source src="static/nfl.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+
+
               <h3>Trigger Actions on Touchdowns</h3> 
               <div id="rcorners1" class="center" >
               <h3>Do you want to create an automated event every time a team scores a touchdown?&nbsp;</h3>
@@ -196,7 +207,7 @@
     <div class="path" id="path" >
       <div class="scores" id="scores">
         <h2 id="myH2"></h2>
-  
+        
         <script>
           const path = document.getElementById('scores');
           path.addEventListener('click', (e)=> 
@@ -210,6 +221,17 @@
 
 
             Probabilities();
+            Standings();
+            
+    
+
+
+
+
+
+            
+            
+
             
             //isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away' ,teamaway);
             //isTouchdown('sr:sport_event:33623449','PIT',27,'home','Pittsburgh Steelers');
@@ -218,12 +240,8 @@
 
         
             console.log("Is game day:" + IsGameDay());
-            if (IsGameDay() == 'true') {
-              Scores();
-            }
-            else  {
-              Standings();
-            }
+            if (IsGameDay() == 'true') { Scores(); }
+   
         </script>
         
         <!-- -->
