@@ -248,10 +248,10 @@ function generateHTMLwData(away,awayscore,homescore,home, matchid)
     html += '</td></tr><tr><td>';
     html +=  '<div id=\"DivProbabilities\">' + away;
         if (localStorage.getItem("WinLossCheckbox") == "TRUE")
-            html += ' ' + localStorage.getItem(away + "-games");
+            html += ' ' + sessionStorage.getItem(away + "-games");
 
         if (localStorage.getItem("ProbCheckbox") == "TRUE")
-            html += ' ' + arrow(parseInt(localStorage.getItem(matchid + "-" + away))) + localStorage.getItem(matchid + "-" + away) + '%' ;
+            html += ' ' + arrow(parseInt(sessionStorage.getItem(matchid + "-" + away))) + sessionStorage.getItem(matchid + "-" + away) + '%' ;
     html +=  '</div>';
     html += '</td></tr></tbody></table>';
 
@@ -264,10 +264,10 @@ function generateHTMLwData(away,awayscore,homescore,home, matchid)
     html += '</td></tr><tr><td>';
     html +=  '<div id=\"DivProbabilities\">' + home;
         if (localStorage.getItem("WinLossCheckbox") == "TRUE")
-            html += ' ' + localStorage.getItem(home + "-games");
+            html += ' ' + sessionStorage.getItem(home + "-games");
 
         if (localStorage.getItem("ProbCheckbox") == "TRUE")
-            html += ' ' + arrow(parseInt(localStorage.getItem(matchid + "-" + home))) + localStorage.getItem(matchid + "-" + home) + '%' ;
+            html += ' ' + arrow(parseInt(sessionStorage.getItem(matchid + "-" + home))) + sessionStorage.getItem(matchid + "-" + home) + '%' ;
     html +=  '</div>';
     html += '</td></tr></tbody></table></div>';
     return html;
@@ -332,7 +332,7 @@ async function getStandings()
         let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json&round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
         let data = await response.json();
         var myJSON = JSON.stringify(data);
-        localStorage.setItem("StandingsJSON",myJSON);
+        sessionStorage.setItem("StandingsJSON",myJSON);
         return data; 
 }
 
@@ -346,7 +346,7 @@ async function Standings()
     currentDate = Year+"-"+Month+"-"+Day;
 
     //Validation to only get standings once per day
-    if (localStorage.getItem('Standings-date') == null || localStorage.getItem('Standings-date') != currentDate)
+    if (sessionStorage.getItem('Standings-date') == null || sessionStorage.getItem('Standings-date') != currentDate)
     {
 
 
@@ -360,10 +360,10 @@ async function Standings()
             MM = standingsDate.getMonth() + 1;
             DD = standingsDate.getDate();
 
-            if (localStorage.getItem("StandingsJSON").search("The NFL overall table") > 0)
+            if (sessionStorage.getItem("StandingsJSON").search("The NFL overall table") > 0)
              {
             console.log("Standings-date",YYYY+"-"+MM+"-"+DD);
-            localStorage.setItem("Standings-date",YYYY+"-"+MM+"-"+DD);
+            sessionStorage.setItem("Standings-date",YYYY+"-"+MM+"-"+DD);
             console.log("Standings generated at: ",YYYY+"-"+MM+"-"+DD);
 
 
@@ -386,7 +386,8 @@ function displayStandings()
 
 
     var textHTML = "";
-    let text = localStorage.getItem("StandingsJSON");
+    var standings;
+    let text = sessionStorage.getItem("StandingsJSON");
     let result = JSON.parse(text);
 
 
@@ -419,7 +420,7 @@ function displayStandings()
             games = "(" + standings[i].win+","+standings[i].loss+")";
 
         console.log(teamAbbreviation + " " + games);
-        localStorage.setItem(teamAbbreviation + "-games",games);
+        sessionStorage.setItem(teamAbbreviation + "-games",games);
         textHTML += generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw,goals_for, goals_against, goals_diff);    
 
     }
@@ -453,10 +454,10 @@ async function Probabilities()
     Month = d.getMonth() + 1;
     Day = d.getDate();  
     currentDate = Year+"-"+Month+"-"+Day;
-    console.log("Probabilites consulted on: ", localStorage.getItem('Probabilities-date'));
+    console.log("Probabilites consulted on: ", sessionStorage.getItem('Probabilities-date'));
     var ProbabilitiesLength = 0;
     //Validation to only get Probabilities once per day
-    if (localStorage.getItem('Probabilities-date') == null || localStorage.getItem('Probabilities-date') != currentDate)
+    if (sessionStorage.getItem('Probabilities-date') == null || sessionStorage.getItem('Probabilities-date') != currentDate)
     {
                 console.log("Getting Probabilities...");
                 let text="";
@@ -478,10 +479,10 @@ async function Probabilities()
                         //Show Probabilities on Console
                         console.log(event_id + " " + home + " " + home_probability + " " + away + " " + away_probability);
                         //store today probabilities
-                        localStorage.setItem(event_id + "-" + home,home_probability);
-                        localStorage.setItem(event_id + "-" + away,away_probability);
+                        sessionStorage.setItem(event_id + "-" + home,home_probability);
+                        sessionStorage.setItem(event_id + "-" + away,away_probability);
                             //store current date
-                        localStorage.setItem('Probabilities-date',currentDate);
+                        sessionStorage.setItem('Probabilities-date',currentDate);
                     }
                 })
                 .catch(error => console.log('error: ', error));
@@ -564,38 +565,38 @@ async function Scores()
 function validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore,teamaway,teamhome)
 {
     
-    if (localStorage.getItem(matchid+"-away-score-"+teamawayabbreviation) == null)
+    if (sessionStorage.getItem(matchid+"-away-score-"+teamawayabbreviation) == null)
         {
-            localStorage.setItem(matchid+"-away-score-"+teamawayabbreviation, teamawayscore);
+            sessionStorage.setItem(matchid+"-away-score-"+teamawayabbreviation, teamawayscore);
             console.log("Created record for " + teamawayabbreviation + " playing away with score:" + teamawayscore);
         }
     else
         {
-            if (localStorage.getItem(matchid+"-away-score-"+teamawayabbreviation) == teamawayscore)
+            if (sessionStorage.getItem(matchid+"-away-score-"+teamawayabbreviation) == teamawayscore)
                 console.log("No score change " + teamawayabbreviation + " playing away with score:" + teamawayscore);
             else
                 {
                     isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away' ,teamaway);
                     console.log("Score Change on away team " + teamawayabbreviation);
-                    localStorage.setItem(matchid+"-away-score-"+teamawayabbreviation, teamawayscore);
+                    sessionStorage.setItem(matchid+"-away-score-"+teamawayabbreviation, teamawayscore);
                 }
         }
     
     
-    if (localStorage.getItem(matchid+"-home-score-"+teamhomeabbreviation) == null)
+    if (sessionStorage.getItem(matchid+"-home-score-"+teamhomeabbreviation) == null)
         {
-            localStorage.setItem(matchid+"-home-score-"+teamhomeabbreviation, teamhomescore);
+            sessionStorage.setItem(matchid+"-home-score-"+teamhomeabbreviation, teamhomescore);
             console.log("Created record for " + teamhomeabbreviation + " playing home with score:" + teamhomescore);
         }
         else
         {
-            if (localStorage.getItem(matchid+"-home-score-"+teamhomeabbreviation) == teamhomescore)
+            if (sessionStorage.getItem(matchid+"-home-score-"+teamhomeabbreviation) == teamhomescore)
                 console.log("No score change " + teamhomeabbreviation + " playing home with score:" + teamhomescore );
             else
                 {
                     console.log("Score Change on home team " + teamhomeabbreviation);
                     isTouchdown(matchid, teamhomeabbreviation, teamhomescore, 'home' , teamhome);
-                    localStorage.setItem(matchid+"-home-score-"+teamhomeabbreviation, teamhomescore);
+                    sessionStorage.setItem(matchid+"-home-score-"+teamhomeabbreviation, teamhomescore);
                 }
         }
     console.log("--------------------------");
@@ -605,7 +606,7 @@ function validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbrevi
 function isTouchdown(matchid,team,score,playingAt,teamname)
 {
 
-    if ((parseInt(score) - parseInt(localStorage.getItem(matchid+"-"+playingAt+"-score-"+team)) ) >=6 )
+    if ((parseInt(score) - parseInt(sessionStorage.getItem(matchid+"-"+playingAt+"-score-"+team)) ) >=6 )
     {
         console.log("TOUCHDOWN: " + team);
         displayTouchdown(team,teamname);
