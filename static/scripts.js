@@ -400,8 +400,8 @@ function displayStandings()
     var standings;
     let text = sessionStorage.getItem("StandingsJSON");
     let result = JSON.parse(text);
-
-
+    console.log(result.standings);
+    console.log(result.standings[0].groups[0].standings);
 
     standings = result.standings[0].groups[0].standings;
 
