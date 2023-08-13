@@ -528,7 +528,7 @@ function IsGameDay()
     let hour = d.getHours();
     console.log("Day:" + day + "hour: " + hour);
 
-    if ((day == 0 && hour >= 12 && hour <= 24) || (day == 1 && hour >= 19 && hour <= 24) || (day == 4 && hour >=19 && hour <= 24) || (day == 6 && hour >= 12 && hour <= 24 ) || (day == 5 && hour >= 16 && hour <= 24 ) )  { console.log("GAME DAY"); return 'true';} 
+    if ((day == 0 && hour >= 11 && hour <= 24) || (day == 1 && hour >= 19 && hour <= 24) || (day == 4 && hour >=19 && hour <= 24) || (day == 6 && hour >= 12 && hour <= 24 ) || (day == 5 && hour >= 16 && hour <= 24 ) )  { console.log("GAME DAY"); return 'true';} 
     else
      return 'false';
 }
