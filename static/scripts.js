@@ -552,7 +552,7 @@ async function Scores()
             for (let i=0;i<result.summaries.length; i++)
             {
      
-                if (result.summaries[i].sport_event.sport_event_context.competition.name == 'NFL' )
+                if (result.summaries[i].sport_event.sport_event_context.competition.name.includes("NFL") )
                 {
                     matchid = result.summaries[i].sport_event.id
                     teamhome = result.summaries[i].sport_event.competitors[0].name;
