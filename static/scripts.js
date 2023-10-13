@@ -375,6 +375,50 @@ async function Standings()
 
             if (sessionStorage.getItem("StandingsJSON").search("The NFL overall table") > 0)
              {
+
+
+
+
+            var textHTML = "";
+            var standings;
+            let text = sessionStorage.getItem("StandingsJSON");
+            let result = JSON.parse(text);
+            console.log(result.standings);
+            console.log(result.standings[0].groups[0].standings);
+        
+            standings = result.standings[0].groups[0].standings;
+        
+            //console.log("si llego");
+            
+            //console.log(result.standings[0].groups[0].standings);
+            for (var i = 0; i < standings.length; i++)
+            { 
+        
+               teamAbbreviation = standings[i].competitor.abbreviation;
+               teamName = standings[i].competitor.name;
+               teamID = standings[i].competitor.id;
+               rank = standings[i].rank;
+        
+               played = standings[i].played;
+               win = standings[i].win;
+               loss = standings[i].loss;
+               draw = standings[i].draw;
+               goals_for = standings[i].goals_for;
+               goals_against = standings[i].goals_against;
+               goals_diff = standings[i].goals_diff;
+        
+        
+                if (standings[i].draw>0)
+                    games = "(" + standings[i].win+","+standings[i].loss+","+standings[i].draw+")";
+                else
+                    games = "(" + standings[i].win+","+standings[i].loss+")";
+        
+                console.log(teamAbbreviation + " " + games);
+                sessionStorage.setItem(teamAbbreviation + "-games",games);
+                textHTML += generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw,goals_for, goals_against, goals_diff);    
+        
+            }
+
             console.log("Standings-date",YYYY+"-"+MM+"-"+DD);
             sessionStorage.setItem("Standings-date",YYYY+"-"+MM+"-"+DD);
             console.log("Standings generated at: ",YYYY+"-"+MM+"-"+DD);
@@ -390,62 +434,15 @@ async function Standings()
     if (IsGameDay() == 'true')
     {
         console.log("Standongs ALREADY OBTAINED, Game day today scores will be displayed and not standings" );}
-    else {displayStandings();}
+    else {displayStandings(textHTML);}
     
 }
 
-function displayStandings()
+function displayStandings(textHTML)
 {
-
-
-    var textHTML = "";
-    var standings;
-    let text = sessionStorage.getItem("StandingsJSON");
-    let result = JSON.parse(text);
-    console.log(result.standings);
-    console.log(result.standings[0].groups[0].standings);
-
-    standings = result.standings[0].groups[0].standings;
-
-    //console.log("si llego");
-    
-    //console.log(result.standings[0].groups[0].standings);
-    for (var i = 0; i < standings.length; i++)
-    { 
-
-       teamAbbreviation = standings[i].competitor.abbreviation;
-       teamName = standings[i].competitor.name;
-       teamID = standings[i].competitor.id;
-       rank = standings[i].rank;
-
-       played = standings[i].played;
-       win = standings[i].win;
-       loss = standings[i].loss;
-       draw = standings[i].draw;
-       goals_for = standings[i].goals_for;
-       goals_against = standings[i].goals_against;
-       goals_diff = standings[i].goals_diff;
-
-
-        if (standings[i].draw>0)
-            games = "(" + standings[i].win+","+standings[i].loss+","+standings[i].draw+")";
-        else
-            games = "(" + standings[i].win+","+standings[i].loss+")";
-
-        console.log(teamAbbreviation + " " + games);
-        sessionStorage.setItem(teamAbbreviation + "-games",games);
-        textHTML += generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw,goals_for, goals_against, goals_diff);    
-
-    }
-
     const h2 = document.getElementById("myH2");
     let html = textHTML;
     h2.insertAdjacentHTML("afterend", html);
-
-
-
-
-
 }
 
 
