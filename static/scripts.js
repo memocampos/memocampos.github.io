@@ -425,7 +425,7 @@ async function Standings()
 
 
 
-            //new Audio('/static/nfl.mp3').play();
+            new Audio('/static/nfl.mp3').play();
             }
 
         })
