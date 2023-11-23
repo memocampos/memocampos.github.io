@@ -357,12 +357,13 @@ async function Standings()
     Month = d.getMonth() + 1;
     Day = d.getDate();  
     currentDate = Year+"-"+Month+"-"+Day;
+    var textHTML = "";
 
     //Validation to only get standings once per day
     if (sessionStorage.getItem('Standings-date') == null || sessionStorage.getItem('Standings-date') != currentDate)
     {
 
-
+        
         getStandings()
         .then(result => {
            
@@ -379,7 +380,7 @@ async function Standings()
 
 
 
-            var textHTML = "";
+            
             var standings;
             let text = sessionStorage.getItem("StandingsJSON");
             let result = JSON.parse(text);
@@ -464,6 +465,8 @@ async function getProbabilities()
     //Season 23-24
     let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:102797/probabilities.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
     
+
+
     let data = await response.json();
     return data; 
 }
@@ -535,10 +538,31 @@ function IsGameDay()
     let hour = d.getHours();
     console.log("Day:" + day + "hour: " + hour);
 
-    if ((day == 0 && hour >= 11 && hour <= 24) || (day == 1 && hour >= 19 && hour <= 24) || (day == 4 && hour >=19 && hour <= 24) || (day == 6 && hour >= 12 && hour <= 24 ) || (day == 5 && hour >= 16 && hour <= 24 ) )  { console.log("GAME DAY"); return 'true';} 
+    if ((day == 0 && hour >= 11 && hour <= 24) || (day == 1 && hour >= 19 && hour <= 24) || (day == 4 && hour >=19 && hour <= 24) || (day == 6 && hour >= 12 && hour <= 24 ) || (day == 5 && hour >= 16 && hour <= 24 ) || (isThanksgiving()) )  { console.log("GAME DAY"); return 'true';} 
     else
      return 'false';
 }
+
+
+function isThanksgiving() {
+    // Get today's date
+    const today = new Date();
+    // Get the month and day of today's date
+    const month = today.getMonth();
+    const day = today.getDate();
+    // Check if the month is November and the day is the fourth Thursday (between 22 and 28)
+    if (month === 10 && day >= 22 && day <= 28) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  // Example usage:
+  console.log(isThanksgiving()); // Output: true or false, depending on today's date
+
+
+
 
 async function Scores()
 {
