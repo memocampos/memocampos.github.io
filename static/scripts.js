@@ -340,7 +340,7 @@ async function getStandings()
 
         //Season 23-24
         //let response = await fetch("https://531whoot38.execute-api.us-west-1.amazonaws.com/default/NFL?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:102797/standings.json&round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-        let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:102797/standings.json&round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
+        let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:102797/standings.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
 
         
         let data = await response.json();
@@ -363,7 +363,7 @@ async function Standings()
     if (sessionStorage.getItem('Standings-date') == null || sessionStorage.getItem('Standings-date') != currentDate)
     {
 
-        
+        console.log("SI LLEGO!");
         getStandings()
         .then(result => {
            
@@ -385,13 +385,19 @@ async function Standings()
             let text = sessionStorage.getItem("StandingsJSON");
             let result = JSON.parse(text);
             console.log(result.standings);
+            console.log("longitud");
+            console.log(result.standings.length);
             console.log(result.standings[0].groups[0].standings);
         
             standings = result.standings[0].groups[0].standings;
+
+            console.log("longitud 2");
+            console.log(standings.length);
         
             //console.log("si llego");
             
             //console.log(result.standings[0].groups[0].standings);
+            
             for (var i = 0; i < standings.length; i++)
             { 
         
@@ -407,7 +413,7 @@ async function Standings()
                goals_for = standings[i].goals_for;
                goals_against = standings[i].goals_against;
                goals_diff = standings[i].goals_diff;
-        
+            
         
                 if (standings[i].draw>0)
                     games = "(" + standings[i].win+","+standings[i].loss+","+standings[i].draw+")";
@@ -419,14 +425,14 @@ async function Standings()
                 textHTML += generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw,goals_for, goals_against, goals_diff);    
         
             }
-
+            sessionStorage.setItem("textHTML", textHTML);
             console.log("Standings-date",YYYY+"-"+MM+"-"+DD);
             sessionStorage.setItem("Standings-date",YYYY+"-"+MM+"-"+DD);
             console.log("Standings generated at: ",YYYY+"-"+MM+"-"+DD);
 
 
 
-            new Audio('/static/nfl.mp3').play();
+            //new Audio('./static/nfl.mp3').play();
             }
 
         })
@@ -435,7 +441,14 @@ async function Standings()
     if (IsGameDay() == 'true')
     {
         console.log("Standongs ALREADY OBTAINED, Game day today scores will be displayed and not standings" );}
-    else {displayStandings(textHTML);}
+    else {
+        if (sessionStorage.getItem('textHTML'))
+            textStandings = sessionStorage.getItem('textHTML');
+        else
+            textStandings = '<div class="game"><div class="score"><img src="images/NFL.png" class="responsive" /></div><div class="score">Obtaining statistics ... </div></div>'
+
+            displayStandings(textStandings);
+        }
     
 }
 
@@ -450,7 +463,7 @@ function displayStandings(textHTML)
 
 async function getProbabilities() 
 {
-    console.log("new AWS endpoint")
+    
     var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
 
     //let response = await fetch("https://531whoot38.execute-api.us-west-1.amazonaws.com/default/NFL?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
@@ -550,8 +563,9 @@ function isThanksgiving() {
     // Get the month and day of today's date
     const month = today.getMonth();
     const day = today.getDate();
-    // Check if the month is November and the day is the fourth Thursday (between 22 and 28)
-    if (month === 10 && day >= 22 && day <= 28) {
+    const dayName = today.getDay();
+
+    if (month === 10 && day >= 22 && day <= 28 && dayName >= 4 && dayName <= 5 ) {
       return true;
     } else {
       return false;
