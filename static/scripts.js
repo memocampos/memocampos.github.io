@@ -363,7 +363,6 @@ async function Standings()
     if (sessionStorage.getItem('Standings-date') == null || sessionStorage.getItem('Standings-date') != currentDate)
     {
 
-        console.log("SI LLEGO!");
         getStandings()
         .then(result => {
            
@@ -384,19 +383,14 @@ async function Standings()
             var standings;
             let text = sessionStorage.getItem("StandingsJSON");
             let result = JSON.parse(text);
-            console.log(result.standings);
-            console.log("longitud");
-            console.log(result.standings.length);
+
             console.log(result.standings[0].groups[0].standings);
         
             standings = result.standings[0].groups[0].standings;
 
-            console.log("longitud 2");
-            console.log(standings.length);
+
         
-            //console.log("si llego");
-            
-            //console.log(result.standings[0].groups[0].standings);
+
             
             for (var i = 0; i < standings.length; i++)
             { 
@@ -432,7 +426,11 @@ async function Standings()
 
 
 
-            //new Audio('./static/nfl.mp3').play();
+            document.addEventListener('click', function() {
+                // Play audio file
+                new Audio('./static/nfl.mp3').play();
+              });
+
             }
 
         })
