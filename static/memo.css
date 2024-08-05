@@ -1,6 +1,6 @@
 :root 
 {
-  --blue: #013369;
+  
   --white: #ffffff;
   --black: #000000;
   --grey: grey;
@@ -323,9 +323,7 @@ box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72);
   background-color: green;
 }
 
-.blue {
-  background-color: blue;
-}
+
 
 .vertical-center {
   margin: 0;
