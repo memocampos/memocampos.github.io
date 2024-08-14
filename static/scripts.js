@@ -375,7 +375,7 @@ async function Standings()
             YYYY = standingsDate.getFullYear();
             MM = standingsDate.getMonth() + 1;
             DD = standingsDate.getDate();
-
+            
             if (sessionStorage.getItem("StandingsJSON").search("The NFL overall table") > 0)
              {
 
