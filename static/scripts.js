@@ -434,6 +434,7 @@ async function Standings()
             document.addEventListener('click', function() {
                 // Play audio file
                 new Audio('./static/nfl.mp3').play();
+                clickimage('webhook_NFL');
               });
 
             }
