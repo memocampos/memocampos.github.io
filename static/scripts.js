@@ -124,6 +124,7 @@ function set_values()
     document.getElementById("webhook_TB").value = localStorage.getItem("webhook_TB");
     document.getElementById("webhook_TEN").value = localStorage.getItem("webhook_TEN");
     document.getElementById("webhook_WAS").value = localStorage.getItem("webhook_WAS");
+    document.getElementById("webhook_NFL").value = localStorage.getItem("webhook_NFL");
     document.getElementById("webhook_OFF").value = localStorage.getItem("webhook_OFF");
 }
 
@@ -182,6 +183,7 @@ function SettingsForm(API_KEY, background_color, theme, scrollingSpeed,WinLossCh
     localStorage.setItem("webhook_TB", document.getElementById("webhook_TB").value);
     localStorage.setItem("webhook_TEN", document.getElementById("webhook_TEN").value);
     localStorage.setItem("webhook_WAS", document.getElementById("webhook_WAS").value);
+    localStorage.setItem("webhook_NFL", document.getElementById("webhook_NFL").value);
     localStorage.setItem("webhook_OFF", document.getElementById("webhook_OFF").value);
 }
 
