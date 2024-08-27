@@ -7,33 +7,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Live Game Scores 🏈</title>
   <link rel="icon" type="image/x-icon" href="images/page.ico?">
+  <!-- Link to the main stylesheet for styling the webpage -->
   <link rel="stylesheet" href="static/memo.css" />
+  <!-- Link to an additional stylesheet for animations -->
   <link rel="stylesheet" href="static/animate.min.css" />
 </head>
 
+<!-- The body element triggers the set_values function when the page loads -->
 <body onload="set_values()">
 
+
   <!-- SETTINGS Screen-->
+  <!-- A button that collapses/expands the settings menu, styled with an image icon -->
   <button type="button" class="collapsible" style="border-style: none;background-color: #013369"><img
       src="images/settings7.png" width="30px" style="padding-right: 6px;"></button>
   <div class="content">
+    <!-- Container for the settings content -->
     <h1>Settings</h1>
 
 
-
+    <!-- API Key Section -->
     <h3> API Key</h3>
     <div id="rcorners1" class="center">
+      <!-- Form for settings, triggers SettingsForm function on submit -->
       <form id="settingsForm"
         onsubmit='SettingsForm(document.getElementById("API_KEY").value, document.getElementsByName("background_color"), document.getElementsByName("theme"), document.getElementById("scrollingSpeed"),document.getElementById("WinLossCheckbox"),document.getElementById("ProbCheckbox-checkbox"))'>
-
+        <!-- Input field for the API key -->
         <input type="text" id="API_KEY" name="API_KEY" value="W0YIjok3FdQ5RC31y07nKXcE3d">
     </div>
 
 
 
-
+    <!-- Scrolling Speed Section -->
     <h3>Scrolling Speed</h3>
     <div id="rcorners1" class="center">
+      <!-- Dropdown menu to select the scrolling speed for game scores -->
       <select name="scrollingSpeed" id="scrollingSpeed">
         <option value="120s">Super Slow</option>
         <option value="60s">Very Slow</option>
@@ -48,9 +56,10 @@
       </select>
     </div>
 
-
+    <!-- Refresh Rate Section -->
     <h3>Refresh Rate</h3>
     <div id="rcorners1" class="center">
+      <!-- Dropdown menu to select the refresh rate for the live scores -->
       <select name="RefreshRate" id="RefreshRate">
         <option value="300000">Every 5 minutes</option>
         <option value="120000">Every 2 minutes</option>
@@ -60,30 +69,36 @@
         <option value="15000">Every 15 seconds</option>
       </select>
     </div>
-
+    
+    <!-- Win‑Loss Record and Probabilities Section -->
     <h3>Win‑Loss Record and Probabilities</h3>
     <div id="rcorners1" class="center">
+      <!-- Checkbox to display the win-loss record -->
       <input type="checkbox" id="WinLossCheckbox" name="WinLossCheckbox" value="WinLossCheckbox">
       <label for="WinLossCheckbox"> Display win-loss record</label><br>
+      <!-- Checkbox to display team probabilities -->
       <input type="checkbox" id="ProbCheckbox" name="ProbCheckbox" value="ProbCheckbox">
       <label for="ProbCheckbox"> Display team probabilities </label><br>
 
     </div>
 
 
-
+    <!-- Themes Section -->
     <h3>Themes</h3>
     <div id="rcorners1" class="center">
+      <!-- Table with options for different visual themes using radio buttons -->
       <table style="text-align: center">
         <tbody>
           <tr>
             <td>
+              <!-- Theme option: Logo -->
               <input type="radio" id="logo" name="theme" value="logo" checked required>
               <label for="logo"><br><img src="images/logo/BUF.png" width="100px"
                   height="100px" /><br>Logo<br>&nbsp;</label>
 
             </td>
             <td>
+              <!-- Theme option: Logo with background -->
               <input type="radio" id="logo-with-background" name="theme" value="logo-with-background" checked required>
               <label for="logo-with-background"><br> <img src="images/logo-with-background/LAC.png" width="100px"
                   height="100px" /><br>Logo with<br>Background</label>
@@ -91,6 +106,7 @@
             </td>
 
             <td>
+              <!-- Theme option: Logo with team name -->
               <input type="radio" id="logo_name" name="theme" value="logo_name">
               <label for="logo_name"><br><img src="images/logo_name/GB.png" width="100px" height="100px" /><br>Logo
                 with<br>team name</label>
@@ -98,58 +114,60 @@
             </td>
 
             <td>
+              <!-- Theme option: Helmet -->
               <input type="radio" id="helmet" name="theme" value="helmet">
               <label for="helmet"><br><img src="images/helmet/PIT.png" width="100px"
                   height="100px" /><br>Helmet<br>&nbsp;</label>
             </td>
 
             <td>
+              <!-- Theme option: Team Name -->
               <input type="radio" id="names" name="theme" value="names">
               <label for="names"><br><img src="images/names/KC.png" width="100px" height="100px" /><br>Team
                 Name<br>&nbsp;</label>
             </td>
             <td>
+              <!-- Theme option: Disney -->
               <input type="radio" id="disney" name="theme" value="disney">
               <label for="disney"><br><img src="images/disney/SEA.png" width="100px"
                   height="100px" /><br>Disney<br>&nbsp;</label>
             </td>
 
             <td>
+              <!-- Theme option: Trump -->
               <input type="radio" id="trump" name="theme" value="trump">
               <label for="trump"><br><img src="images/trump/MIN.png" width="100px"
                   height="100px" /><br>Trump<br>&nbsp;</label>
             </td>
-
-
-
-
 
           </tr>
         </tbody>
       </table>
     </div>
 
+    <!-- Color Background Schemes Section -->
     <h3>Color Background Schemes</h3>
     <div id="rcorners1" class="center">
+      <!-- Table with options for different background colors using radio buttons -->
       <table>
         <tbody>
           <tr>
             <td>
+              <!-- Background color option: Black -->
               <input type="radio" id="black" name="background_color" value="black" checked required>
               <label for="black">
                 <div class='box black'></div>
               </label>
             </td>
             <td>
+              <!-- Background color option: Grey -->
               <input type="radio" id="grey" name="background_color" value="grey">
               <label for="grey">
                 <div class='box grey'></div>
               </label>
             </td>
-
-
-
             <td>
+              <!-- Background color option: White -->
               <input type="radio" id="white" name="background_color" value="white">
               <label for="white">
                 <div class='box white'></div>
@@ -157,6 +175,7 @@
             </td>
 
             <td>
+              <!-- Background option: Image -->
               <input type="radio" id="image" name="background_color" value="image">
               <label for="image">
                 <div class='box green'></div>
@@ -168,8 +187,10 @@
       </table>
     </div>
 
+    <!-- NFL Song Section -->
     <h3>NFL Song</h3>
     <div id="rcorners1" class="center">
+       <!-- Audio player for NFL theme music -->
       <audio id="myAudio" controls>
         <source src="static/nfl.ogg" type="audio/ogg">
         <source src="static/nfl.mp3" type="audio/mpeg">
@@ -177,7 +198,7 @@
       </audio>
     </div>
 
-
+    <!-- Trigger Actions on Touchdowns Section -->
     <h3>Trigger Actions on Touchdowns</h3>
     <div id="rcorners1" class="center">
       <h3>Do you want to create an automated event every time a team scores a touchdown?&nbsp;</h3>
@@ -363,6 +384,8 @@
     </form>
     <p>&nbsp;</p>
   </div>
+
+  <!-- Include a script for collapsible settings sections -->
   <script type="text/javascript" src="static/collapsible.js"></script>
 
 
@@ -370,24 +393,24 @@
   <div class="path" id="path">
     <div class="scores" id="scores">
       <h2 id="myH2"></h2>
-
+       <!-- Script block for handling interactions and running functions -->
       <script>
         const path = document.getElementById('scores');
+        // Add a click event listener to the 'scores' element
         path.addEventListener('click', (e) => {
+          // Check if the current animation state is running
           const running = path.style.animationPlayState === 'running';
+          // Toggle the animation state between 'paused' and 'running'
           path.style.animationPlayState = running ? 'paused' : 'running';
         })
-
+        // Add a scroll event listener to the 'scores' element
         path.addEventListener('scroll', (e) => { alert("Scroll") })
-
-
-
+        //fetch probabilities
         Probabilities();
+        //fetch standings
         Standings();
         document.documentElement.style.setProperty('--animate-duration', '5s');
         document.documentElement.style.setProperty('--animate-delay', '0.1s');
-
-
         console.log("Is game day:" + IsGameDay());
         if (IsGameDay() == 'true') { Scores(); }
 

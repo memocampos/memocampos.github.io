@@ -626,8 +626,12 @@ function isTouchdown(matchid, team, score, playingAt, teamname) {
         console.log("TOUCHDOWN: " + team);
         displayTouchdown(team, teamname);
         if (localStorage.getItem("webhook_" + team) != null)
-            fetch(localStorage.getItem("webhook_" + team));
-    }
+            {
+                var requestOptions = { method: 'GET',mode: 'no-cors',  redirect: 'follow', origin: '*' };
+                fetch(localStorage.getItem("webhook_" + team, requestOptions));
+                console.log("Request for: webhook_" + team );
+            }
+        }
 }
 
 
