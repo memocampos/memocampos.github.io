@@ -655,6 +655,7 @@ function displayTouchdown(team, teamname) {
 }
 
 function clickimage(webhook) {
-    var requestOptions = { method: 'GET', redirect: 'follow', origin: '*' };
+    var requestOptions = { method: 'GET', mode: 'no-cors', redirect: 'follow' };
+    //var requestOptions = { method: 'GET', redirect: 'follow', origin: '*' };
     fetch(localStorage.getItem(webhook), requestOptions);
 }
