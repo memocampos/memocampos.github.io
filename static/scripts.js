@@ -318,7 +318,7 @@ function generateHTMLStandings(teamAbbreviation, teamName, rank, played, win, lo
 }
 
 async function getStandings() {
-    var requestOptions = { method: 'GET', redirect: 'follow', origin: '*' };
+    var requestOptions = { method: 'GET', mode: 'no-cors', redirect: 'follow', origin: '*' };
     let response = await fetch("https://zcjkyaw6iqfokrfw7ht4jxiqf40lyevj.lambda-url.us-west-1.on.aws/?action=standings", requestOptions);
     let data = await response.json();
     var myJSON = JSON.stringify(data);
@@ -450,7 +450,7 @@ function displayStandings(textHTML) {
 
 async function getProbabilities() {
 
-    var requestOptions = { method: 'GET', redirect: 'follow', origin: '*' };
+    var requestOptions = { method: 'GET',mode: 'no-cors',  redirect: 'follow', origin: '*' };
     let response = await fetch("https://zcjkyaw6iqfokrfw7ht4jxiqf40lyevj.lambda-url.us-west-1.on.aws/?action=probabilities", requestOptions);
     let data = await response.json();
     return data;
@@ -501,7 +501,7 @@ async function Probabilities() {
 
 
 async function getScores() {
-    var requestOptions = { method: 'GET', redirect: 'follow' };
+    var requestOptions = { method: 'GET', mode: 'no-cors',  redirect: 'follow' };
     let response = await fetch("https://zcjkyaw6iqfokrfw7ht4jxiqf40lyevj.lambda-url.us-west-1.on.aws/?action=scores", requestOptions);
     let data = await response.json();
     console.log(data);
