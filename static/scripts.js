@@ -1,13 +1,6 @@
 // Get the root element
 var r = document.querySelector(':root');
 var theme;
-const delay = ms => new Promise(res => setTimeout(res, ms));
-
-const NFLStop = async () => {
-    await delay(25000);
-    console.log("Waited 25s");
-    clickimage('webhook_OFF');
-    };
 
 
 // Create a function for getting a variable value
@@ -443,7 +436,12 @@ async function Standings()
                 // Play audio file
                 new Audio('./static/nfl.mp3').play();
                 clickimage('webhook_NFL');
-                NFLStop();
+                setTimeout(function() {
+                    // Your code to execute after the delay
+                    console.log("This line is executed after a 25-second delay.");
+                    clickimage('webhook_OFF');
+                }, 25000); // 25000 milliseconds = 25 seconds
+                
               });
 
             }
