@@ -5,18 +5,18 @@ var theme;
 
 // Create a function for getting a variable value
 function myFunction_get() {
-  // Get the styles (properties and values) for the root
-  var rs = getComputedStyle(r);
-  // Alert the value of the --blue variable
-  //alert("The value of --black is: " + rs.getPropertyValue('--black'));
+    // Get the styles (properties and values) for the root
+    var rs = getComputedStyle(r);
+    // Alert the value of the --blue variable
+    //alert("The value of --black is: " + rs.getPropertyValue('--black'));
 }
 
 // Create a function for setting a variable value
 function myFunction_set() {
-  // Set the value of variable --blue to another value (in this case "lightblue")
-  r.style.setProperty('--black', getlocal('background_color'));
-  r.style.setProperty('--1', getlocal('scrollingSpeed'));
-  theme = getlocal('theme'); 
+    // Set the value of variable --blue to another value (in this case "lightblue")
+    r.style.setProperty('--black', getlocal('background_color'));
+    r.style.setProperty('--1', getlocal('scrollingSpeed'));
+    theme = getlocal('theme');
 }
 
 
@@ -24,7 +24,7 @@ function myFunction_set() {
 function createSRC(team) {
     theme = getlocal('theme');
     if (theme == null)
-        theme = 'logo'; 
+        theme = 'logo';
 
     source = 'images/' + theme + '/' + team + '.png';
     return source;
@@ -35,25 +35,22 @@ function isHome() {
     if (getlocal('theme') == 'helmet')
         return " flip";
     else
-        return "";       
+        return "";
 }
 
 
-function set_values()
-{
+function set_values() {
     window.scrollBy(0, 50);
-    if (localStorage.getItem("RefreshRate") == null)
-    {
-        setTimeout(function(){
+    if (localStorage.getItem("RefreshRate") == null) {
+        setTimeout(function () {
             window.location.reload(1);
-         }, 30000); 
-         localStorage.setItem("RefreshRate",'30000');   
+        }, 30000);
+        localStorage.setItem("RefreshRate", '30000');
     }
-    else
-    {
-        setTimeout(function(){
+    else {
+        setTimeout(function () {
             window.location.reload(1);
-         }, parseInt(localStorage.getItem("RefreshRate")));
+        }, parseInt(localStorage.getItem("RefreshRate")));
     }
 
     myFunction_set()
@@ -77,7 +74,7 @@ function set_values()
     else
         document.getElementById("WinLossCheckbox").checked = false;
 
-    
+
     if (localStorage.getItem("ProbCheckbox") == null)
         localStorage.setItem("ProbCheckbox", 'FALSE');
 
@@ -86,7 +83,7 @@ function set_values()
     else
         document.getElementById("ProbCheckbox").checked = false;
 
-  
+
     if (localStorage.getItem("theme") == null)
         localStorage.setItem("theme", 'logo');
 
@@ -132,12 +129,12 @@ function set_values()
 
 
 
-function SettingsForm(API_KEY, background_color, theme, scrollingSpeed,WinLossCheckbox,ProbCheckbox) {
+function SettingsForm(API_KEY, background_color, theme, scrollingSpeed, WinLossCheckbox, ProbCheckbox) {
     if (document.getElementById('WinLossCheckbox').checked)
         localStorage.setItem("WinLossCheckbox", "TRUE");
     else
         localStorage.setItem("WinLossCheckbox", "FALSE");
-        
+
 
     if (document.getElementById('ProbCheckbox').checked)
         localStorage.setItem("ProbCheckbox", "TRUE");
@@ -206,32 +203,27 @@ function getRefreshRate() {
 
 }
 
-function checked(radios)
-{
+function checked(radios) {
     var checked = "";
-    for (i = 0 ; i < radios.length; i++)
-    {
-        if(radios[i].checked) 
-            {checked=radios[i].value;}   
+    for (i = 0; i < radios.length; i++) {
+        if (radios[i].checked) { checked = radios[i].value; }
     }
     return checked;
 }
 
-function getlocal(key)
-{
+function getlocal(key) {
     return localStorage.getItem(key);
 }
 
 
-function generateHTML(away,awayscore,homescore,home)
-{
-    html =  '<div class=\"game\">';
+function generateHTML(away, awayscore, homescore, home) {
+    html = '<div class=\"game\">';
     html += '<div class=\"score\">';
     html += '<img id=\"' + away + '\" src=\"' + createSRC(away) + '\" class=\"responsive\" alt=\"away\" /> ';
     html += '</div>';
-    html += '<div class=\"score\">' + awayscore + ' - ' +  homescore + '</div>';
+    html += '<div class=\"score\">' + awayscore + ' - ' + homescore + '</div>';
     html += '<div>';
-    html += '<img id=\"' + home + '\" src=\"' + createSRC(home)  + '\" class=\"responsive' + isHome() + '\" alt=\"home\" />';
+    html += '<img id=\"' + home + '\" src=\"' + createSRC(home) + '\" class=\"responsive' + isHome() + '\" alt=\"home\" />';
     html += '</div>';
     html += '</div>';
     return html;
@@ -239,9 +231,7 @@ function generateHTML(away,awayscore,homescore,home)
 
 
 
-function generateHTMLwData(away,awayscore,homescore,home, matchid)
-{
-
+function generateHTMLwData(away, awayscore, homescore, home, matchid) {
 
     html = '<div class=\"game\">';
     html += '<table><tbody><tr><td>';
@@ -249,36 +239,35 @@ function generateHTMLwData(away,awayscore,homescore,home, matchid)
     html += '<img id=\"' + away + '\" src=\"' + createSRC(away) + '\"  alt=\"away\" /> ';
     html += '</div>';
     html += '</td></tr><tr><td>';
-    html +=  '<div id=\"DivProbabilities\">' + away;
-        if (localStorage.getItem("WinLossCheckbox") == "TRUE")
-            html += ' ' + sessionStorage.getItem(away + "-games");
+    html += '<div id=\"DivProbabilities\">' + away;
+    if (localStorage.getItem("WinLossCheckbox") == "TRUE")
+        html += ' ' + sessionStorage.getItem(away + "-games");
 
-        if (localStorage.getItem("ProbCheckbox") == "TRUE")
-            html += ' ' + arrow(parseInt(sessionStorage.getItem(matchid + "-" + away))) + sessionStorage.getItem(matchid + "-" + away) + '%' ;
-    html +=  '</div>';
+    if (localStorage.getItem("ProbCheckbox") == "TRUE")
+        html += ' ' + arrow(parseInt(sessionStorage.getItem(matchid + "-" + away))) + sessionStorage.getItem(matchid + "-" + away) + '%';
+    html += '</div>';
     html += '</td></tr></tbody></table>';
 
-    html += '<div class=\"score centerScore\">' + awayscore + ' - ' +  homescore + '</div>';
+    html += '<div class=\"score centerScore\">' + awayscore + ' - ' + homescore + '</div>';
 
     html += '<table><tbody><tr><td>';
     html += '<div class=\"score responsive\" id=\"DivImage\" >';
     html += '<img id=\"' + home + '\" src=\"' + createSRC(home) + '\" class=\"' + isHome() + '\" alt=\"home\" />';
     html += '</div>';
     html += '</td></tr><tr><td>';
-    html +=  '<div id=\"DivProbabilities\">' + home;
-        if (localStorage.getItem("WinLossCheckbox") == "TRUE")
-            html += ' ' + sessionStorage.getItem(home + "-games");
+    html += '<div id=\"DivProbabilities\">' + home;
+    if (localStorage.getItem("WinLossCheckbox") == "TRUE")
+        html += ' ' + sessionStorage.getItem(home + "-games");
 
-        if (localStorage.getItem("ProbCheckbox") == "TRUE")
-            html += ' ' + arrow(parseInt(sessionStorage.getItem(matchid + "-" + home))) + sessionStorage.getItem(matchid + "-" + home) + '%' ;
-    html +=  '</div>';
+    if (localStorage.getItem("ProbCheckbox") == "TRUE")
+        html += ' ' + arrow(parseInt(sessionStorage.getItem(matchid + "-" + home))) + sessionStorage.getItem(matchid + "-" + home) + '%';
+    html += '</div>';
     html += '</td></tr></tbody></table></div>';
     return html;
 }
 
-function arrow(value)
-{
-    if (value>50)
+function arrow(value) {
+    if (value > 50)
         return '⬆';
     else
         return '⬇';
@@ -287,195 +276,171 @@ function arrow(value)
 
 
 
-function generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw, goals_for, goals_against, goals_diff)
-{
+function generateHTMLStandings(teamAbbreviation, teamName, rank, played, win, loss, draw, goals_for, goals_against, goals_diff) {
     html = '          <div class=\"game standingsframe\" style=\"background-image: url(\' images/backgrounds/' + teamAbbreviation + '.webp\');border-radius: 10px;\">';
-    html +=  '            <div class=\" \">';
-    html +=  '                <div>';
-    html +=  '                <table>';
-    html +=  '                <tbody>';
-    html +=  '                  <tr>';
-    html +=  '                    <td>';
-    html +=  '                          <table style=\"width: 100%;\" >';
-    html +=  '                            <tbody>';
-    html +=  '                            <tr>';
-    html +=  '                            <td><img id=\"' + teamAbbreviation + '\" src=\"' + createSRC(teamAbbreviation) + '\" class=\"responsivelogo\" alt=\"away\" /></td>';
-    html +=  '                            <td><p class=\"teamRank\">Rank #' + rank + '</p>';
-    html +=  '            				<table class=\"teamtext\">';
-    html +=  '              			<tbody>';
-    html +=  '              			<tr><td>Games Played: </td><td>' + played + '</td></tr>';
-    html +=  '              			<tr><td>Win: </td><td>' + win + '</td></tr>';
-    html +=  '              			<tr><td>Loss: </td><td>' + loss + '</td></tr>';
-    html +=  '              			<tr><td>Draw: </td><td>' + draw + '</td></tr>';
-    html +=  '              			<tr><td>Goals For: </td><td>' + goals_for + '</td></tr>';
-    html +=  '              			<tr><td>Goals Against: </td><td>' + goals_against + '</td></tr>';
-    html +=  '              			<tr><td>Goals Diffrence: </td><td>' + goals_diff + '</td></tr>';
-    html +=  '              			</tbody>';
-    html +=  '              			</table>';
-    html +=  '                            </td>';
-    html +=  '                            </tr>';
-    html +=  '                            </tbody>';
-    html +=  '                            </table>';
-    html +=  '                    </td>';
-    html +=  '                  </tr>';
-    html +=  '                  <tr>';
-    html +=  '                    <td><quote class=\"teamName\">' + teamName + '</quote></td>';
-    html +=  '                  </tr>';
-    html +=  '                </tbody>';
-    html +=  '                </table></div>';
-    html +=  '            </div>';
-    html +=  '          </div>';
+    html += '            <div class=\" \">';
+    html += '                <div>';
+    html += '                <table>';
+    html += '                <tbody>';
+    html += '                  <tr>';
+    html += '                    <td>';
+    html += '                          <table style=\"width: 100%;\" >';
+    html += '                            <tbody>';
+    html += '                            <tr>';
+    html += '                            <td><img id=\"' + teamAbbreviation + '\" src=\"' + createSRC(teamAbbreviation) + '\" class=\"responsivelogo\" alt=\"away\" /></td>';
+    html += '                            <td><p class=\"teamRank\">Rank #' + rank + '</p>';
+    html += '            				<table class=\"teamtext\">';
+    html += '              			<tbody>';
+    html += '              			<tr><td>Games Played: </td><td>' + played + '</td></tr>';
+    html += '              			<tr><td>Win: </td><td>' + win + '</td></tr>';
+    html += '              			<tr><td>Loss: </td><td>' + loss + '</td></tr>';
+    html += '              			<tr><td>Draw: </td><td>' + draw + '</td></tr>';
+    html += '              			<tr><td>Goals For: </td><td>' + goals_for + '</td></tr>';
+    html += '              			<tr><td>Goals Against: </td><td>' + goals_against + '</td></tr>';
+    html += '              			<tr><td>Goals Diffrence: </td><td>' + goals_diff + '</td></tr>';
+    html += '              			</tbody>';
+    html += '              			</table>';
+    html += '                            </td>';
+    html += '                            </tr>';
+    html += '                            </tbody>';
+    html += '                            </table>';
+    html += '                    </td>';
+    html += '                  </tr>';
+    html += '                  <tr>';
+    html += '                    <td><quote class=\"teamName\">' + teamName + '</quote></td>';
+    html += '                  </tr>';
+    html += '                </tbody>';
+    html += '                </table></div>';
+    html += '            </div>';
+    html += '          </div>';
     return html;
 
 }
 
-async function getStandings() 
-{        
-        var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
-        //Season 22-23
-        //let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json&round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-        //let response = await fetch("https://531whoot38.execute-api.us-west-1.amazonaws.com/default/NFL?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/standings.json&round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-
-        //PRE-Season 23
-        //let response = await fetch("https://531whoot38.execute-api.us-west-1.amazonaws.com/default/NFL?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:105129/standings.json&round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-        //let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:105129/standings.json&round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-
-
-        //Season 23-24
-        //let response = await fetch("https://531whoot38.execute-api.us-west-1.amazonaws.com/default/NFL?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:102797/standings.json&round=1&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-        //let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:102797/standings.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-
-        //pre season 24-25
-        let response = await fetch("https://zcjkyaw6iqfokrfw7ht4jxiqf40lyevj.lambda-url.us-west-1.on.aws/?action=standings", requestOptions);
-        
-        
-        let data = await response.json();
-        var myJSON = JSON.stringify(data);
-        sessionStorage.setItem("StandingsJSON",myJSON);
-        return data; 
+async function getStandings() {
+    var requestOptions = { method: 'GET', redirect: 'follow', origin: '*' };
+    let response = await fetch("https://zcjkyaw6iqfokrfw7ht4jxiqf40lyevj.lambda-url.us-west-1.on.aws/?action=standings", requestOptions);
+    let data = await response.json();
+    var myJSON = JSON.stringify(data);
+    sessionStorage.setItem("StandingsJSON", myJSON);
+    return data;
 }
 
-async function Standings()
-{
+async function Standings() {
     const d = new Date();
     console.log(d);
     Year = d.getFullYear();
     Month = d.getMonth() + 1;
-    Day = d.getDate();  
-    currentDate = Year+"-"+Month+"-"+Day;
+    Day = d.getDate();
+    currentDate = Year + "-" + Month + "-" + Day;
     var textHTML = "";
 
     //Validation to only get standings once per day
-    if (sessionStorage.getItem('Standings-date') == null || sessionStorage.getItem('Standings-date') != currentDate)
-    {
+    if (sessionStorage.getItem('Standings-date') == null || sessionStorage.getItem('Standings-date') != currentDate) {
 
         getStandings()
-        .then(result => {
-           
-            //standingsDate = result.generated_at;    
-            //standingsDate = standingsDate.substring(0,8)+parseInt(standingsDate.substring(9,10));
-            standingsDate = new Date();
-            YYYY = standingsDate.getFullYear();
-            MM = standingsDate.getMonth() + 1;
-            DD = standingsDate.getDate();
-            
-            if (sessionStorage.getItem("StandingsJSON").search("The NFL overall table") > 0)
-             {
+            .then(result => {
+
+                //standingsDate = result.generated_at;    
+                //standingsDate = standingsDate.substring(0,8)+parseInt(standingsDate.substring(9,10));
+                standingsDate = new Date();
+                YYYY = standingsDate.getFullYear();
+                MM = standingsDate.getMonth() + 1;
+                DD = standingsDate.getDate();
+
+                if (sessionStorage.getItem("StandingsJSON").search("The NFL overall table") > 0) {
 
 
 
 
-            
-            var standings;
-            let text = sessionStorage.getItem("StandingsJSON");
-            let result = JSON.parse(text);
 
-            console.log(result.standings[0].groups[0].standings);
-        
-            standings = result.standings[0].groups[0].standings;
+                    var standings;
+                    let text = sessionStorage.getItem("StandingsJSON");
+                    let result = JSON.parse(text);
 
+                    console.log(result.standings[0].groups[0].standings);
 
-        
-
-            
-            for (var i = 0; i < standings.length; i++)
-            { 
-        
-               teamAbbreviation = standings[i].competitor.abbreviation;
-               teamName = standings[i].competitor.name;
-               teamID = standings[i].competitor.id;
-               rank = standings[i].rank;
-        
-               played = standings[i].played;
-               win = standings[i].win;
-               loss = standings[i].loss;
-               draw = standings[i].draw;
-               goals_for = standings[i].goals_for;
-               goals_against = standings[i].goals_against;
-               goals_diff = standings[i].goals_diff;
-            
-        
-                if (standings[i].draw>0)
-                    games = "(" + standings[i].win+","+standings[i].loss+","+standings[i].draw+")";
-                else
-                    games = "(" + standings[i].win+","+standings[i].loss+")";
-        
-                console.log(teamAbbreviation + " " + games);
-                sessionStorage.setItem(teamAbbreviation + "-games",games);
-                textHTML += generateHTMLStandings(teamAbbreviation, teamName,rank, played, win,loss,draw,goals_for, goals_against, goals_diff);    
-        
-            }
-            sessionStorage.setItem("textHTML", textHTML);
-            console.log("Standings-date",YYYY+"-"+MM+"-"+DD);
-            sessionStorage.setItem("Standings-date",YYYY+"-"+MM+"-"+DD);
-            console.log("Standings generated at: ",YYYY+"-"+MM+"-"+DD);
+                    standings = result.standings[0].groups[0].standings;
 
 
 
-            document.addEventListener('click', function() {
-               
 
-                if ((sessionStorage.getItem('NFL_PLAY') == null) || (sessionStorage.getItem('NFL_PLAY') != "TRUE" )) 
-                    {
-                         // Play audio file
-                        new Audio('./static/nfl.mp3').play();
-                        //Trigger the NFL Webhook
-                        clickimage('webhook_NFL');
-                        sessionStorage.setItem("NFL_PLAY", "TRUE");
 
-                        setTimeout(function() {
-                            //turn off NFL Webhook after 25 Sec
-                            clickimage('webhook_OFF');
-                        }, 25000); 
+                    for (var i = 0; i < standings.length; i++) {
+
+                        teamAbbreviation = standings[i].competitor.abbreviation;
+                        teamName = standings[i].competitor.name;
+                        teamID = standings[i].competitor.id;
+                        rank = standings[i].rank;
+
+                        played = standings[i].played;
+                        win = standings[i].win;
+                        loss = standings[i].loss;
+                        draw = standings[i].draw;
+                        goals_for = standings[i].goals_for;
+                        goals_against = standings[i].goals_against;
+                        goals_diff = standings[i].goals_diff;
+
+
+                        if (standings[i].draw > 0)
+                            games = "(" + standings[i].win + "," + standings[i].loss + "," + standings[i].draw + ")";
+                        else
+                            games = "(" + standings[i].win + "," + standings[i].loss + ")";
+
+                        console.log(teamAbbreviation + " " + games);
+                        sessionStorage.setItem(teamAbbreviation + "-games", games);
+                        textHTML += generateHTMLStandings(teamAbbreviation, teamName, rank, played, win, loss, draw, goals_for, goals_against, goals_diff);
+
                     }
+                    sessionStorage.setItem("textHTML", textHTML);
+                    console.log("Standings-date", YYYY + "-" + MM + "-" + DD);
+                    sessionStorage.setItem("Standings-date", YYYY + "-" + MM + "-" + DD);
+                    console.log("Standings generated at: ", YYYY + "-" + MM + "-" + DD);
 
-              
-                
 
-                
-              });
 
-            }
+                    document.addEventListener('click', function () {
 
-        })
-        .catch(error => console.log('error: ', error));
+
+                        if ((sessionStorage.getItem('NFL_PLAY') == null) || (sessionStorage.getItem('NFL_PLAY') != "TRUE")) {
+                            // Play audio file
+                            new Audio('./static/nfl.mp3').play();
+                            //Trigger the NFL Webhook
+                            clickimage('webhook_NFL');
+                            sessionStorage.setItem("NFL_PLAY", "TRUE");
+
+                            setTimeout(function () {
+                                //turn off NFL Webhook after 25 Sec
+                                clickimage('webhook_OFF');
+                            }, 25000);
+                        }
+
+
+
+
+
+                    });
+
+                }
+
+            })
+            .catch(error => console.log('error: ', error));
     }
-    if (IsGameDay() == 'true')
-    {
-        console.log("Standongs ALREADY OBTAINED, Game day today scores will be displayed and not standings" );}
+    if (IsGameDay() == 'true') {
+        console.log("Standongs ALREADY OBTAINED, Game day today scores will be displayed and not standings");
+    }
     else {
         if (sessionStorage.getItem('textHTML'))
             textStandings = sessionStorage.getItem('textHTML');
         else
             textStandings = '<div class="game"><div class="score"><img src="images/NFL.png" class="responsive" /></div><div class="score">Obtaining statistics ... </div></div>'
 
-            displayStandings(textStandings);
-        }
-    
+        displayStandings(textStandings);
+    }
+
 }
 
-function displayStandings(textHTML)
-{
+function displayStandings(textHTML) {
     const h2 = document.getElementById("myH2");
     let html = textHTML;
     h2.insertAdjacentHTML("afterend", html);
@@ -483,102 +448,75 @@ function displayStandings(textHTML)
 
 
 
-async function getProbabilities() 
-{
-    
-    var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*'};
+async function getProbabilities() {
 
-    //let response = await fetch("https://531whoot38.execute-api.us-west-1.amazonaws.com/default/NFL?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-
-
-    //Season 22-23
-    //let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl??url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:90233/probabilities.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-    
-    //PRE Season 23-24
-    //let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:105129/probabilities.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-
-    //Season 23-24
-    //let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/seasons/sr:season:102797/probabilities.json&api_key=" + localStorage.getItem("API_KEY"), requestOptions);
-    
-    //pre season 24-25
+    var requestOptions = { method: 'GET', redirect: 'follow', origin: '*' };
     let response = await fetch("https://zcjkyaw6iqfokrfw7ht4jxiqf40lyevj.lambda-url.us-west-1.on.aws/?action=probabilities", requestOptions);
-
-
     let data = await response.json();
-    return data; 
+    return data;
 }
 
 
-async function Probabilities()
-{
+async function Probabilities() {
     const d = new Date();
-    
+
     Year = d.getFullYear();
     Month = d.getMonth() + 1;
-    Day = d.getDate();  
-    currentDate = Year+"-"+Month+"-"+Day;
+    Day = d.getDate();
+    currentDate = Year + "-" + Month + "-" + Day;
     console.log("Probabilites consulted on: ", sessionStorage.getItem('Probabilities-date'));
     var ProbabilitiesLength = 0;
     //Validation to only get Probabilities once per day
-    if (sessionStorage.getItem('Probabilities-date') == null || sessionStorage.getItem('Probabilities-date') != currentDate)
-    {
-                console.log("Getting Probabilities...Baby!");
-                let text="";
-                getProbabilities()
-                .then(result => {
+    if (sessionStorage.getItem('Probabilities-date') == null || sessionStorage.getItem('Probabilities-date') != currentDate) {
+        console.log("Getting Probabilities...Baby!");
+        let text = "";
+        getProbabilities()
+            .then(result => {
 
-                    if (result.sport_event_probabilities.length>0) 
-                        ProbabilitiesLength = result.sport_event_probabilities.length;
-                    else
-                        ProbabilitiesLength = 0;
-                
-                    for (var i = 0; i < ProbabilitiesLength; i++)
-                    {
-                        event_id =  result.sport_event_probabilities[i].sport_event.id;
-                        home = result.sport_event_probabilities[i].sport_event.competitors[0].abbreviation;
-                        away = result.sport_event_probabilities[i].sport_event.competitors[1].abbreviation;
-                        home_probability = result.sport_event_probabilities[i].markets[0].outcomes[0].probability;
-                        away_probability = result.sport_event_probabilities[i].markets[0].outcomes[1].probability;
-                        //Show Probabilities on Console
-                        console.log(event_id + " " + home + " " + home_probability + " " + away + " " + away_probability);
-                        //store today probabilities
-                        sessionStorage.setItem(event_id + "-" + home,home_probability);
-                        sessionStorage.setItem(event_id + "-" + away,away_probability);
-                            //store current date
-                        sessionStorage.setItem('Probabilities-date',currentDate);
-                    }
-                })
-                .catch(error => console.log('error: ', error));
+                if (result.sport_event_probabilities.length > 0)
+                    ProbabilitiesLength = result.sport_event_probabilities.length;
+                else
+                    ProbabilitiesLength = 0;
+
+                for (var i = 0; i < ProbabilitiesLength; i++) {
+                    event_id = result.sport_event_probabilities[i].sport_event.id;
+                    home = result.sport_event_probabilities[i].sport_event.competitors[0].abbreviation;
+                    away = result.sport_event_probabilities[i].sport_event.competitors[1].abbreviation;
+                    home_probability = result.sport_event_probabilities[i].markets[0].outcomes[0].probability;
+                    away_probability = result.sport_event_probabilities[i].markets[0].outcomes[1].probability;
+                    //Show Probabilities on Console
+                    console.log(event_id + " " + home + " " + home_probability + " " + away + " " + away_probability);
+                    //store today probabilities
+                    sessionStorage.setItem(event_id + "-" + home, home_probability);
+                    sessionStorage.setItem(event_id + "-" + away, away_probability);
+                    //store current date
+                    sessionStorage.setItem('Probabilities-date', currentDate);
+                }
+            })
+            .catch(error => console.log('error: ', error));
     }
-    else { console.log("Probabilites already generated.")}
+    else { console.log("Probabilites already generated.") }
 }
 
 
 
-async function getScores()
-{
-    var requestOptions = { method: 'GET',  redirect: 'follow'};
-    //let response = await fetch("https://1uu0dgg3ae.execute-api.us-east-1.amazonaws.com/default/nfl?url=https://api.sportradar.com/americanfootball/trial/v2/en/schedules/live/summaries.json&api_key=" + localStorage.getItem("API_KEY" ), requestOptions);
-    
+async function getScores() {
+    var requestOptions = { method: 'GET', redirect: 'follow' };
     let response = await fetch("https://zcjkyaw6iqfokrfw7ht4jxiqf40lyevj.lambda-url.us-west-1.on.aws/?action=scores", requestOptions);
-    
-    
     let data = await response.json();
     console.log(data);
     return data;
 }
 
 
-function IsGameDay()
-{
+function IsGameDay() {
     const d = new Date();
     let day = d.getDay();
     let hour = d.getHours();
     console.log("Day:" + day + "hour: " + hour);
-
-    if ((day == 0 && hour >= 11 && hour <= 24) || (day == 1 && hour >= 19 && hour <= 24) || (day == 4 && hour >=19 && hour <= 24) || (day == 6 && hour >= 12 && hour <= 24 ) || (day == 5 && hour >= 16 && hour <= 24 ) || (isThanksgiving()) )  { console.log("GAME DAY"); return 'true';} 
+    if ((day == 0 && hour >= 11 && hour <= 24) || (day == 1 && hour >= 19 && hour <= 24) || (day == 4 && hour >= 19 && hour <= 24) || (day == 6 && hour >= 12 && hour <= 24) || (day == 5 && hour >= 16 && hour <= 24) || (isThanksgiving())) { console.log("GAME DAY"); return 'true'; }
     else
-     return 'false';
+        return 'false';
 }
 
 
@@ -590,21 +528,20 @@ function isThanksgiving() {
     const day = today.getDate();
     const dayName = today.getDay();
 
-    if (month === 10 && day >= 22 && day <= 28 && dayName >= 4 && dayName <= 5 ) {
-      return true;
+    if (month === 10 && day >= 22 && day <= 28 && dayName >= 4 && dayName <= 5) {
+        return true;
     } else {
-      return false;
+        return false;
     }
-  }
-  
-  // Example usage:
-  console.log(isThanksgiving()); // Output: true or false, depending on today's date
+}
+
+// Example usage:
+console.log(isThanksgiving()); // Output: true or false, depending on today's date
 
 
 
 
-async function Scores()
-{
+async function Scores() {
     var textHTML = "";
     var teamhome;
     var teamhomeabbreviation;
@@ -613,17 +550,14 @@ async function Scores()
     var teamawayscore;
     var status;
     var matchstatus;
-    
 
-    
+
+
     getScores()
-      .then (result => 
-        {
-            for (let i=0;i<result.summaries.length; i++)
-            {
-     
-                if (result.summaries[i].sport_event.sport_event_context.competition.name.includes("NFL") )
-                {
+        .then(result => {
+            for (let i = 0; i < result.summaries.length; i++) {
+
+                if (result.summaries[i].sport_event.sport_event_context.competition.name.includes("NFL")) {
                     matchid = result.summaries[i].sport_event.id
                     teamhome = result.summaries[i].sport_event.competitors[0].name;
                     teamhomeabbreviation = result.summaries[i].sport_event.competitors[0].abbreviation;
@@ -633,85 +567,75 @@ async function Scores()
                     teamawayscore = result.summaries[i].sport_event_status.away_score;
                     matchstatus = result.summaries[i].sport_event_status;
 
-                    if (localStorage.getItem("WinLossCheckbox") == "TRUE" || localStorage.getItem("ProbCheckbox") == "TRUE" )
-                        textHTML += generateHTMLwData(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation,matchid);
+                    if (localStorage.getItem("WinLossCheckbox") == "TRUE" || localStorage.getItem("ProbCheckbox") == "TRUE")
+                        textHTML += generateHTMLwData(teamawayabbreviation, teamawayscore, teamhomescore, teamhomeabbreviation, matchid);
                     else
-                        textHTML += generateHTML(teamawayabbreviation,teamawayscore,teamhomescore,teamhomeabbreviation) ; 
+                        textHTML += generateHTML(teamawayabbreviation, teamawayscore, teamhomescore, teamhomeabbreviation);
 
                     console.log("id: " + i + " Match ID: " + matchid + " " + teamhomeabbreviation + " " + teamhomescore + "-" + teamawayscore + " " + teamawayabbreviation);
-                    validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore,teamaway,teamhome);
+                    validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbreviation, teamhomescore, teamaway, teamhome);
                 }
             }
             //console.log(textHTML);
             const h2 = document.getElementById("myH2");
             let html = textHTML;
             h2.insertAdjacentHTML("afterend", html);
-        } )
-      .catch(error => console.log('error: ', error));
+        })
+        .catch(error => console.log('error: ', error));
 
 }
 
 
-function validateGame(matchid,teamawayabbreviation,teamawayscore,teamhomeabbreviation,teamhomescore,teamaway,teamhome)
-{
-    
-    if (sessionStorage.getItem(matchid+"-away-score-"+teamawayabbreviation) == null)
-        {
-            sessionStorage.setItem(matchid+"-away-score-"+teamawayabbreviation, teamawayscore);
-            console.log("Created record for " + teamawayabbreviation + " playing away with score:" + teamawayscore);
+function validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbreviation, teamhomescore, teamaway, teamhome) {
+
+    if (sessionStorage.getItem(matchid + "-away-score-" + teamawayabbreviation) == null) {
+        sessionStorage.setItem(matchid + "-away-score-" + teamawayabbreviation, teamawayscore);
+        console.log("Created record for " + teamawayabbreviation + " playing away with score:" + teamawayscore);
+    }
+    else {
+        if (sessionStorage.getItem(matchid + "-away-score-" + teamawayabbreviation) == teamawayscore)
+            console.log("No score change " + teamawayabbreviation + " playing away with score:" + teamawayscore);
+        else {
+            isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away', teamaway);
+            console.log("Score Change on away team " + teamawayabbreviation);
+            sessionStorage.setItem(matchid + "-away-score-" + teamawayabbreviation, teamawayscore);
         }
-    else
-        {
-            if (sessionStorage.getItem(matchid+"-away-score-"+teamawayabbreviation) == teamawayscore)
-                console.log("No score change " + teamawayabbreviation + " playing away with score:" + teamawayscore);
-            else
-                {
-                    isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away' ,teamaway);
-                    console.log("Score Change on away team " + teamawayabbreviation);
-                    sessionStorage.setItem(matchid+"-away-score-"+teamawayabbreviation, teamawayscore);
-                }
+    }
+
+
+    if (sessionStorage.getItem(matchid + "-home-score-" + teamhomeabbreviation) == null) {
+        sessionStorage.setItem(matchid + "-home-score-" + teamhomeabbreviation, teamhomescore);
+        console.log("Created record for " + teamhomeabbreviation + " playing home with score:" + teamhomescore);
+    }
+    else {
+        if (sessionStorage.getItem(matchid + "-home-score-" + teamhomeabbreviation) == teamhomescore)
+            console.log("No score change " + teamhomeabbreviation + " playing home with score:" + teamhomescore);
+        else {
+            console.log("Score Change on home team " + teamhomeabbreviation);
+            isTouchdown(matchid, teamhomeabbreviation, teamhomescore, 'home', teamhome);
+            sessionStorage.setItem(matchid + "-home-score-" + teamhomeabbreviation, teamhomescore);
         }
-    
-    
-    if (sessionStorage.getItem(matchid+"-home-score-"+teamhomeabbreviation) == null)
-        {
-            sessionStorage.setItem(matchid+"-home-score-"+teamhomeabbreviation, teamhomescore);
-            console.log("Created record for " + teamhomeabbreviation + " playing home with score:" + teamhomescore);
-        }
-        else
-        {
-            if (sessionStorage.getItem(matchid+"-home-score-"+teamhomeabbreviation) == teamhomescore)
-                console.log("No score change " + teamhomeabbreviation + " playing home with score:" + teamhomescore );
-            else
-                {
-                    console.log("Score Change on home team " + teamhomeabbreviation);
-                    isTouchdown(matchid, teamhomeabbreviation, teamhomescore, 'home' , teamhome);
-                    sessionStorage.setItem(matchid+"-home-score-"+teamhomeabbreviation, teamhomescore);
-                }
-        }
+    }
     console.log("--------------------------");
 }
 
 
-function isTouchdown(matchid,team,score,playingAt,teamname)
-{
+function isTouchdown(matchid, team, score, playingAt, teamname) {
 
-    if ((parseInt(score) - parseInt(sessionStorage.getItem(matchid+"-"+playingAt+"-score-"+team)) ) >=6 )
-    {
+    if ((parseInt(score) - parseInt(sessionStorage.getItem(matchid + "-" + playingAt + "-score-" + team))) >= 6) {
         console.log("TOUCHDOWN: " + team);
-        displayTouchdown(team,teamname);
-        if (localStorage.getItem("webhook_" + team) != null) 
+        displayTouchdown(team, teamname);
+        if (localStorage.getItem("webhook_" + team) != null)
             fetch(localStorage.getItem("webhook_" + team));
-    }   
+    }
 }
 
 
-function  displayTouchdown(team, teamname) 
-{
+function displayTouchdown(team, teamname) {
 
     let html = "";
 
-    html =  '<div class=\"game\">';
+    html = '<div class=\"game\">';
     html += '<div class=\"score animate__animated animate__heartBeat animate__faster animate__infinite\">';
     html += '<img id=\"' + team + '\" src=\"' + createSRC(team) + '\" class=\"responsive\" alt=\"away\" /> ';
     html += '</div>';
@@ -726,7 +650,6 @@ function  displayTouchdown(team, teamname)
 
 }
 
-function clickimage(webhook)
-{
+function clickimage(webhook) {
     fetch(localStorage.getItem(webhook));
 }
