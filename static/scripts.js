@@ -436,9 +436,11 @@ async function Standings()
                 // Play audio file
                 new Audio('./static/nfl.mp3').play();
                 clickimage('webhook_NFL');
+                
+                //CHECK THIS ONE.....
                 setTimeout(function() {
                     // Your code to execute after the delay
-                    console.log("This line is executed after a 25-second delay.");
+                    console.log("EXECUTED.....This line is executed after a 25-second delay.");
                     clickimage('webhook_OFF');
                 }, 25000); // 25000 milliseconds = 25 seconds
                 
