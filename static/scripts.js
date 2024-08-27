@@ -433,18 +433,25 @@ async function Standings()
 
 
             document.addEventListener('click', function() {
-                // Play audio file
-                new Audio('./static/nfl.mp3').play();
-                clickimage('webhook_NFL');
-                
-                //CHECK THIS ONE.....
-                setTimeout(function() {
-                    // Your code to execute after the delay
-                    console.log("EXECUTED.....This line is executed after a 25-second delay.");
-                    //clickimage('webhook_OFF');
-                    alert("20 seconds have passed!");
+               
 
-                }, 20000); // 25000 milliseconds = 25 seconds
+                if ((sessionStorage.getItem('NFL_PLAY') == null) || (sessionStorage.getItem('NFL_PLAY') != "TRUE" )) 
+                    {
+                         // Play audio file
+                        new Audio('./static/nfl.mp3').play();
+                        //Trigger the NFL Webhook
+                        clickimage('webhook_NFL');
+                        sessionStorage.setItem("NFL_PLAY", "TRUE");
+
+                        setTimeout(function() {
+                            //turn off NFL Webhook after 20 Sec
+                            clickimage('webhook_OFF');
+                        }, 2000); 
+                    }
+
+              
+                
+
                 
               });
 
