@@ -444,9 +444,9 @@ async function Standings()
                         sessionStorage.setItem("NFL_PLAY", "TRUE");
 
                         setTimeout(function() {
-                            //turn off NFL Webhook after 20 Sec
+                            //turn off NFL Webhook after 25 Sec
                             clickimage('webhook_OFF');
-                        }, 2000); 
+                        }, 25000); 
                     }
 
               
