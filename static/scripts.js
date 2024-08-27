@@ -441,8 +441,10 @@ async function Standings()
                 setTimeout(function() {
                     // Your code to execute after the delay
                     console.log("EXECUTED.....This line is executed after a 25-second delay.");
-                    clickimage('webhook_OFF');
-                }, 25000); // 25000 milliseconds = 25 seconds
+                    //clickimage('webhook_OFF');
+                    alert("20 seconds have passed!");
+
+                }, 20000); // 25000 milliseconds = 25 seconds
                 
               });
 
