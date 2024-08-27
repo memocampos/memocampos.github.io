@@ -1,6 +1,14 @@
 // Get the root element
 var r = document.querySelector(':root');
 var theme;
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+const NFLStop = async () => {
+    await delay(25000);
+    console.log("Waited 25s");
+    clickimage('webhook_OFF');
+    };
+
 
 // Create a function for getting a variable value
 function myFunction_get() {
@@ -435,6 +443,7 @@ async function Standings()
                 // Play audio file
                 new Audio('./static/nfl.mp3').play();
                 clickimage('webhook_NFL');
+                NFLStop();
               });
 
             }
