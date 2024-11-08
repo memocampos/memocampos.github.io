@@ -1,6 +1,7 @@
 // Get the root element
 var r = document.querySelector(':root');
 var theme;
+var touchdown = false;
 
 
 // Create a function for getting a variable value
@@ -630,7 +631,11 @@ function isTouchdown(matchid, team, score, playingAt, teamname) {
                 var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*' };
                 fetch(localStorage.getItem("webhook_" + team, requestOptions));
                 console.log("Request for: webhook_" + team );
+                touchdown = true;
             }
+        }
+        else {
+            if touchdown {clickimage('webhook_OFF'); touchdown = false;}
         }
 }
 
