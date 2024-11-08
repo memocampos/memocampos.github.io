@@ -1,7 +1,7 @@
 // Get the root element
 var r = document.querySelector(':root');
 var theme;
-var touchdown = false;
+
 
 
 // Create a function for getting a variable value
@@ -324,6 +324,7 @@ async function getStandings() {
     let data = await response.json();
     var myJSON = JSON.stringify(data);
     sessionStorage.setItem("StandingsJSON", myJSON);
+    sessionStorage.setItem("touchdown","false");
     return data;
 }
 
@@ -622,6 +623,10 @@ function validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbr
 
 
 function isTouchdown(matchid, team, score, playingAt, teamname) {
+    
+
+    
+
 
     if ((parseInt(score) - parseInt(sessionStorage.getItem(matchid + "-" + playingAt + "-score-" + team))) >= 6) {
         console.log("TOUCHDOWN: " + team);
@@ -631,11 +636,13 @@ function isTouchdown(matchid, team, score, playingAt, teamname) {
                 var requestOptions = { method: 'GET',  redirect: 'follow', origin: '*' };
                 fetch(localStorage.getItem("webhook_" + team, requestOptions));
                 console.log("Request for: webhook_" + team );
-                touchdown = true;
+                sessionStorage.setItem("touchdown", "true");
             }
         }
         else {
-            if touchdown {clickimage('webhook_OFF'); touchdown = false;}
+            if (sessionStorage.getItem("touchdown") == "true") {clickimage('webhook_OFF'); 
+                sessionStorage.setItem("touchdown", "false");
+            }
         }
 }
 
