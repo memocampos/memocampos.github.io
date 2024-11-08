@@ -612,6 +612,9 @@ function validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbr
     else {
         if (sessionStorage.getItem(matchid + "-home-score-" + teamhomeabbreviation) == teamhomescore)
             console.log("No score change " + teamhomeabbreviation + " playing home with score:" + teamhomescore);
+        if (sessionStorage.getItem("touchdown") == "true") {clickimage('webhook_OFF'); 
+            sessionStorage.setItem("touchdown", "false");
+        }
         else {
             console.log("Score Change on home team " + teamhomeabbreviation);
             isTouchdown(matchid, teamhomeabbreviation, teamhomescore, 'home', teamhome);
@@ -639,11 +642,9 @@ function isTouchdown(matchid, team, score, playingAt, teamname) {
                 sessionStorage.setItem("touchdown", "true");
             }
         }
-        else {
-            if (sessionStorage.getItem("touchdown") == "true") {clickimage('webhook_OFF'); 
-                sessionStorage.setItem("touchdown", "false");
-            }
-        }
+        
+        
+        
 }
 
 
