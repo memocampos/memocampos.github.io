@@ -589,6 +589,10 @@ async function Scores() {
 
 
 function validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbreviation, teamhomescore, teamaway, teamhome) {
+    //if (sessionStorage.getItem("touchdown") == "true") {
+    //    clickimage('webhook_OFF'); 
+    //    sessionStorage.setItem("touchdown", "false");
+    //}
 
     if (sessionStorage.getItem(matchid + "-away-score-" + teamawayabbreviation) == null) {
         sessionStorage.setItem(matchid + "-away-score-" + teamawayabbreviation, teamawayscore);
@@ -598,9 +602,7 @@ function validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbr
         if (sessionStorage.getItem(matchid + "-away-score-" + teamawayabbreviation) == teamawayscore)
         {
             console.log("No score change " + teamawayabbreviation + " playing away with score:" + teamawayscore);
-            if (sessionStorage.getItem("touchdown") == "true") {clickimage('webhook_OFF'); 
-                sessionStorage.setItem("touchdown", "false");
-            }
+            
         }
         else {
             isTouchdown(matchid, teamawayabbreviation, teamawayscore, 'away', teamaway);
@@ -618,10 +620,7 @@ function validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbr
         if (sessionStorage.getItem(matchid + "-home-score-" + teamhomeabbreviation) == teamhomescore)
         {
             console.log("No score change " + teamhomeabbreviation + " playing home with score:" + teamhomescore);
-            if (sessionStorage.getItem("touchdown") == "true") {
-                clickimage('webhook_OFF'); 
-                sessionStorage.setItem("touchdown", "false");
-            }
+            
         }
         else {
             console.log("Score Change on home team " + teamhomeabbreviation);
