@@ -618,7 +618,8 @@ function validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbr
         if (sessionStorage.getItem(matchid + "-home-score-" + teamhomeabbreviation) == teamhomescore)
         {
             console.log("No score change " + teamhomeabbreviation + " playing home with score:" + teamhomescore);
-            if (sessionStorage.getItem("touchdown") == "true") {clickimage('webhook_OFF'); 
+            if (sessionStorage.getItem("touchdown") == "true") {
+                clickimage('webhook_OFF'); 
                 sessionStorage.setItem("touchdown", "false");
             }
         }
@@ -634,10 +635,6 @@ function validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbr
 
 function isTouchdown(matchid, team, score, playingAt, teamname) {
     
-
-    
-
-
     if ((parseInt(score) - parseInt(sessionStorage.getItem(matchid + "-" + playingAt + "-score-" + team))) >= 6) {
         console.log("TOUCHDOWN: " + team);
         displayTouchdown(team, teamname);
@@ -648,10 +645,7 @@ function isTouchdown(matchid, team, score, playingAt, teamname) {
                 console.log("Request for: webhook_" + team );
                 sessionStorage.setItem("touchdown", "true");
             }
-        }
-        
-        
-        
+        }    
 }
 
 
