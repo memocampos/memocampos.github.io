@@ -402,3 +402,15 @@ td:first-child, th:first-child
   font-family: NFL-Font, sans-serif;
   font-size:7.5vh;
 }
+
+  .download-buttons {
+            display: flex;
+
+            justify-content: center;
+
+        }
+
+        .download-button img {
+            width: 200px;
+            height: auto;
+        }
