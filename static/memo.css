@@ -168,6 +168,16 @@ input[type=text]
   font-weight: 900;
 }
 
+.statistics 
+{
+  font-family: NFL-Font;
+  display: flex;
+  color: #DDD;
+  font-size: 31vh;
+  font-weight: 10;
+
+}
+
 
 .teamTouchdown 
 {

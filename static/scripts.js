@@ -435,7 +435,7 @@ async function Standings() {
         if (sessionStorage.getItem('textHTML'))
             textStandings = sessionStorage.getItem('textHTML');
         else
-            textStandings = '<div class="game"><div class="score"><img src="images/NFL.png" class="responsive" /></div><div class="score">Obtaining statistics ... </div></div>'
+            textStandings = '<div class="game"><div class="score"><img src="images/NFL.png" class="responsive" /></div><div class="statistics">Obtaining statistics ... </div></div>'
 
         displayStandings(textStandings);
     }
