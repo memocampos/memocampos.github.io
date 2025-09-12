@@ -4,7 +4,7 @@ Welcome to **SCROLLING SCORES**, your ultimate real-time score-tracking app for 
 
 With SCROLLING SCORES, you won’t miss a touchdown, field goal, or key moment again. Customizable themes, animated interfaces, and live game action make this the perfect app for football lovers.
 
-![Helmet Theme](images/helmet/PIT.png)
+![Helmet Theme](images/demo/scroll-demo.gif)  
 
 ---
 
@@ -18,7 +18,8 @@ With SCROLLING SCORES, you won’t miss a touchdown, field goal, or key moment a
   - Pick scrolling speed (from "Super Slow" to "Speedy Gonzales").
   - Adjust refresh rate (every 5 minutes to every 15 seconds).
 - **Game Statistics**:
-  - View live probabilities and win-loss records.
+  - View live probabilities and win-loss records. 
+  - ![Helmet Theme](images/demo/standings-demo.gif)
 - **Audio Integration**: NFL theme music playback included.
 - **Touchdown Notifications**:
   - Configure custom alerts and events using IFTTT when your favorite team scores.
@@ -38,14 +39,6 @@ With SCROLLING SCORES, you won’t miss a touchdown, field goal, or key moment a
 4. [Demo](#demo)
 5. [Contributing](#contributing)
 6. [License](#license-📜)
-
----
-
-## Preview 📊
-
-Below is a preview of SCROLLING SCORES with the helmet theme:
-
-![Helmet Theme](images/helmet/PIT.png)
 
 ---
  
@@ -89,26 +82,20 @@ Change up the visuals to fit your vibe:
 - Default: Team Logos
 - Helmet View
 - Team Names
-- Fun Themes: Disney, Trump
+- Fun Themes
 
-### Background Colors 🌈
-Set the mood with solid backgrounds or image-based designs.
+### Background Colors 
+Set the mood with solid backgrounds or football field image-based designs.
 
 ### Touchdown Alerts 📣
 Configure custom animations or trigger IFTTT events when a touchdown occurs. Example:
 ```text
-https://yourwebhook.url/trigger
+https://maker.ifttt.com/trigger/
 ```
+https://ifttt.com/explore/what-are-webhooks
 
----
 
-## Demo
-
-Here’s how a screen looks when you filter by the **Helmet Theme**:
-
-### Live Score Display 🏈
-
-![Helmet Theme](images/helmet/PIT.png)
+![IFTTT IMAGE](images/demo/ifttt.png)
 
 ---
 ### Connect

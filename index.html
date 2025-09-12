@@ -5,7 +5,7 @@
   <script type="text/javascript" src="static/scripts.js"></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Live Game Scores 🏈</title>
+  <title>Scrolling Score 🏈</title>
   <link rel="icon" type="image/x-icon" href="images/page.ico?">
   <!-- Link to the main stylesheet for styling the webpage -->
   <link rel="stylesheet" href="static/memo.css" />
@@ -41,7 +41,7 @@
   <!-- SETTINGS Screen-->
   <!-- A button that collapses/expands the settings menu, styled with an image icon -->
   <button type="button" class="collapsible" style="border-style: none;background-color: #013369"><img
-      src="images/settings7.png" width="30px" style="padding-right: 6px;"></button>
+          src="images/settings.png" width="30px" style="padding-right: 6px;"></button>
   <div class="content">
     <!-- Container for the settings content -->
     <h1>Settings</h1>
@@ -162,6 +162,13 @@
               <label for="trump"><br><img src="images/trump/MIN.png" width="100px"
                   height="100px" /><br>Trump<br>&nbsp;</label>
             </td>
+          <td>
+          <!-- Theme option: CornDoggy -->
+          <input type="radio" id="corndoggy" name="theme" value="corndoggy">
+          <label for="corndoggy"><br><img src="images/corndoggy/BUF.png" width="100px"
+              height="100px" /><br>CornDoggy<br>&nbsp;</label>
+        </td>
+
 
           </tr>
         </tbody>
@@ -462,7 +469,7 @@
       <p id="demo">
       <div class="game">
         <div class="score"><img src="images/NFL.png" class="responsive" /></div>
-        <div class="statistics">Live Scores 🏈</div>
+        <div class="statistics">Scrolling Score 🏈</div>
       </div>
       </p>
 
