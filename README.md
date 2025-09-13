@@ -108,12 +108,8 @@ View live probabilities \
 ### Touchdown Alerts 📣
 Configure custom animations or trigger IFTTT events when a touchdown occurs. 
 
-![demo](images/demo/demo.mov)
 
-
-<video width="80%" height="auto" controls>
-  <source src="images/demo/demo.mov" type="video/mp4">
-</video>
+![demo2](images/demo/demo2.gif)
 
 Example:
 ```text
