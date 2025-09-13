@@ -38,8 +38,6 @@ With SCROLLING SCORES, you won’t miss a touchdown, field goal, or key moment a
 1. [Preview](#preview-📊)
 2. [Setup and Usage Instructions](#setup-and-usage-instructions-🚀)
 3. [Customizable Settings](#customizable-settings-⚙️)
-4. [Contributing](#contributing)
-5. [License](#license-📜)
 
 ---
 
