@@ -106,7 +106,13 @@ View live probabilities \
 
 
 ### Touchdown Alerts 📣
-Configure custom animations or trigger IFTTT events when a touchdown occurs. Example:
+Configure custom animations or trigger IFTTT events when a touchdown occurs. 
+
+![demo](images/demo/demo.mov)
+
+
+
+Example:
 ```text
 https://maker.ifttt.com/trigger/
 ```
