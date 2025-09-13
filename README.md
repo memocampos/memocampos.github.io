@@ -4,23 +4,25 @@ Welcome to **SCROLLING SCORES**, your ultimate real-time score-tracking app for 
 
 With SCROLLING SCORES, you won’t miss a touchdown, field goal, or key moment again. Customizable themes, animated interfaces, and live game action make this the perfect app for football lovers.
 
-![Helmet Theme](images/demo/scroll-demo.gif)  
-
+![Helmet Theme](images/demo/scroll-demo.gif) 
 ---
 
-## Features ✨
+## Features
 
-- **Live Score Updates**: Keep track of NFL games with up-to-the-second updates.
+- **Live Score Updates**: Keep track of NFL games with up-to-the-second updates. \
+ 
+
 - **Customizable Themes**: 
   - Choose from logos, helmets, team names, Disney, or "Trump" themes.
   - Multiple background styles such as solid colors or images.
 - **Interactive Settings**:
   - Pick scrolling speed (from "Super Slow" to "Speedy Gonzales").
   - Adjust refresh rate (every 5 minutes to every 15 seconds).
-- **Game Statistics**:
-  - View live probabilities and win-loss records. 
-  - ![Helmet Theme](images/demo/standings-demo.gif)
-- **Audio Integration**: NFL theme music playback included.
+  
+- **Game Statistics**: 
+  - Team Rank 
+  - View live probabilities 
+
 - **Touchdown Notifications**:
   - Configure custom alerts and events using IFTTT when your favorite team scores.
 - **Team-Specific Settings**: Register IFTTT webhooks for individual NFL teams.
@@ -36,12 +38,14 @@ With SCROLLING SCORES, you won’t miss a touchdown, field goal, or key moment a
 1. [Preview](#preview-📊)
 2. [Setup and Usage Instructions](#setup-and-usage-instructions-🚀)
 3. [Customizable Settings](#customizable-settings-⚙️)
-4. [Demo](#demo)
-5. [Contributing](#contributing)
-6. [License](#license-📜)
+4[Contributing](#contributing)
+5[License](#license-📜)
 
 ---
- 
+
+## Preview
+ ![Helmet Theme](images/demo/scroll-demo.gif)  
+
 ## Setup and Usage Instructions 🚀
 
 1. Clone or download the repository:
@@ -67,25 +71,39 @@ With SCROLLING SCORES, you won’t miss a touchdown, field goal, or key moment a
 ## Customizable Settings ⚙️
 
 ### API Key 🔑
-- Configure your **API Key** for authorized data retrieval.
+- Configure your **API Key** for authorized data retrieval. (note: API key ***DISABLED FOR NOW***)
 
 ### Scrolling Speed Settings 🕓
 Control how fast the scores scroll across the screen. 
 - Options: **Super Slow**, **Normal**, **Fast**, **Speedy Gonzales**, etc.
-
+![backgrounds](images/demo/scrolling.png)
 ### Refresh Rate Settings 🔄
 Determine how frequently scores update automatically.
 - Options: From **every 5 minutes** to **every 15 seconds**.
+![refresh](images/demo/refresh.png)
 
 ### Themes 🎨
+![themes](images/demo/themes.png)
 Change up the visuals to fit your vibe:
 - Default: Team Logos
 - Helmet View
 - Team Names
 - Fun Themes
 
+
 ### Background Colors 
-Set the mood with solid backgrounds or football field image-based designs.
+Set the mood with solid backgrounds or football field image-based designs. \
+![backgrounds](images/demo/backgrounds.png)
+### Game Statistics 
+Team Rank \
+  ![standings](images/demo/standings-demo.gif)
+
+View live probabilities \
+  ![standings](images/demo/statistics.png)
+
+
+
+
 
 ### Touchdown Alerts 📣
 Configure custom animations or trigger IFTTT events when a touchdown occurs. Example:
