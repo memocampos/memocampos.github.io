@@ -9,11 +9,11 @@ With SCROLLING SCORES, you won’t miss a touchdown, field goal, or key moment a
 
 ## Features
 
-- **Live Score Updates**: Keep track of NFL games with up-to-the-second updates. \
+- **Live Score Updates**: Keep track of NFL games with up-to-the-second updates. 
  
 
 - **Customizable Themes**: 
-  - Choose from logos, helmets, team names, Disney, or "Trump" themes.
+  - Choose from logos, helmets, team names, or fun themes.
   - Multiple background styles such as solid colors or images.
 - **Interactive Settings**:
   - Pick scrolling speed (from "Super Slow" to "Speedy Gonzales").
@@ -38,8 +38,8 @@ With SCROLLING SCORES, you won’t miss a touchdown, field goal, or key moment a
 1. [Preview](#preview-📊)
 2. [Setup and Usage Instructions](#setup-and-usage-instructions-🚀)
 3. [Customizable Settings](#customizable-settings-⚙️)
-4[Contributing](#contributing)
-5[License](#license-📜)
+4. [Contributing](#contributing)
+5. [License](#license-📜)
 
 ---
 
@@ -120,4 +120,4 @@ https://ifttt.com/explore/what-are-webhooks
 For support or comments, please reach out:
 - Email: camposguillermo@hotmail.com
 
-Happy scrolling! 😎
+Happy score scrolling! 🏈
