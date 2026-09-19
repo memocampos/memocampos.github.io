@@ -45,7 +45,7 @@ body
 
 }
 
-.responsivelogo 
+.responsivelogo
 {
     width: 40vh;
     height: 40vh;
@@ -57,7 +57,7 @@ body
 
 }
 
-.responsiveStandings 
+.responsiveStandings
 {
     width: 800px;
     height: 80vh;
@@ -190,7 +190,7 @@ input[type=text]
   margin-left: 0px;
 }
 
-.teamName 
+.teamName
 {
   font-family: NFL-Font;
   display: flex;
@@ -204,7 +204,7 @@ input[type=text]
   margin-bottom: 20px;
 }
 
-.teamRank 
+.teamRank
 {
   font-family: sans-serif;
   display: flex;
@@ -214,7 +214,7 @@ input[type=text]
   align-items: left;
 }
 
-.teamtext 
+.teamtext
 {
   font-family: sans-serif;
   display: flex;
@@ -225,7 +225,7 @@ input[type=text]
 }
 
 
-.center 
+.center
 {
   display: block;
   margin-left: auto;
@@ -250,10 +250,10 @@ input[type=text]
   text-align: end;
 }
 
-.standingsframe 
+.standingsframe
 {
 
-  -webkit-box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72); 
+  -webkit-box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72);
 box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72);
 }
 

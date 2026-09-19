@@ -42,17 +42,12 @@ function isHome() {
 
 function set_values() {
     window.scrollBy(0, 50);
-    if (localStorage.getItem("RefreshRate") == null) {
-        setTimeout(function () {
-            window.location.reload(1);
-        }, 30000);
+
+    // Scores now refresh in place via startScorePolling() instead of a periodic full-page
+    // reload, so the ticker scroll animation never restarts. Settings changes (theme,
+    // background, etc.) still apply via the Settings form's normal full-page submit.
+    if (localStorage.getItem("RefreshRate") == null)
         localStorage.setItem("RefreshRate", '30000');
-    }
-    else {
-        setTimeout(function () {
-            window.location.reload(1);
-        }, parseInt(localStorage.getItem("RefreshRate")));
-    }
 
     myFunction_set()
     document.getElementById("API_KEY").value = localStorage.getItem("API_KEY");
@@ -217,12 +212,12 @@ function getlocal(key) {
 }
 
 
-function generateHTML(away, awayscore, homescore, home) {
-    html = '<div class=\"game\">';
+function generateHTML(away, awayscore, homescore, home, matchid) {
+    html = '<div class=\"game\" id=\"game-' + matchid + '\">';
     html += '<div class=\"score\">';
     html += '<img id=\"' + away + '\" src=\"' + createSRC(away) + '\" class=\"responsive\" alt=\"away\" /> ';
     html += '</div>';
-    html += '<div class=\"score\">' + awayscore + ' - ' + homescore + '</div>';
+    html += '<div class=\"score\" id=\"scoretext-' + matchid + '\">' + awayscore + ' - ' + homescore + '</div>';
     html += '<div>';
     html += '<img id=\"' + home + '\" src=\"' + createSRC(home) + '\" class=\"responsive' + isHome() + '\" alt=\"home\" />';
     html += '</div>';
@@ -231,38 +226,38 @@ function generateHTML(away, awayscore, homescore, home) {
 }
 
 
+// Shared by generateHTMLwData (initial render) and updateOrCreateGame (live poll refresh),
+// so the record/probability text stays identical whether it's just been created or updated in place.
+function buildProbLineContent(team, matchid) {
+    var text = team;
+    if (localStorage.getItem("WinLossCheckbox") == "TRUE")
+        text += ' ' + sessionStorage.getItem(team + "-games");
+
+    if (localStorage.getItem("ProbCheckbox") == "TRUE")
+        text += ' ' + arrow(parseInt(sessionStorage.getItem(matchid + "-" + team))) + sessionStorage.getItem(matchid + "-" + team) + '%';
+    return text;
+}
+
 
 function generateHTMLwData(away, awayscore, homescore, home, matchid) {
 
-    html = '<div class=\"game\">';
+    html = '<div class=\"game\" id=\"game-' + matchid + '\">';
     html += '<table><tbody><tr><td>';
     html += '<div class=\"score responsive\" id=\"DivImage\" >';
     html += '<img id=\"' + away + '\" src=\"' + createSRC(away) + '\"  alt=\"away\" /> ';
     html += '</div>';
     html += '</td></tr><tr><td>';
-    html += '<div id=\"DivProbabilities\">' + away;
-    if (localStorage.getItem("WinLossCheckbox") == "TRUE")
-        html += ' ' + sessionStorage.getItem(away + "-games");
-
-    if (localStorage.getItem("ProbCheckbox") == "TRUE")
-        html += ' ' + arrow(parseInt(sessionStorage.getItem(matchid + "-" + away))) + sessionStorage.getItem(matchid + "-" + away) + '%';
-    html += '</div>';
+    html += '<div id=\"probline-' + matchid + '-' + away + '\">' + buildProbLineContent(away, matchid) + '</div>';
     html += '</td></tr></tbody></table>';
 
-    html += '<div class=\"score centerScore\">' + awayscore + ' - ' + homescore + '</div>';
+    html += '<div class=\"score centerScore\" id=\"scoretext-' + matchid + '\">' + awayscore + ' - ' + homescore + '</div>';
 
     html += '<table><tbody><tr><td>';
     html += '<div class=\"score responsive\" id=\"DivImage\" >';
     html += '<img id=\"' + home + '\" src=\"' + createSRC(home) + '\" class=\"' + isHome() + '\" alt=\"home\" />';
     html += '</div>';
     html += '</td></tr><tr><td>';
-    html += '<div id=\"DivProbabilities\">' + home;
-    if (localStorage.getItem("WinLossCheckbox") == "TRUE")
-        html += ' ' + sessionStorage.getItem(home + "-games");
-
-    if (localStorage.getItem("ProbCheckbox") == "TRUE")
-        html += ' ' + arrow(parseInt(sessionStorage.getItem(matchid + "-" + home))) + sessionStorage.getItem(matchid + "-" + home) + '%';
-    html += '</div>';
+    html += '<div id=\"probline-' + matchid + '-' + home + '\">' + buildProbLineContent(home, matchid) + '</div>';
     html += '</td></tr></tbody></table></div>';
     return html;
 }
@@ -399,6 +394,12 @@ async function Standings() {
                     sessionStorage.setItem("Standings-date", YYYY + "-" + MM + "-" + DD);
                     console.log("Standings generated at: ", YYYY + "-" + MM + "-" + DD);
 
+                    // Without the old auto-reload, nothing else re-renders once this fetch
+                    // resolves, so replace the "Obtaining statistics..." placeholder here.
+                    if (IsGameDay() != 'true') {
+                        displayStandings(textHTML);
+                    }
+
 
 
                     document.addEventListener('click', function () {
@@ -443,9 +444,18 @@ async function Standings() {
 }
 
 function displayStandings(textHTML) {
+    // Replace (rather than append to) any previously rendered standings/placeholder,
+    // since this can now be called again once the fetch resolves.
+    var existing = document.getElementById('standings-container');
+    if (existing) existing.remove();
+
+    var container = document.createElement('div');
+    container.id = 'standings-container';
+    container.style.display = 'contents';
+    container.innerHTML = textHTML;
+
     const h2 = document.getElementById("myH2");
-    let html = textHTML;
-    h2.insertAdjacentHTML("afterend", html);
+    h2.insertAdjacentElement("afterend", container);
 }
 
 
@@ -547,13 +557,11 @@ console.log(isThanksgiving()); // Output: true or false, depending on today's da
 
 
 async function Scores() {
-    var textHTML = "";
     var teamhome;
     var teamhomeabbreviation;
     var teamaway;
     var teamawayabbreviation;
     var teamawayscore;
-    var status;
     var matchstatus;
 
 
@@ -572,22 +580,52 @@ async function Scores() {
                     teamawayscore = result.summaries[i].sport_event_status.away_score;
                     matchstatus = result.summaries[i].sport_event_status;
 
-                    if (localStorage.getItem("WinLossCheckbox") == "TRUE" || localStorage.getItem("ProbCheckbox") == "TRUE")
-                        textHTML += generateHTMLwData(teamawayabbreviation, teamawayscore, teamhomescore, teamhomeabbreviation, matchid);
-                    else
-                        textHTML += generateHTML(teamawayabbreviation, teamawayscore, teamhomescore, teamhomeabbreviation);
+                    updateOrCreateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbreviation, teamhomescore);
 
                     console.log("id: " + i + " Match ID: " + matchid + " " + teamhomeabbreviation + " " + teamhomescore + "-" + teamawayscore + " " + teamawayabbreviation);
                     validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbreviation, teamhomescore, teamaway, teamhome);
                 }
             }
-            //console.log(textHTML);
-            const h2 = document.getElementById("myH2");
-            let html = textHTML;
-            h2.insertAdjacentHTML("afterend", html);
         })
         .catch(error => console.log('error: ', error));
 
+}
+
+
+// Called on every poll: if the game is already on the ticker, update its score/probability text
+// in place (keeps the CSS scroll animation running uninterrupted); otherwise append it as a new game.
+function updateOrCreateGame(matchid, awayabbr, awayscore, homeabbr, homescore) {
+    var existing = document.getElementById('game-' + matchid);
+
+    if (existing) {
+        var scoreEl = document.getElementById('scoretext-' + matchid);
+        if (scoreEl) scoreEl.textContent = awayscore + ' - ' + homescore;
+
+        var awayProb = document.getElementById('probline-' + matchid + '-' + awayabbr);
+        if (awayProb) awayProb.textContent = buildProbLineContent(awayabbr, matchid);
+
+        var homeProb = document.getElementById('probline-' + matchid + '-' + homeabbr);
+        if (homeProb) homeProb.textContent = buildProbLineContent(homeabbr, matchid);
+    } else {
+        var withData = (localStorage.getItem("WinLossCheckbox") == "TRUE" || localStorage.getItem("ProbCheckbox") == "TRUE");
+        var html = withData
+            ? generateHTMLwData(awayabbr, awayscore, homescore, homeabbr, matchid)
+            : generateHTML(awayabbr, awayscore, homescore, homeabbr, matchid);
+        // Append at the end of the ticker (not right after myH2) so newly-seen games
+        // land after existing ones instead of reordering the ticker on every poll.
+        document.getElementById('scores').insertAdjacentHTML('beforeend', html);
+    }
+}
+
+
+// Keeps scores current without the disruptive full-page reload that used to restart
+// the scroll animation on every RefreshRate tick.
+function startScorePolling() {
+    setInterval(function () {
+        if (IsGameDay() == 'true') {
+            Scores();
+        }
+    }, getRefreshRate());
 }
 
 
