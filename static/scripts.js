@@ -370,9 +370,14 @@ function generateHTMLStandings(teamAbbreviation, teamName, rank, win, loss, draw
     html += '<img src=\"images/helmet/' + teamAbbreviation + '.png\" class=\"hero-image\" alt=\"' + teamAbbreviation + '\" />';
     html += '</div>';
 
+    // Ties are rare in the NFL, so only show the "-D" part of the record once a team
+    // actually has one instead of always displaying a confusing "-0".
+    var recordLabel = draw > 0 ? '(W-L-D)' : '(W-L)';
+    var recordValue = draw > 0 ? (win + '-' + loss + '-' + draw) : (win + '-' + loss);
+
     html += '<div class=\"stats-panel\">';
-    html += '<div class=\"stats-record-label\">RECORD <span>(W-L-D)</span></div>';
-    html += '<div class=\"stats-record-value\">' + win + '-' + loss + '-' + draw + '</div>';
+    html += '<div class=\"stats-record-label\">RECORD <span>' + recordLabel + '</span></div>';
+    html += '<div class=\"stats-record-value\">' + recordValue + '</div>';
     html += '<div class=\"stats-row\"><span class=\"stats-row-label\">POINTS FOR <span>(PF)</span></span><span class=\"stats-row-value\">' + goals_for + ' <i class=\"stat-icon icon-plus\">+</i></span></div>';
     html += '<div class=\"stats-row\"><span class=\"stats-row-label\">POINTS AGAINST <span>(PA)</span></span><span class=\"stats-row-value\">' + goals_against + ' <i class=\"stat-icon icon-minus\">&#8722;</i></span></div>';
     html += '<div class=\"stats-row\"><span class=\"stats-row-label\">POINTS DIFF.</span><span class=\"stats-row-value\">' + diffValue + ' <i class=\"stat-icon icon-tri\">' + diffIcon + '</i></span></div>';
