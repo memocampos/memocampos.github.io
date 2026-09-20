@@ -759,8 +759,12 @@ function validateGame(matchid, teamawayabbreviation, teamawayscore, teamhomeabbr
 }
 
 
+// Cleared and restarted on every touchdown, so webhook_OFF fires exactly once a full
+// minute has passed with no new touchdown - not a fixed delay after each individual one.
+var touchdownOffTimer = null;
+
 function isTouchdown(matchid, team, score, playingAt, teamname) {
-    
+
     if ((parseInt(score) - parseInt(sessionStorage.getItem(matchid + "-" + playingAt + "-score-" + team))) >= 6) {
         console.log("TOUCHDOWN: " + team);
         displayTouchdown(team, teamname);
@@ -771,15 +775,22 @@ function isTouchdown(matchid, team, score, playingAt, teamname) {
                 console.log("Request for: webhook_" + team );
                 sessionStorage.setItem("touchdown", "true");
             }
-        }    
+
+        if (touchdownOffTimer) clearTimeout(touchdownOffTimer);
+        touchdownOffTimer = setTimeout(function () {
+            clickimage('webhook_OFF');
+            touchdownOffTimer = null;
+        }, 60000);
+        }
 }
 
 
 function displayTouchdown(team, teamname) {
 
     let html = "";
+    var touchdownId = 'touchdown-' + team + '-' + Date.now();
 
-    html = '<div class=\"game\">';
+    html = '<div class=\"game\" id=\"' + touchdownId + '\">';
     html += '<div class=\"score animate__animated animate__heartBeat animate__faster animate__infinite\">';
     html += '<img id=\"' + team + '\" src=\"' + createSRC(team) + '\" class=\"responsive\" alt=\"away\" /> ';
     html += '</div>';
@@ -791,6 +802,18 @@ function displayTouchdown(team, teamname) {
     html += '</div>';
     const h2 = document.getElementById("myH2");
     h2.insertAdjacentHTML("afterend", html);
+    updateScrollDistance();
+
+    // Previously this stayed on the ticker forever. Give it one full scroll loop (the
+    // current --1 speed setting) to be seen, then remove it.
+    var loopSeconds = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--1'));
+    setTimeout(function () {
+        var el = document.getElementById(touchdownId);
+        if (el) {
+            el.remove();
+            updateScrollDistance();
+        }
+    }, (loopSeconds || 30) * 1000);
 
 }
 

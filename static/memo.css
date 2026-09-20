@@ -47,7 +47,6 @@ body
 {
   margin: 0;
   accent-color: var(--color-primary);
-  font-family: var(--font-mono);
 }
 
 @font-face 
