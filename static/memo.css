@@ -187,13 +187,21 @@ input[type=text]:focus-visible
 }
 
 
-.score 
+.score
 {
   font-family: sans-serif;
   display: flex;
   color: #DDD;
   font-size: 31vh;
   font-weight: 900;
+}
+
+/* Win-loss record / probability line under each team in the live ticker (id="probline-*").
+   Pinned explicitly rather than left to inherit the browser's default font, which varies
+   by device/browser settings and isn't guaranteed to render the same way twice. */
+[id^="probline-"]
+{
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .statistics 
