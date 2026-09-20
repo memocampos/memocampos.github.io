@@ -334,17 +334,12 @@ function arrow(value) {
 
 
 
-// The standings API's `round` reflects the week about to be played, not the one whose
-// results are shown (e.g. team records still show only 1 game played while round is already
-// 2), so the displayed week is that minus one. The regular season is 17 weeks, after which
-// this is the playoff picture rather than a week-by-week one.
+// The standings API's `round` is the current week as-is. The regular season is 17 weeks,
+// after which this is the playoff picture rather than a week-by-week one.
 function getWeekSummaryLabel(round) {
-    var completedWeek = round - 1;
-    if (completedWeek < 1)
-        completedWeek = 1;
-    if (completedWeek > 17)
+    if (round > 17)
         return 'PLAYOFF SUMMARY';
-    return 'WEEK ' + completedWeek + ' SUMMARY';
+    return 'WEEK ' + round + ' SUMMARY';
 }
 
 function generateHTMLStandings(teamAbbreviation, teamName, rank, win, loss, draw, goals_for, goals_against, goals_diff, week) {
