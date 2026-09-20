@@ -309,7 +309,7 @@ function generateHTMLwData(away, awayscore, homescore, home, matchid) {
     html += '<img id=\"' + away + '\" src=\"' + createSRC(away) + '\"  alt=\"away\" /> ';
     html += '</div>';
     html += '</td></tr><tr><td>';
-    html += '<div id=\"probline-' + matchid + '-' + away + '\">' + buildProbLineContent(away, matchid) + '</div>';
+    html += '<div class=\"probline\" id=\"probline-' + matchid + '-' + away + '\">' + buildProbLineContent(away, matchid) + '</div>';
     html += '</td></tr></tbody></table>';
 
     html += '<div class=\"score centerScore\" id=\"scoretext-' + matchid + '\">' + awayscore + ' - ' + homescore + '</div>';
@@ -319,7 +319,7 @@ function generateHTMLwData(away, awayscore, homescore, home, matchid) {
     html += '<img id=\"' + home + '\" src=\"' + createSRC(home) + '\" class=\"' + isHome() + '\" alt=\"home\" />';
     html += '</div>';
     html += '</td></tr><tr><td>';
-    html += '<div id=\"probline-' + matchid + '-' + home + '\">' + buildProbLineContent(home, matchid) + '</div>';
+    html += '<div class=\"probline\" id=\"probline-' + matchid + '-' + home + '\">' + buildProbLineContent(home, matchid) + '</div>';
     html += '</td></tr></tbody></table></div>';
     return html;
 }

@@ -196,12 +196,16 @@ input[type=text]:focus-visible
   font-weight: 900;
 }
 
-/* Win-loss record / probability line under each team in the live ticker (id="probline-*").
-   Pinned explicitly rather than left to inherit the browser's default font, which varies
-   by device/browser settings and isn't guaranteed to render the same way twice. */
-[id^="probline-"]
+/* Win-loss record / probability line under each team in the live ticker. This used to be
+   #DivProbabilities (still further down this file) until the "refresh in place" rework
+   gave each one a unique id (probline-<matchid>-<team>) for direct DOM updates - orphaning
+   that id-based rule so this text silently lost its styling. Restored here as a class. */
+.probline
 {
-  font-family: 'Times New Roman', Times, serif;
+  clear: both;
+  text-align: center;
+  font-family: NFL-Font, sans-serif;
+  font-size: 7.5vh;
 }
 
 .statistics 
@@ -886,18 +890,9 @@ td:first-child, th:first-child
 }
 
 
-#DivImage 
+#DivImage
 {
   float: left;
-}
-
-#DivProbabilities
-{
-  float: center;
-  clear: center;
-  text-align: center;
-  font-family: NFL-Font, sans-serif;
-  font-size:7.5vh;
 }
 
   .download-buttons {
