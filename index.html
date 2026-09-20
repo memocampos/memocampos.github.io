@@ -2,13 +2,17 @@
 <html>
 
 <head>
-  <script type="text/javascript" src="static/scripts.js"></script>
+  <script type="text/javascript" src="static/scripts.js?v=3"></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Scrolling Score 🏈</title>
   <link rel="icon" type="image/x-icon" href="images/page.ico?">
+  <!-- Monospace "readout" font used for Settings UI text, paired with the site's existing NFL-Font display face -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Link to the main stylesheet for styling the webpage -->
-  <link rel="stylesheet" href="static/memo.css" />
+  <link rel="stylesheet" href="static/memo.css?v=3" />
   <!-- Link to an additional stylesheet for animations -->
   <link rel="stylesheet" href="static/animate.min.css" />
   <!-- Google Tag Manager -->
@@ -40,8 +44,13 @@
 
   <!-- SETTINGS Screen-->
   <!-- A button that collapses/expands the settings menu, styled with an image icon -->
-  <button type="button" class="collapsible" style="border-style: none;background-color: #013369"><img
-          src="images/settings.png" width="30px" style="padding-right: 6px;"></button>
+  <button type="button" class="collapsible">
+    <span class="collapsible-brand">
+      <img src="images/settings.png" width="24px" class="collapsible-icon">
+      <span class="collapsible-label">Settings</span>
+    </span>
+    <span class="collapsible-chevron" aria-hidden="true">&#9660;</span>
+  </button>
   <div class="content">
     <!-- Container for the settings content -->
     <h1>Settings</h1>
@@ -49,7 +58,7 @@
 
     <!-- API Key Section -->
     <h3> API Key</h3>
-    <div id="rcorners1" class="center">
+    <div class="rcorners1 center">
       <!-- Form for settings, triggers SettingsForm function on submit -->
       <form id="settingsForm"
         onsubmit='SettingsForm(document.getElementById("API_KEY").value, document.getElementsByName("background_color"), document.getElementsByName("theme"), document.getElementById("scrollingSpeed"),document.getElementById("WinLossCheckbox"),document.getElementById("ProbCheckbox-checkbox"))'>
@@ -63,25 +72,25 @@
 
     <!-- Scrolling Speed Section -->
     <h3>Scrolling Speed</h3>
-    <div id="rcorners1" class="center">
+    <div class="rcorners1 center">
       <!-- Dropdown menu to select the scrolling speed for game scores -->
       <select name="scrollingSpeed" id="scrollingSpeed">
-        <option value="120s">Super Slow</option>
-        <option value="60s">Very Slow</option>
-        <option value="40s">Slow</option>
-        <option value="30s">Normal</option>
-        <option value="25s">Moderate</option>
-        <option value="20s">Fast</option>
-        <option value="15s">Very Fast</option>
-        <option value="10s">Lightning </option>
-        <option value="5s">Sonic </option>
-        <option value="3s">Speedy Gonzales</option>
+        <option value="240s">Super Slow</option>
+        <option value="150s">Very Slow</option>
+        <option value="100s">Slow</option>
+        <option value="70s">Normal</option>
+        <option value="50s">Moderate</option>
+        <option value="36s">Fast</option>
+        <option value="26s">Very Fast</option>
+        <option value="18s">Lightning </option>
+        <option value="12s">Sonic </option>
+        <option value="7s">Speedy Gonzales</option>
       </select>
     </div>
 
     <!-- Refresh Rate Section -->
     <h3>Refresh Rate</h3>
-    <div id="rcorners1" class="center">
+    <div class="rcorners1 center">
       <!-- Dropdown menu to select the refresh rate for the live scores -->
       <select name="RefreshRate" id="RefreshRate">
         <option value="300000">Every 5 minutes</option>
@@ -95,7 +104,7 @@
     
     <!-- Win‑Loss Record and Probabilities Section -->
     <h3>Win‑Loss Record and Probabilities</h3>
-    <div id="rcorners1" class="center">
+    <div class="rcorners1 center">
       <!-- Checkbox to display the win-loss record -->
       <input type="checkbox" id="WinLossCheckbox" name="WinLossCheckbox" value="WinLossCheckbox">
       <label for="WinLossCheckbox"> Display win-loss record</label><br>
@@ -108,7 +117,7 @@
 
     <!-- Themes Section -->
     <h3>Themes</h3>
-    <div id="rcorners1" class="center">
+    <div class="rcorners1 center">
       <!-- Table with options for different visual themes using radio buttons -->
       <table style="text-align: center">
         <tbody>
@@ -177,7 +186,7 @@
 
     <!-- Color Background Schemes Section -->
     <h3>Color Background Schemes</h3>
-    <div id="rcorners1" class="center">
+    <div class="rcorners1 center">
       <!-- Table with options for different background colors using radio buttons -->
       <table>
         <tbody>
@@ -219,7 +228,7 @@
 
     <!-- NFL Song Section -->
     <h3>NFL Song</h3>
-    <div id="rcorners1" class="center">
+    <div class="rcorners1 center">
        <!-- Audio player for NFL theme music -->
       <audio id="myAudio" controls>
         <source src="static/nfl.ogg" type="audio/ogg">
@@ -230,7 +239,7 @@
 
     <!-- Trigger Actions on Touchdowns Section -->
     <h3>Trigger Actions on Touchdowns</h3>
-    <div id="rcorners1" class="center">
+    <div class="rcorners1 center">
       <h3>Do you want to create an automated event every time a team scores a touchdown?&nbsp;</h3>
       <p>Register at <a href="https://ifttt.com/"><strong>IFTTT</strong></a>&nbsp;and create <strong><a
             href="https://ifttt.com/maker_webhooks">webhook</a></strong> and paste it below:</p>
@@ -415,7 +424,7 @@
     <br>
               <!-- Download Section -->
     <h3> Download</h3>
-    <div id="rcorners1" class="center">
+    <div class="rcorners1 center">
        <div class="download-buttons">
         <!-- Apple App Store Button -->
         <a href="https://apps.apple.com/mx/app/scrolling-score/id6736430610?l=en-GB" target="_blank" class="download-button">

@@ -1,19 +1,40 @@
-:root 
+/*
+ * Design Upgrade
+ * Aesthetic direction: NFL shield colors — navy, red and white, muted rather than glossy,
+ * applied to the Settings drawer.
+ * Font pairing: NFL-Font (display, headers) + JetBrains Mono (body, form controls, readouts)
+ * Rationale: the app already speaks in scoreboard/broadcast graphics; navy chrome with red
+ * accents (instead of a bright gold glow) reads as league-branded without going dark-mode
+ * or staying stark white.
+ */
+
+:root
 {
-  
+
   --white: #ffffff;
   --black: #000000;
   --grey: grey;
   --red: red;
 
-  --1 : 30s;
+  --1 : 70s;
   --2 : 25s;
   --3 : 20s;
   --4 : 15s;
   --5 : 10s;
   --6 : 8s;
   --7 : 5s;
-  --8 : 3s;   
+  --8 : 3s;
+
+  /* Existing brand hex values, wrapped as semantic tokens for the Settings UI */
+  --color-primary: #013369;
+  --color-primary-rgb: 1, 51, 105;
+  --color-surface: #f1f1f1;
+  --color-surface-alt: #ffffff;
+  --color-ink: #000000;
+  --color-danger: #d50a0a;
+  --color-danger-rgb: 213, 10, 10;
+  --font-display: 'NFL-Font', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 ::-webkit-scrollbar 
@@ -22,10 +43,11 @@
 }
 
 
-body 
+body
 {
   margin: 0;
-  accent-color: #013369; 
+  accent-color: var(--color-primary);
+  font-family: var(--font-mono);
 }
 
 @font-face 
@@ -45,18 +67,6 @@ body
 
 }
 
-.responsivelogo
-{
-    width: 40vh;
-    height: 40vh;
-    max-width: 600px;
-    min-width: 1em;
-    max-height: 600px;
-    min-height: 1em;
-    margin-left: 40px;
-
-}
-
 .responsiveStandings
 {
     width: 800px;
@@ -65,18 +75,29 @@ body
 
 input[type=text]
 {
-  color: black;
-  background-color: #f1f1f1;
+  color: var(--color-ink);
+  background-color: var(--color-surface);
   width: 80%;
-  font-family: 'Courier New', Courier, monospace;
-  
+  font-family: var(--font-mono);
+  font-size: 14px;
+
   box-sizing: border-box;
-  box-shadow: #013369;
-  border-radius: 5px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 2px;
-  border-color: #013369;
+  border: 1.5px solid var(--color-primary);
+  border-radius: 8px;
+  padding: 6px 10px;
+  transition: border-color .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+}
+
+input[type=text]:hover
+{
+  border-color: var(--color-danger);
+}
+
+input[type=text]:focus-visible
+{
+  outline: none;
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(var(--color-danger-rgb), .3);
 }
 
 
@@ -190,41 +211,6 @@ input[type=text]
   margin-left: 0px;
 }
 
-.teamName
-{
-  font-family: NFL-Font;
-  display: flex;
-  color: #DDD;
-  font-size: 10vh;
-  font-weight: 100;
-  align-items: center;
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.teamRank
-{
-  font-family: sans-serif;
-  display: flex;
-  color: #DDD;
-  font-size: 6vh;
-  font-weight: 100;
-  align-items: left;
-}
-
-.teamtext
-{
-  font-family: sans-serif;
-  display: flex;
-  color: #DDD;
-  font-size: 4vh;
-  align-items: left;
-
-}
-
-
 .center
 {
   display: block;
@@ -250,11 +236,266 @@ input[type=text]
   text-align: end;
 }
 
-.standingsframe
-{
+/* Standings "team card" shown in the ticker on non-game days, styled after a broadcast
+   scorebug graphic: gold/navy frame, team art, rank + logo badge, stat panel, name banner. */
 
-  -webkit-box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72);
-box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72);
+.standingscard
+{
+  position: relative;
+  width: 50vw;
+  height: 82vh;
+  border-radius: 22px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  -webkit-box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+}
+
+.standingscard-scrim
+{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 2.4vh 3vh;
+  background-image: linear-gradient(160deg, rgba(var(--team-primary-rgb, 5, 10, 25), 0.55) 0%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0.92) 100%);
+}
+
+.standingscard-top
+{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.2vh;
+  flex: 0 0 auto;
+}
+
+.rank-pill
+{
+  display: flex;
+  align-items: center;
+  gap: 1.4vh;
+  background: rgba(6, 9, 20, 0.65);
+  border-radius: 10px;
+  padding: 0.8vh 2vh;
+}
+
+.rank-pill-logo
+{
+  height: 7vh;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
+}
+
+.rank-pill-divider
+{
+  align-self: stretch;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.rank-pill-info
+{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2vh;
+}
+
+.rank-pill-label
+{
+  font-family: sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  font-size: 2vh;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.rank-pill-division
+{
+  font-family: sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.3vh;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+
+.rank-pill-number
+{
+  font-family: sans-serif;
+  font-weight: 900;
+  font-size: 6vh;
+  line-height: 1;
+  color: var(--team-accent, #FFD966);
+  text-shadow: 0 0 18px currentColor;
+  margin-left: 0.6vh;
+}
+
+.standingscard-middle
+{
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+  gap: 1.5vh;
+  margin-top: 0.5vh;
+}
+
+.standingscard-hero
+{
+  flex: 1.8;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.hero-image
+{
+  max-width: 82%;
+  max-height: 82%;
+  width: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6));
+}
+
+.stats-panel
+{
+  flex: 0 0 37%;
+  box-sizing: border-box;
+  background: rgba(8, 14, 30, 0.55);
+  border: 1px solid var(--team-accent, #FFD966);
+  border-radius: 14px;
+  padding: 2vh 2.2vh;
+}
+
+.stats-record-label
+{
+  font-family: sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.7vh;
+  color: #cdd3e0;
+}
+
+.stats-record-label span
+{
+  color: var(--team-accent, #FFD966);
+}
+
+.stats-record-value
+{
+  font-family: sans-serif;
+  font-weight: 800;
+  font-size: 5.5vh;
+  line-height: 1;
+  color: #fff;
+  margin: 0.5vh 0 1.2vh 0;
+}
+
+.stats-row
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1vh 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.stats-row-label
+{
+  font-family: sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 1.5vh;
+  color: #cdd3e0;
+}
+
+.stats-row-label span
+{
+  color: var(--team-accent, #FFD966);
+}
+
+.stats-row-value
+{
+  font-family: sans-serif;
+  font-weight: 800;
+  font-size: 2.6vh;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.6vh;
+}
+
+.stat-icon
+{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  line-height: 1;
+}
+
+.icon-plus, .icon-minus
+{
+  width: 2.4vh;
+  height: 2.4vh;
+  border-radius: 50%;
+  border: 1.5px solid var(--team-accent, #FFD966);
+  color: var(--team-accent, #FFD966);
+  font-size: 1.6vh;
+  font-weight: 900;
+}
+
+.icon-tri
+{
+  color: var(--team-accent, #FFD966);
+  font-size: 1.8vh;
+}
+
+.week-summary
+{
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.8vh;
+  margin-top: 1.4vh;
+  font-family: sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 1.5vh;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.week-summary img
+{
+  height: 2.2vh;
+  width: auto;
+}
+
+.team-banner
+{
+  flex: 0 0 auto;
+  font-family: NFL-Font;
+  font-size: 6.5vh;
+  font-weight: 100;
+  line-height: 1.05;
+  color: #fff;
+  -webkit-text-stroke: 1.5px var(--team-accent, #caa23e);
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5), 0 6px 14px rgba(0, 0, 0, 0.6);
+  margin-top: 0.8vh;
 }
 
 
@@ -276,37 +517,252 @@ box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72);
 }
 
 
-.collapsible 
+.collapsible
 {
-  background-color: var(--black);
-  color: var(--black);
+  background: linear-gradient(135deg, var(--color-primary), #001d3d);
   cursor: pointer;
-  padding: 0px;
-  width: 100%;
+  width: auto;
+  margin: 10px;
+  padding: 10px 18px;
   border: none;
-  text-align: right;
+  border-bottom: 3px solid var(--color-danger);
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   outline: none;
-  border: none;
+  box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), .3);
+  transition: background .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+}
 
+.collapsible:hover
+{
+  background: linear-gradient(135deg, #024a94, var(--color-primary));
+  box-shadow: 0 6px 16px rgba(var(--color-primary-rgb), .4);
+}
+
+.collapsible-brand
+{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.collapsible-icon
+{
+  display: block;
+}
+
+.collapsible-label
+{
+  font-family: var(--font-display), sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 16px;
+  color: var(--color-surface-alt);
+}
+
+.collapsible-chevron
+{
+  font-size: 11px;
+  color: var(--color-surface-alt);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+}
+
+.collapsible.active .collapsible-chevron
+{
+  transform: rotate(180deg);
 }
 
 
-.content 
-{  
+.content
+{
   border: none;
-  padding: 0 18px;
+  padding: 0 24px 24px;
   display: none;
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: var(--color-surface);
+  background-image: linear-gradient(rgba(var(--color-primary-rgb), .1), rgba(var(--color-primary-rgb), .1)),
+    radial-gradient(circle at 100% 0%, rgba(var(--color-primary-rgb), .08), transparent 55%);
+  background-blend-mode: multiply, normal;
+  font-family: var(--font-mono);
+  animation: settingsReveal .4s cubic-bezier(.22, 1, .36, 1);
+}
+
+@keyframes settingsReveal
+{
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.content h1
+{
+  font-family: var(--font-display), sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: 34px;
+  color: var(--color-primary);
+  margin: 20px 0 8px;
+  text-shadow: 2px 2px 0 rgba(var(--color-danger-rgb), .25);
+}
+
+.content > h3
+{
+  font-family: var(--font-display), sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 20px;
+  color: var(--color-primary);
+  margin: 32px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--color-danger);
+  display: inline-block;
+}
+
+.rcorners1 h3
+{
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-primary);
+  margin: 0 0 8px;
+}
+
+.content label
+{
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.content input[type="checkbox"] + label
+{
+  cursor: pointer;
+}
+
+.content select,
+.content input[type="text"]
+{
+  font-family: var(--font-mono);
+}
+
+.content select
+{
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: var(--color-surface-alt);
+  border: 2px solid var(--color-primary);
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+}
+
+.content select:hover
+{
+  border-color: var(--color-danger);
+}
+
+.content select:focus-visible
+{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--color-danger-rgb), .3);
+}
+
+.content input[type="checkbox"]
+{
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* Theme and background-color pickers are card/swatch based — the native radio dot has
+   nowhere sensible to sit next to a 100px logo, so it's kept for focus/keyboard access but
+   visually hidden; the label card itself (border/glow) shows the selected state instead. */
+input[name="theme"],
+input[name="background_color"]
+{
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.content table
+{
+  border-collapse: separate;
+  border-spacing: 10px;
+  margin: 0 auto;
+}
+
+input[name="theme"] + label
+{
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: border-color .25s cubic-bezier(.4, 0, .2, 1), transform .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+}
+
+input[name="theme"] + label:hover
+{
+  transform: translateY(-3px);
+}
+
+input[name="theme"]:checked + label
+{
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(var(--color-danger-rgb), .25), 0 8px 18px rgba(var(--color-primary-rgb), .25);
+  background: rgba(var(--color-primary-rgb), .05);
+}
+
+input[name="theme"]:focus-visible + label,
+input[name="background_color"]:focus-visible + label
+{
+  outline: 3px solid var(--color-danger);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+input[name="background_color"] + label
+{
+  cursor: pointer;
+}
+
+input[name="background_color"] + label:hover .box
+{
+  transform: scale(1.08);
+}
+
+input[name="background_color"]:checked + label .box
+{
+  box-shadow: 0 0 0 3px var(--color-danger), 0 6px 14px rgba(var(--color-primary-rgb), .3);
+}
+
+.content table tr:hover td.textright
+{
+  color: var(--color-primary);
+  font-weight: 700;
 }
 
 
-.box 
+.box
 {
-  height: 20px;
-  width: 20px;
+  height: 28px;
+  width: 28px;
 
-  border: 1px solid black;
+  border: 2px solid var(--color-primary);
+  border-radius: 8px;
+  transition: transform .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s cubic-bezier(.4, 0, .2, 1);
 }
 
 .white 
@@ -343,14 +799,17 @@ box-shadow: 4px 2px 9px -1px rgba(0,0,0,0.72);
   transform: translateY(-50%);
 }
 
-#rcorners1 
+.rcorners1
 {
-  border-radius: 5px;
-  background: white;
-  padding: 15px;
+  border-radius: 12px;
+  background-color: var(--color-surface);
+  background-image: linear-gradient(rgba(var(--color-primary-rgb), .1), rgba(var(--color-primary-rgb), .1));
+  background-blend-mode: multiply;
+  border-left: 4px solid var(--color-primary);
+  padding: 18px 20px;
 
   width: 95%;
-  height: 95%;
+  box-shadow: 0 6px 18px rgba(var(--color-primary-rgb), .12);
 }
 
 
@@ -376,26 +835,39 @@ td:first-child, th:first-child
 }
 
 
-.submit 
+.submit
 {
   float: right;
   display: inline;
   position: fixed;
-  top: 4px;
-  right: 7px;
-  color: #ffffff;
-  background-color: #013369;
-  font-size: 19px;
+  top: 10px;
+  right: 12px;
+  color: var(--color-surface-alt);
+  background-color: var(--color-primary);
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 16px;
   border: 1px solid #000013;
-  border-radius: 5px;
-  padding: 9px 50px;
-  cursor: pointer
+  border-radius: 8px;
+  padding: 10px 40px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(var(--color-primary-rgb), .35);
+  transition: transform .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s cubic-bezier(.4, 0, .2, 1), color .25s, background-color .25s;
 }
 
-.submit:hover 
+.submit:hover
 {
-  color: #d50a0a;
-  background-color: #ffffff;
+  color: var(--color-danger);
+  background-color: var(--color-surface-alt);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(var(--color-primary-rgb), .3);
+}
+
+.submit:focus-visible
+{
+  outline: 3px solid var(--color-danger);
+  outline-offset: 2px;
 }
 
 
@@ -423,4 +895,9 @@ td:first-child, th:first-child
         .download-button img {
             width: 200px;
             height: auto;
+            transition: transform .25s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .download-button:hover img {
+            transform: translateY(-3px) scale(1.03);
         }

@@ -31,6 +31,64 @@ function createSRC(team) {
     return source;
 }
 
+// Always the team's actual logo, regardless of the selected theme, for the standings card's badge.
+function createLogoSRC(team) {
+    return 'images/logo/' + team + '.png';
+}
+
+// The live standings/scores/probabilities API has no color or conference field (checked the
+// actual response), so standings cards are themed from this static table of official team
+// brand colors and divisions instead. "accent" is a brighter/lighter shade of each team's
+// palette, picked for legibility as text/icon color over a dark card background.
+var TEAM_INFO = {
+    ARI: { primary: '#97233F', accent: '#FFFFFF', division: 'NFC West' },
+    ATL: { primary: '#A71930', accent: '#A5ACAF', division: 'NFC South' },
+    BAL: { primary: '#241773', accent: '#C60C30', division: 'AFC North' },
+    BUF: { primary: '#00338D', accent: '#C60C30', division: 'AFC East' },
+    CAR: { primary: '#0085CA', accent: '#BFC0BF', division: 'NFC South' },
+    CHI: { primary: '#0B162A', accent: '#C83803', division: 'NFC North' },
+    CIN: { primary: '#FB4F14', accent: '#FFFFFF', division: 'AFC North' },
+    CLE: { primary: '#311D00', accent: '#FF3C00', division: 'AFC North' },
+    DAL: { primary: '#041E42', accent: '#869397', division: 'NFC East' },
+    DEN: { primary: '#002244', accent: '#FB4F14', division: 'AFC West' },
+    DET: { primary: '#0076B6', accent: '#B0B7BC', division: 'NFC North' },
+    GB: { primary: '#203731', accent: '#FFB612', division: 'NFC North' },
+    HOU: { primary: '#03202F', accent: '#A71930', division: 'AFC South' },
+    IND: { primary: '#002C5F', accent: '#A2AAAD', division: 'AFC South' },
+    JAX: { primary: '#101820', accent: '#D7A22A', division: 'AFC South' },
+    KC: { primary: '#E31837', accent: '#FFB81C', division: 'AFC West' },
+    LV: { primary: '#000000', accent: '#A5ACAF', division: 'AFC West' },
+    LAC: { primary: '#0080C6', accent: '#FFC20E', division: 'AFC West' },
+    LA: { primary: '#003594', accent: '#FFA300', division: 'NFC West' },
+    MIA: { primary: '#008E97', accent: '#FC4C02', division: 'AFC East' },
+    MIN: { primary: '#4F2683', accent: '#FFC62F', division: 'NFC North' },
+    NE: { primary: '#002244', accent: '#C60C30', division: 'AFC East' },
+    NO: { primary: '#101820', accent: '#D3BC8D', division: 'NFC South' },
+    NYG: { primary: '#0B2265', accent: '#A71930', division: 'NFC East' },
+    NYJ: { primary: '#125740', accent: '#FFFFFF', division: 'AFC East' },
+    PHI: { primary: '#004C54', accent: '#A5ACAF', division: 'NFC East' },
+    PIT: { primary: '#101820', accent: '#FFB612', division: 'AFC North' },
+    SEA: { primary: '#002244', accent: '#69BE28', division: 'NFC West' },
+    SF: { primary: '#AA0000', accent: '#B3995D', division: 'NFC West' },
+    TB: { primary: '#34302B', accent: '#FF7900', division: 'NFC South' },
+    TEN: { primary: '#0C2340', accent: '#4B92DB', division: 'AFC South' },
+    WAS: { primary: '#5A1414', accent: '#FFB612', division: 'NFC East' }
+};
+
+function getTeamInfo(team) {
+    return TEAM_INFO[team] || { primary: '#0b1220', accent: '#FFD966', division: '' };
+}
+
+// "R, G, B" form of a #rrggbb hex color, so CSS can use it inside rgba(var(--x), alpha)
+// to tint the standings card's dark overlay with the team's own color instead of plain black.
+function hexToRgbTriplet(hex) {
+    var clean = hex.replace('#', '');
+    var r = parseInt(clean.substring(0, 2), 16);
+    var g = parseInt(clean.substring(2, 4), 16);
+    var b = parseInt(clean.substring(4, 6), 16);
+    return r + ', ' + g + ', ' + b;
+}
+
 function isHome() {
     //flip horizontally helmets if team is home 
     if (getlocal('theme') == 'helmet')
@@ -272,45 +330,57 @@ function arrow(value) {
 
 
 
-function generateHTMLStandings(teamAbbreviation, teamName, rank, played, win, loss, draw, goals_for, goals_against, goals_diff) {
-    html = '          <div class=\"game standingsframe\" style=\"background-image: url(\' images/backgrounds/' + teamAbbreviation + '.webp\');border-radius: 10px;\">';
-    html += '            <div class=\" \">';
-    html += '                <div>';
-    html += '                <table>';
-    html += '                <tbody>';
-    html += '                  <tr>';
-    html += '                    <td>';
-    html += '                          <table style=\"width: 100%;\" >';
-    html += '                            <tbody>';
-    html += '                            <tr>';
-    html += '                            <td><img id=\"' + teamAbbreviation + '\" src=\"' + createSRC(teamAbbreviation) + '\" class=\"responsivelogo\" alt=\"away\" /></td>';
-    html += '                            <td><p class=\"teamRank\">Rank #' + rank + '</p>';
-    html += '            				<table class=\"teamtext\">';
-    html += '              			<tbody>';
-    html += '              			<tr><td>Games Played: </td><td>' + played + '</td></tr>';
-    html += '              			<tr><td>Win: </td><td>' + win + '</td></tr>';
-    html += '              			<tr><td>Loss: </td><td>' + loss + '</td></tr>';
-    html += '              			<tr><td>Draw: </td><td>' + draw + '</td></tr>';
-    html += '              			<tr><td>Goals For: </td><td>' + goals_for + '</td></tr>';
-    html += '              			<tr><td>Goals Against: </td><td>' + goals_against + '</td></tr>';
-    html += '              			<tr><td>Goals Diffrence: </td><td>' + goals_diff + '</td></tr>';
-    html += '              			</tbody>';
-    html += '              			</table>';
-    html += '                            </td>';
-    html += '                            </tr>';
-    html += '                            </tbody>';
-    html += '                            </table>';
-    html += '                    </td>';
-    html += '                  </tr>';
-    html += '                  <tr>';
-    html += '                    <td><quote class=\"teamName\">' + teamName + '</quote></td>';
-    html += '                  </tr>';
-    html += '                </tbody>';
-    html += '                </table></div>';
-    html += '            </div>';
-    html += '          </div>';
-    return html;
+// The standings API's `round` reflects the week about to be played, not the one whose
+// results are shown (e.g. team records still show only 1 game played while round is already
+// 2), so the displayed week is that minus one. The regular season is 17 weeks, after which
+// this is the playoff picture rather than a week-by-week one.
+function getWeekSummaryLabel(round) {
+    var completedWeek = round - 1;
+    if (completedWeek < 1)
+        completedWeek = 1;
+    if (completedWeek > 17)
+        return 'PLAYOFF SUMMARY';
+    return 'WEEK ' + completedWeek + ' SUMMARY';
+}
 
+function generateHTMLStandings(teamAbbreviation, teamName, rank, win, loss, draw, goals_for, goals_against, goals_diff, week) {
+    var diffIcon = goals_diff < 0 ? '&#9660;' : '&#9650;'; // triangle flips for a negative differential
+    var diffValue = goals_diff > 0 ? ('+' + goals_diff) : goals_diff;
+    var info = getTeamInfo(teamAbbreviation);
+    var cardStyle = 'background-image: url(\'images/backgrounds/' + teamAbbreviation + '.webp\'); --team-primary: ' + info.primary + '; --team-primary-rgb: ' + hexToRgbTriplet(info.primary) + '; --team-accent: ' + info.accent + ';';
+
+    var html = '<div class=\"game standingscard\" style=\"' + cardStyle + '\">';
+    html += '<div class=\"standingscard-scrim\">';
+
+    html += '<div class=\"standingscard-top\">';
+    html += '<div class=\"rank-pill\">';
+    html += '<img class=\"rank-pill-logo\" src=\"' + createLogoSRC(teamAbbreviation) + '\" alt=\"' + teamAbbreviation + ' logo\" />';
+    html += '<div class=\"rank-pill-divider\"></div>';
+    html += '<div class=\"rank-pill-info\"><span class=\"rank-pill-label\">RANK</span><span class=\"rank-pill-division\">' + info.division + '</span></div>';
+    html += '<span class=\"rank-pill-number\">#' + rank + '</span>';
+    html += '</div>';
+    html += '</div>';
+
+    html += '<div class=\"standingscard-middle\">';
+    html += '<div class=\"standingscard-hero\">';
+    html += '<img src=\"images/helmet/' + teamAbbreviation + '.png\" class=\"hero-image\" alt=\"' + teamAbbreviation + '\" />';
+    html += '</div>';
+
+    html += '<div class=\"stats-panel\">';
+    html += '<div class=\"stats-record-label\">RECORD <span>(W-L-D)</span></div>';
+    html += '<div class=\"stats-record-value\">' + win + '-' + loss + '-' + draw + '</div>';
+    html += '<div class=\"stats-row\"><span class=\"stats-row-label\">POINTS FOR <span>(PF)</span></span><span class=\"stats-row-value\">' + goals_for + ' <i class=\"stat-icon icon-plus\">+</i></span></div>';
+    html += '<div class=\"stats-row\"><span class=\"stats-row-label\">POINTS AGAINST <span>(PA)</span></span><span class=\"stats-row-value\">' + goals_against + ' <i class=\"stat-icon icon-minus\">&#8722;</i></span></div>';
+    html += '<div class=\"stats-row\"><span class=\"stats-row-label\">POINTS DIFF.</span><span class=\"stats-row-value\">' + diffValue + ' <i class=\"stat-icon icon-tri\">' + diffIcon + '</i></span></div>';
+    html += '</div>';
+    html += '</div>';
+
+    html += '<div class=\"week-summary\"><img src=\"images/NFL.png\" alt=\"NFL\" /> ' + getWeekSummaryLabel(week) + '</div>';
+    html += '<div class=\"team-banner\">' + teamName + '</div>';
+
+    html += '</div>';
+    html += '</div>';
+    return html;
 }
 
 async function getStandings() {
@@ -370,7 +440,6 @@ async function Standings() {
                         teamID = standings[i].competitor.id;
                         rank = standings[i].rank;
 
-                        played = standings[i].played;
                         win = standings[i].win;
                         loss = standings[i].loss;
                         draw = standings[i].draw;
@@ -386,7 +455,7 @@ async function Standings() {
 
                         console.log(teamAbbreviation + " " + games);
                         sessionStorage.setItem(teamAbbreviation + "-games", games);
-                        textHTML += generateHTMLStandings(teamAbbreviation, teamName, rank, played, win, loss, draw, goals_for, goals_against, goals_diff);
+                        textHTML += generateHTMLStandings(teamAbbreviation, teamName, rank, win, loss, draw, goals_for, goals_against, goals_diff, result.standings[0].round);
 
                     }
                     sessionStorage.setItem("textHTML", textHTML);
