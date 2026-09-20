@@ -463,6 +463,10 @@
         })
         // Add a scroll event listener to the 'scores' element
         path.addEventListener('scroll', (e) => { alert("Scroll") })
+        // Resync the ticker's scroll travel distance only at safe points: right as a loop
+        // restarts (no visible jump there) and once content has finished loading.
+        path.addEventListener('animationiteration', updateScrollDistance);
+        window.addEventListener('load', updateScrollDistance);
         //fetch probabilities
         Probabilities();
         //fetch standings

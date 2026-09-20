@@ -99,7 +99,11 @@ function isHome() {
 
 
 function set_values() {
-    window.scrollBy(0, 50);
+    // Scroll the Settings toggle out of view on load. Measured off its own rendered
+    // height (rather than a fixed pixel guess) so it stays fully hidden even if the
+    // toggle's size changes later.
+    var settingsToggle = document.querySelector('.collapsible');
+    window.scrollBy(0, settingsToggle ? settingsToggle.getBoundingClientRect().bottom + 10 : 50);
 
     // Scores now refresh in place via startScorePolling() instead of a periodic full-page
     // reload, so the ticker scroll animation never restarts. Settings changes (theme,
@@ -525,6 +529,7 @@ function displayStandings(textHTML) {
 
     const h2 = document.getElementById("myH2");
     h2.insertAdjacentElement("afterend", container);
+    updateScrollDistance();
 }
 
 
@@ -683,9 +688,21 @@ function updateOrCreateGame(matchid, awayabbr, awayscore, homeabbr, homescore) {
         // Append at the end of the ticker (not right after myH2) so newly-seen games
         // land after existing ones instead of reordering the ticker on every poll.
         document.getElementById('scores').insertAdjacentHTML('beforeend', html);
+        // A new game genuinely widens the ticker, so resync the scroll distance now.
+        // Ordinary score-text updates above don't call this - see updateScrollDistance().
+        updateScrollDistance();
     }
 }
 
+
+// Freezes the ticker's scroll travel distance (see --scroll-distance in memo.css) to the
+// scores row's current width. Only call this at a point where the jump is invisible: on
+// load, or on the "animationiteration" event (fired right as a loop restarts at
+// translate3d(0,0,0), where the distance var isn't in play yet).
+function updateScrollDistance() {
+    var scores = document.getElementById('scores');
+    if (scores) scores.style.setProperty('--scroll-distance', scores.scrollWidth + 'px');
+}
 
 // Keeps scores current without the disruptive full-page reload that used to restart
 // the scroll animation on every RefreshRate tick.

@@ -162,6 +162,14 @@ input[type=text]:focus-visible
   white-space: nowrap;
   animation: move var(--1) linear infinite;
   padding-left: 100%;
+  /* Travel distance the "move" keyframes below animate to. Kept as a var (in px, set by
+     updateScrollDistance() in scripts.js) instead of letting the keyframe read -100% of
+     this element's own live width: that width changes on every score-text refresh, and a
+     plain percentage transform recalculates against the *current* width every frame, so
+     the ticker would visibly snap each time scores update. The var is only resynced at
+     safe points (page load, each loop boundary) so routine score updates never jump it. */
+  --scroll-distance: 100%;
+  will-change: transform;
 }
 
 .game 
@@ -242,7 +250,7 @@ input[type=text]:focus-visible
 .standingscard
 {
   position: relative;
-  width: 50vw;
+  width: 70vw;
   height: 82vh;
   border-radius: 22px;
   background-size: cover;
@@ -506,13 +514,13 @@ input[type=text]:focus-visible
 }
 
 
-@keyframes move 
+@keyframes move
 {
   0% {
-    transform: translate(0, 0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translate(-100%, 0);
+    transform: translate3d(calc(-1 * var(--scroll-distance)), 0, 0);
   }
 }
 
